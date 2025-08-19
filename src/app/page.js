@@ -1,9 +1,10 @@
 import Image from "next/image";
+import SunsetScene from "@/components/sunset";
 
 export default function Home() {
   return (
-    <div>
-      here start
-    </div>
+    <main className="min-h-screen">
+      <SunsetScene />
+    </main>
   );
 }

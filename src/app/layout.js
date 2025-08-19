@@ -9,10 +9,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body >
-        <Navbar />
-        {children}
+      <body>
+        <div className="w-full bg-transparent fixed inset-x-0 top-0 z-50">
+          <Navbar />
+        </div>
+        <main className="relative">
+          {children}
+        </main>
       </body>
     </html>
   );
 }
+

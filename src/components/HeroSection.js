@@ -18,6 +18,10 @@ export default function SunsetScene() {
   const flagRef = useRef(null);
   const sun = useRef(null);
   const sunGlow = useRef(null);
+  const buttonRef = useRef(null);
+
+  const text1Ref = useRef(null);
+  const text2Ref = useRef(null);
 
   useGSAP(
     () => {
@@ -35,13 +39,10 @@ export default function SunsetScene() {
 
       tl.fromTo(
         ".cloud",
-        {
-          x: 0,
-          filter: "grayscale(0) brightness(1) saturate(1)",
-        },
+        { x: 0, filter: "grayscale(0) brightness(1) opacity(1)" },
         {
           x: 100,
-          filter: "grayscale(1) brightness(0.5) saturate(1)",
+          filter: "grayscale(1) brightness(0.5) opacity(0.5) ",
           ease: "none",
         },
         0
@@ -105,6 +106,42 @@ export default function SunsetScene() {
       tl.to(smallBearsRef.current, { y: 300, x: 0, ease: "none" }, 0);
       tl.to(flagRef.current, { y: -148, x: 0, ease: "none" }, 0);
       tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
+
+      tl.to(text1Ref.current, {
+  scale: 0.8,
+  ease: "power2.inOut",
+}, 0.1);
+
+tl.fromTo(
+  text2Ref.current,
+  {
+    opacity: 0,
+    y: "50%",
+  },
+  {
+    scale: 0.9,
+    opacity: 1,
+    y: "0%",
+    ease: "power2.inOut",
+  },
+  0.3
+)
+
+tl.fromTo(
+  buttonRef.current,
+  {
+    y: 0,
+    opacity: 0,
+    scale: 0.5,
+  },
+  {
+    opacity: 1,
+    scale: 1,
+    y: -50,
+    ease: "power2.inOut",
+  },
+  0.6
+);
     },
     { scope: containerRef }
   );
@@ -143,9 +180,9 @@ export default function SunsetScene() {
         }}
       ></div>
 
-      <div className="cloud absolute w-[20%] h-[20%] top-[10%] left-[3%] z-5">
+      <div className="cloud absolute w-[15%] h-[20%] top-[10%] left-[3%] z-5">
         <Image
-          src="/forest/cloud.svg"
+          src="/sunset/cloud.svg"
           alt="Cloud"
           fill
           style={{ objectFit: "contain" }}
@@ -155,7 +192,7 @@ export default function SunsetScene() {
 
       <div className="cloud absolute w-[15%] h-[15%] top-[40%] right-[5%] z-6">
         <Image
-          src="/forest/cloud.svg"
+          src="/sunset/cloud.svg"
           alt="Cloud"
           fill
           style={{ objectFit: "contain" }}
@@ -165,7 +202,7 @@ export default function SunsetScene() {
 
       <div className="cloud absolute w-[15%] h-[25%] top-[40%] left-[20%] z-4">
         <Image
-          src="/forest/cloud.svg"
+          src="/sunset/cloud.svg"
           alt="Cloud"
           fill
           style={{ objectFit: "contain" }}
@@ -173,9 +210,9 @@ export default function SunsetScene() {
         />
       </div>
 
-      <div className="cloud absolute w-[18%] h-[18%] top-[20%] right-[15%] z-7">
+      <div className="cloud absolute w-[10%] h-[18%] top-[20%] right-[15%] z-7">
         <Image
-          src="/forest/cloud.svg"
+          src="/sunset/cloud.svg"
           alt="Cloud"
           fill
           style={{ objectFit: "contain" }}
@@ -185,7 +222,7 @@ export default function SunsetScene() {
 
       <div className="cloud absolute w-[15%] h-[22%] top-[20%] left-[35%] z-8">
         <Image
-          src="/forest/cloud.svg"
+          src="/sunset/cloud.svg"
           alt="Cloud"
           fill
           style={{ objectFit: "contain" }}
@@ -221,6 +258,35 @@ export default function SunsetScene() {
           style={{ objectFit: "cover" }}
           priority={true}
         />
+      </div>
+
+      <div
+        ref={text1Ref}
+        className="absolute top-[42%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center text-white text-6xl z-50"
+      >
+        REALIZING YOUR
+        <div className="mt-2 text-white text-8xl font-extrabold">
+          CREATIVE VISION
+        </div>
+      </div>
+      <div
+        ref={text2Ref}
+        className="mt-4 absolute top-[53%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] text-center text-white text-2xl opacity-0 z-100"
+      >
+        Vauldex is the place where your imagination comes to life.
+        <br />
+        We bring your vision into reality, walking beside you as we shape the
+        future together.
+      </div>
+
+      <div
+        id="button"
+        ref={buttonRef}
+        className="absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center opacity-0"
+      >
+        <button className="px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500">
+          Tell us your vision →
+        </button>
       </div>
 
       <div ref={bigBearRef} className=" absolute inset-0 z-40">

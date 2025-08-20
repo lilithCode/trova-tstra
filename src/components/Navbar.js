@@ -3,6 +3,14 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Ensure GSAP plugins are registered globally once
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const navLinks = [
   { name: "HOME", href: "/" },
@@ -16,8 +24,16 @@ const navLinks = [
 const Navbar = () => {
   const activeHref = "/";
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false); // New state to track scroll
   const menuRef = useRef(null);
+  const navRef = useRef(null);
+
+  // New ref for the divider lines
+  const dividersRef = useRef([]);
+  const addToDividersRef = (el) => {
+    if (el && !dividersRef.current.includes(el)) {
+      dividersRef.current.push(el);
+    }
+  };
 
   useEffect(() => {
     // Event listener for closing menu on outside click
@@ -31,22 +47,36 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [menuOpen]);
 
-  useEffect(() => {
-    // Event listener for scroll
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        // Change 10 to a threshold that works for your page
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  useGSAP(() => {
+    // GSAP ScrollTrigger animation for navbar background
+    gsap.to(navRef.current, {
+      backgroundColor: "rgb(0,0,0)",
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top -50%",
+        end: "top -100%",
+        scrub: true,
+      },
+    });
+
+    // New GSAP animation to hide the dividers on scroll
+    gsap.to(dividersRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top -200%", // Adjust this value to control when the animation starts
+        end: "top -300%", // Adjust this value to control when the animation ends
+        scrub: true,
+      },
+    });
   }, []);
 
   return (
-    <nav className=" w-full bg-transparent absolute inset-x-0 top-0 z-10 ">
+    <nav
+      ref={navRef}
+      className="w-full bg-transparent fixed inset-x-0 top-0 z-50 transition-colors duration-500"
+    >
       <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
           <Link href="/" className="flex items-center">
@@ -67,7 +97,7 @@ const Navbar = () => {
                 <li>
                   <Link href={link.href}>
                     <span
-                      className={` py-1 font-medium text-base tracking-wide relative transition-colors whitespace-nowrap ${
+                      className={`py-1 font-medium text-base tracking-wide relative transition-colors whitespace-nowrap ${
                         activeHref === link.href
                           ? "text-white"
                           : "text-white/80 hover:text-white"
@@ -91,11 +121,11 @@ const Navbar = () => {
                   </Link>
                 </li>
                 {idx < navLinks.length - 1 && (
+                  // Assign the ref to the list item
                   <li
+                    ref={addToDividersRef}
                     aria-hidden="true"
-                    className={`text-[#794f35] text-lg font-bold select-none transition-opacity duration-300 ${
-                      isScrolled ? "opacity-0" : "opacity-100"
-                    }`}
+                    className="text-[#794f35] text-lg font-bold select-none transition-opacity duration-300 opacity-100"
                   >
                     /////
                   </li>

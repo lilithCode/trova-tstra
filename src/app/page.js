@@ -1,6 +1,7 @@
 import HeroSection from "./../components/HeroSection";
 import Particles from "./../components/Particles";
 
+
 export default function Home() {
   return (
     <main className="min-h-screen">

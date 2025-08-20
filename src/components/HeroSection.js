@@ -17,7 +17,10 @@ export default function SunsetScene() {
   const smallBearsRef = useRef(null);
   const flagRef = useRef(null);
   const sun = useRef(null);
-  const sunGlow = useRef(null);
+  const moon = useRef(null);
+  const buttonRef = useRef(null);
+  const text1Ref = useRef(null);
+  const text2Ref = useRef(null);
 
   useGSAP(
     () => {
@@ -33,66 +36,56 @@ export default function SunsetScene() {
         },
       });
 
-      tl.fromTo(
-        ".cloud",
-        {
-          x: 0,
-          filter: "grayscale(0) brightness(1) saturate(1)",
-        },
-        {
-          x: 100,
-          filter: "grayscale(1) brightness(0.5) saturate(1)",
-          ease: "none",
-        },
-        0
-      );
+       tl.fromTo(
+         ".cloud",
+         { x: 0, filter: "grayscale(0) brightness(1) opacity(1)" },
+         {
+           x: 100,
+           filter: "grayscale(1) brightness(0.5) opacity(0.5) ",
+           ease: "none",
+         },
+         0
+       );
 
       tl.to(backgroundRef.current, { opacity: 0, ease: "none" }, 0);
+
       tl.to(mountain1Ref.current, { y: 50, x: -50, ease: "none" }, 0);
       tl.to(mountain2Ref.current, { y: 50, x: 50, ease: "none" }, 0);
       tl.to(mountain3Ref.current, { y: 50, x: 50, ease: "none" }, 0);
 
-      tl.to(sun.current, { y: 300, x: -500, ease: "none" }, 0);
-      tl.fromTo(
-        sun.current,
-        { filter: "brightness(1) saturate(1)" },
-        { filter: "brightness(2) saturate(0)", ease: "none" },
-        0
-      );
+tl.to(sun.current, { y: 300, x: -300, ease: "none" }, 0);
 
-      tl.to(sunGlow.current, { y: 400, x: -500, ease: "none" }, 0);
-      tl.fromTo(
-        sunGlow.current,
-        {
-          background:
-            "radial-gradient(circle, #f0e08aff 0%, rgba(240, 224, 138, 0.5) 50%, rgba(240, 224, 138, 0) 70%)",
-        },
-        {
-          background:
-            "radial-gradient(circle, #ffffffcc 0%, #ffffff80 50%, #ffffff00 70%)",
-          ease: "none",
-        },
-        0
-      );
+tl.fromTo(
+  sun.current,
 
-      tl.set(
-        sun.current,
-        {
-          top: "70%",
-          right: "20px",
-          x: "-50%",
-          y: "0%",
-          filter: "brightness(1) saturate(0)",
-        },
-        1
-      );
-      tl.set(
-        sunGlow.current,
-        { top: "60%", right: "-180px", x: "0%", y: "0%", opacity: 0.2 },
-        1
-      );
-      tl.to(sun.current, { y: -300, x: -50, ease: "none" }, 1);
-      tl.to(sunGlow.current, { y: -300, x: -50, ease: "none" }, 1);
+  { filter: "brightness(1) saturate(1)" },
+
+  { filter: "brightness(2) saturate(0)", ease: "none" },
+
+  0
+);
+
+tl.set(
+  sun.current,
+
+  {
+    top: "70%",
+
+    right: "20px",
+
+    x: "0%",
+
+    y: "0%",
+
+    filter: "brightness(1) saturate(0)",
+  },
+
+  0.5
+);
+
+tl.to(sun.current, { y: -300, x: -50, ease: "none" }, 0.5);
+
+
 
       tl.fromTo(
         [mountain1Ref.current, mountain2Ref.current, mountain3Ref.current],
@@ -105,6 +98,70 @@ export default function SunsetScene() {
       tl.to(smallBearsRef.current, { y: 300, x: 0, ease: "none" }, 0);
       tl.to(flagRef.current, { y: -148, x: 0, ease: "none" }, 0);
       tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
+
+      tl.to(
+        text1Ref.current,
+        {
+          scale: 0.8,
+          ease: "power2.inOut",
+        },
+        0.1
+      );
+
+      tl.fromTo(
+        text2Ref.current,
+        {
+          opacity: 0,
+          y: "50%",
+        },
+        {
+          scale: 0.9,
+          opacity: 1,
+          y: "0%",
+          ease: "power2.inOut",
+        },
+        0.3
+      );
+
+      tl.fromTo(
+        buttonRef.current,
+        {
+          y: 0,
+          opacity: 0,
+          scale: 0.5,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: -50,
+          ease: "power2.inOut",
+        },
+        0.6
+      );
+
+      const secondHalfStart = 1;
+
+      tl.to(
+        [
+          mountain1Ref.current,
+          mountain2Ref.current,
+          mountain3Ref.current,
+          landscapeRef.current,
+          flagRef.current,
+          moon.current,
+          sun.current,
+        ],
+        { y: "200%", ease: "none" },
+        secondHalfStart
+      );
+
+      tl.to(".cloud", { y: "500%", ease: "none" }, secondHalfStart);
+
+      tl.to(
+        [text1Ref.current, text2Ref.current, buttonRef.current],
+        { y: "-100%", opacity: 0, ease: "none" },
+        secondHalfStart
+      );
     },
     { scope: containerRef }
   );
@@ -124,103 +181,129 @@ export default function SunsetScene() {
       ></div>
 
       <div
-        ref={sunGlow}
-        className="w-100 h-100 absolute top-[59%] right-[85px] -translate-x-1/2 z-18"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(255, 230, 180, 0.6) 0%, rgba(240, 224, 138, 0.3) 50%, rgba(240, 224, 138, 0) 70%)",
-          borderRadius: "50%",
-        }}
-      ></div>
-
-      <div
         ref={sun}
-        className="w-50 h-50 absolute top-[64%] right-[300px] -translate-x-1/2 z-19"
+        className="w-80 h-80 absolute top-[60%] right-[200px] -translate-x-1/2 z-8"
         style={{
           background:
-            "radial-gradient(circle, #eeb671ff 0%, #eebb7dff 50%, #eec694ff 100%)",
+            "radial-gradient(circle, rgba(255, 255, 255, 0.7) 30%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0) 70%)",
           borderRadius: "50%",
         }}
       ></div>
 
-      <div className="cloud absolute w-[20%] h-[20%] top-[10%] left-[3%] z-5">
+      <div ref={moon} className="w-60 h-60 absolute top-[10%] left-[10%] z-8">
         <Image
-          src="/forest/cloud.svg"
-          alt="Cloud"
           fill
-          style={{ objectFit: "contain" }}
-          priority={true}
+          priority
+          src="/sunset/moon.svg"
+          alt="Moon"
+          className="w-full h-full object-contain"
         />
       </div>
 
+      <div className="cloud absolute w-[10%] h-[15%] top-[20%] left-[5%] z-8">
+        <Image
+          fill
+          priority
+          src="/sunset/cloud.svg"
+          alt="Cloud"
+          className="w-full h-full object-contain"
+        />
+      </div>
       <div className="cloud absolute w-[15%] h-[15%] top-[40%] right-[5%] z-6">
         <Image
-          src="/forest/cloud.svg"
-          alt="Cloud"
           fill
-          style={{ objectFit: "contain" }}
-          priority={true}
+          priority
+          src="/sunset/cloud.svg"
+          alt="Cloud"
+          className="w-full h-full object-contain"
         />
       </div>
 
-      <div className="cloud absolute w-[15%] h-[25%] top-[40%] left-[20%] z-4">
+      <div className="cloud absolute w-[15%] h-[25%] top-[40%] left-[20%] z-7">
         <Image
-          src="/forest/cloud.svg"
-          alt="Cloud"
           fill
-          style={{ objectFit: "contain" }}
-          priority={true}
+          priority
+          src="/sunset/cloud.svg"
+          alt="Cloud"
+          className="w-full h-full object-contain"
         />
       </div>
 
-      <div className="cloud absolute w-[18%] h-[18%] top-[20%] right-[15%] z-7">
+      <div className="cloud absolute w-[10%] h-[18%] top-[20%] right-[15%] z-7">
         <Image
-          src="/forest/cloud.svg"
-          alt="Cloud"
           fill
-          style={{ objectFit: "contain" }}
-          priority={true}
+          priority
+          src="/sunset/cloud.svg"
+          alt="Cloud"
+          className="w-full h-full object-contain"
         />
       </div>
 
       <div className="cloud absolute w-[15%] h-[22%] top-[20%] left-[35%] z-8">
         <Image
-          src="/forest/cloud.svg"
-          alt="Cloud"
           fill
-          style={{ objectFit: "contain" }}
-          priority={true}
+          priority
+          src="/sunset/cloud.svg"
+          alt="Cloud"
+          className="w-full h-full object-contain"
         />
       </div>
 
-      <div ref={mountain1Ref} className="absolute inset-0 z-30">
+      <div ref={mountain1Ref} className="absolute inset-0 z-7">
         <Image
           src="/sunset/mountain-1.svg"
           alt="Mountain 1"
           fill
-          style={{ objectFit: "cover" }}
-          priority={true}
+          className="object-cover"
+          priority
         />
       </div>
-
-      <div ref={mountain2Ref} className="absolute inset-0 z-20">
+      <div ref={mountain2Ref} className="absolute inset-0 z-9">
         <Image
           src="/sunset/mountain-2.svg"
           alt="Mountain 2"
           fill
-          style={{ objectFit: "cover" }}
-          priority={true}
+          className="object-cover"
+          priority
         />
       </div>
-
       <div ref={mountain3Ref} className="absolute inset-0 z-10">
         <Image
           src="/sunset/mountain-3.svg"
           alt="Mountain 3"
           fill
-          style={{ objectFit: "cover" }}
-          priority={true}
+          className="object-cover"
+          priority
         />
+      </div>
+
+      <div
+        ref={text1Ref}
+        className="absolute top-[42%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center text-white text-6xl z-50"
+      >
+        REALIZING YOUR
+        <div className="mt-2 text-white text-8xl font-extrabold">
+          CREATIVE VISION
+        </div>
+      </div>
+      <div
+        ref={text2Ref}
+        className="mt-4 absolute top-[53%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] text-center text-white text-2xl opacity-0 z-100"
+      >
+        Vauldex is the place where your imagination comes to life.
+        <br />
+        We bring your vision into reality, walking beside you as we shape the
+        future together.
+      </div>
+
+      <div
+        id="button"
+        ref={buttonRef}
+        className="absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center opacity-0"
+      >
+        <button className="px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500">
+          Tell us your vision →
+        </button>
       </div>
 
       <div ref={bigBearRef} className=" absolute inset-0 z-40">
@@ -228,8 +311,8 @@ export default function SunsetScene() {
           src="/sunset/big-bear.svg"
           alt="Big Bear"
           fill
-          style={{ objectFit: "cover" }}
-          priority={true}
+          className="object-cover"
+          priority
         />
       </div>
       <div ref={smallBearsRef} className="absolute inset-0 z-40">
@@ -237,8 +320,8 @@ export default function SunsetScene() {
           src="/sunset/small-bears.svg"
           alt="Small Bears"
           fill
-          style={{ objectFit: "cover" }}
-          priority={true}
+          className="object-cover"
+          priority
         />
       </div>
 
@@ -250,8 +333,8 @@ export default function SunsetScene() {
           src="/sunset/flag.svg"
           alt="Flag"
           fill
-          style={{ objectFit: "cover" }}
-          priority={true}
+          className="object-cover"
+          priority
         />
       </div>
       <div ref={landscapeRef} className="absolute inset-0 z-90">
@@ -259,8 +342,8 @@ export default function SunsetScene() {
           src="/sunset/landscape.svg"
           alt="Landscape"
           fill
-          style={{ objectFit: "cover" }}
-          priority={true}
+          className="object-cover"
+          priority
         />
       </div>
     </div>

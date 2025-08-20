@@ -17,6 +17,16 @@ const AboutComponent = () => {
   const backgroundRef = useRef(null);
   const buttonRef = useRef(null);
   const contentContainerRef = useRef(null);
+  // NEW: Refs for the main SVG and the dev SVGs
+  const mainSvgRef = useRef(null);
+  const devRefs = useRef([]);
+
+  // Use a helper function to add refs to the array
+  const addToDevRefs = (el) => {
+    if (el && !devRefs.current.includes(el)) {
+      devRefs.current.push(el);
+    }
+  };
 
   useGSAP(
     () => {
@@ -35,19 +45,25 @@ const AboutComponent = () => {
         }
       );
 
+      // NEW: Set initial state for the new SVGs
+      gsap.set([mainSvgRef.current, ...devRefs.current], {
+        opacity: 0,
+        scale: 0,
+      });
+
       // Create a single master timeline that will control everything
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top", // Pin the container to the top of the viewport
-          end: "+=2000", // Total scroll distance for the entire animation (intro + hold + outro)
-          pin: true, // Keep the container fixed in place during the scroll
-          scrub: 1, // Smoothly scrub the animation with the scroll
+          start: "top top",
+          end: "+=8000", // Increased total scroll distance
+          pin: true,
+          scrub: 1,
           markers: false,
         },
       });
 
-      // Phase 1: Animate the text and button into view
+      // Phase 1: Animate the initial text and button into view
       masterTl.to(
         [ourRef.current.children, NameRef.current.children, buttonRef.current],
         {
@@ -61,7 +77,6 @@ const AboutComponent = () => {
       );
 
       // Phase 2: Animate the SVG background to be visible
-      // This happens after the text animation is complete. The total timeline is 2000px, so we can use a relative position
       masterTl.to(
         backgroundRef.current,
         {
@@ -69,15 +84,11 @@ const AboutComponent = () => {
           ease: "power2.inOut",
         },
         "+=0.5"
-      ); // Start this animation 0.5 seconds after the previous one ends
+      );
 
       // Phase 3: Hold the view
-      // The timeline will now simply "play" and hold the scene for a period
-      // The scroll will continue for the duration of the pin
 
-      // Phase 4: Animate the text, button, and SVG to fade out and shrink
-      // We use a specific position to start this outro animation.
-      // The `start` parameter here is relative to the start of the master timeline.
+      // Phase 4: Animate the text, button, and first SVG to fade out and shrink
       masterTl.to(
         contentContainerRef.current,
         {
@@ -86,7 +97,7 @@ const AboutComponent = () => {
           ease: "power1.in",
         },
         ">1"
-      ); // Start this animation 1 second after the previous one finishes
+      );
 
       masterTl.to(
         backgroundRef.current,
@@ -95,7 +106,34 @@ const AboutComponent = () => {
           ease: "power1.in",
         },
         "<"
-      ); // Start this animation at the exact same time as the previous one
+      );
+
+      // --- NEW ANIMATION PHASES ---
+
+      // Phase 5: Reveal the main.svg after the initial content has disappeared
+      masterTl.to(
+        mainSvgRef.current,
+        {
+          opacity: 1,
+          scale: 1,
+          ease: "power2.out",
+        },
+        ">" // Start this immediately after the previous animations complete
+      );
+
+      // Phase 6: Sequentially reveal the dev SVGs
+      // We loop through the devRefs array and add a new animation for each
+      devRefs.current.forEach((devSvg, index) => {
+        masterTl.to(
+          devSvg,
+          {
+            opacity: 1,
+            scale: 1,
+            ease: "power2.out",
+          },
+          "+=0.5" // Start each subsequent animation 0.5 seconds after the previous one
+        );
+      });
     },
     { scope: containerRef }
   );
@@ -147,6 +185,81 @@ const AboutComponent = () => {
             About Us →
           </button>
         </div>
+      </div>
+      {/* NEW: Container for the main SVG and dev SVGs */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center">
+        <Image
+          src="/main.svg"
+          alt="Main SVG"
+          ref={mainSvgRef}
+          width={1000}
+          height={1000}
+          className="w-[70%] h-[90%] object-contain"
+        />
+        {/* Render dev SVGs with unique positions */}
+        <Image
+          src="/dev01.svg"
+          alt="Developer 01"
+          ref={addToDevRefs}
+          width={100}
+          height={100}
+          className="absolute"
+          style={{ top: "30%", left: "20%" }}
+        />
+        <Image
+          src="/dev02.svg"
+          alt="Developer 02"
+          ref={addToDevRefs}
+          width={100}
+          height={100}
+          className="absolute"
+          style={{ top: "50%", left: "70%" }}
+        />
+        <Image
+          src="/dev03.svg"
+          alt="Developer 03"
+          ref={addToDevRefs}
+          width={100}
+          height={100}
+          className="absolute"
+          style={{ bottom: "20%", left: "45%" }}
+        />
+        <Image
+          src="/dev04.svg"
+          alt="Developer 04"
+          ref={addToDevRefs}
+          width={100}
+          height={100}
+          className="absolute"
+          style={{ top: "40%", left: "55%" }}
+        />
+        <Image
+          src="/dev05.svg"
+          alt="Developer 05"
+          ref={addToDevRefs}
+          width={100}
+          height={100}
+          className="absolute"
+          style={{ bottom: "10%", left: "30%" }}
+        />
+        <Image
+          src="/dev06.svg"
+          alt="Developer 06"
+          ref={addToDevRefs}
+          width={100}
+          height={100}
+          className="absolute"
+          style={{ top: "60%", left: "40%" }}
+        />
+        <Image
+          src="/dev07.svg"
+          alt="Developer 07"
+          ref={addToDevRefs}
+          width={100}
+          height={100}
+          className="absolute"
+          style={{ bottom: "5%", left: "60%" }}
+        />
       </div>
     </div>
   );

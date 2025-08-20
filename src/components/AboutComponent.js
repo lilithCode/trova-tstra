@@ -2,10 +2,9 @@
 
 import React, { useRef } from "react";
 import { gsap } from "gsap";
-import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// Import your SVG as a React component
+import Image from "next/image";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -15,77 +14,98 @@ const AboutComponent = () => {
   const containerRef = useRef(null);
   const ourRef = useRef(null);
   const NameRef = useRef(null);
-  const svgRef = useRef(null); // Ref for the SVG
+  const backgroundRef = useRef(null);
+  const buttonRef = useRef(null);
+  const contentContainerRef = useRef(null);
+
   useGSAP(
     () => {
-      gsap.set(ourRef.current.children, {
-        yPercent: 100,
-        opacity: 0,
-        scale: 0.5,
-      });
-
-      gsap.set(NameRef.current.children, {
-        yPercent: 100,
-        opacity: 0,
-        scale: 0.5,
-      });
-
-      gsap.set(svgRef.current, {
+      // Set initial state for all elements to be hidden
+      gsap.set(backgroundRef.current, {
         opacity: 0,
       });
 
-      // Create a sequence of animations using two separate ScrollTriggers
+      gsap.set(
+        [ourRef.current.children, NameRef.current.children, buttonRef.current],
+        {
+          xPercent: 100,
+          yPercent: -100,
+          opacity: 0,
+          scale: 0.5,
+        }
+      );
 
-      // ScrollTrigger for the text animation
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "center bottom",
-            end: "center center",
-            scrub: true,
-          },
-        })
-        .to(ourRef.current.children, {
+      // Create a single master timeline that will control everything
+      const masterTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top", // Pin the container to the top of the viewport
+          end: "+=2000", // Total scroll distance for the entire animation (intro + hold + outro)
+          pin: true, // Keep the container fixed in place during the scroll
+          scrub: 1, // Smoothly scrub the animation with the scroll
+          markers: false,
+        },
+      });
+
+      // Phase 1: Animate the text and button into view
+      masterTl.to(
+        [ourRef.current.children, NameRef.current.children, buttonRef.current],
+        {
+          xPercent: 0,
           yPercent: 0,
           scale: 1,
           opacity: 1,
           stagger: 0.05,
           ease: "power2.out",
-        })
-        .to(
-          NameRef.current.children,
-          {
-            yPercent: 0,
-            scale: 1,
-            opacity: 1,
-            color: "#cc5200",
-            stagger: 0.05,
-            ease: "power2.out",
-          },
-          "<"
-        );
+        }
+      );
 
-      // ScrollTrigger for the SVG animation
-      gsap.to(svgRef.current, {
-        opacity: 1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "center center", // Starts when the text animation is complete
-          end: "50% top", // Ends 50% down the viewport
-          scrub: true,
-          markers: true, // Set to true for debugging
+      // Phase 2: Animate the SVG background to be visible
+      // This happens after the text animation is complete. The total timeline is 2000px, so we can use a relative position
+      masterTl.to(
+        backgroundRef.current,
+        {
+          opacity: 0.5,
+          ease: "power2.inOut",
         },
-      });
+        "+=0.5"
+      ); // Start this animation 0.5 seconds after the previous one ends
+
+      // Phase 3: Hold the view
+      // The timeline will now simply "play" and hold the scene for a period
+      // The scroll will continue for the duration of the pin
+
+      // Phase 4: Animate the text, button, and SVG to fade out and shrink
+      // We use a specific position to start this outro animation.
+      // The `start` parameter here is relative to the start of the master timeline.
+      masterTl.to(
+        contentContainerRef.current,
+        {
+          scale: 0,
+          opacity: 0,
+          ease: "power1.in",
+        },
+        ">1"
+      ); // Start this animation 1 second after the previous one finishes
+
+      masterTl.to(
+        backgroundRef.current,
+        {
+          opacity: 0,
+          ease: "power1.in",
+        },
+        "<"
+      ); // Start this animation at the exact same time as the previous one
     },
     { scope: containerRef }
   );
+
   const renderCharacters = (text, ref) => {
     return (
       <span ref={ref} className="inline-flex overflow-hidden">
         {text.split("").map((char, index) => (
           <span key={index} className="inline-block">
-            {char === " " ? "\u00A0" : char}
+            {char === " " ? "\u00A0" : char} {}
           </span>
         ))}
       </span>
@@ -95,28 +115,35 @@ const AboutComponent = () => {
   return (
     <div
       ref={containerRef}
-      className="relative z-10 mt-60 min-h-screen bg-transparent flex items-center justify-center overflow-hidden" // Added overflow-hidden to the main container
+      className="relative z-10 min-h-screen bg-transparent flex items-center justify-center"
     >
-      {/* Render the SVG with the ref and position it */}
-      <div ref={svgRef} className="absolute inset-0 z-0 pointer-events-none opacity-0">
-  <Image
-                  src="/backgroundPattern.svg"
-                  alt="Business Structure"
-                  layout="fill"
-                  objectFit="contain"
-                  priority
-                />      </div>
-      <div className="flex flex-col items-center justify-center text-white py-8 relative z-10">
-        {" "}
-        {/* Added relative z-10 to ensure text is above SVG */}
+      <div
+        ref={backgroundRef}
+        className="absolute inset-0 z-0 flex items-center justify-center"
+      >
+        <Image
+          src="/backgroundPattern.svg"
+          alt="Background Pattern"
+          width={1000}
+          height={1000}
+          className="w-[70%] h-[90%] object-cover"
+        />
+      </div>
+      <div
+        ref={contentContainerRef}
+        className="flex flex-col items-center justify-center text-white py-8 z-10"
+      >
         <h2 className="text-7xl mb-6 text-center">
           {renderCharacters("WHO IS", ourRef)}
-          <span className="ml-4 font-bold">
-            {renderCharacters("VAULDEX?", NameRef)}
+          <span className="ml-4 font-bold text-[#cc5200]">
+            {renderCharacters("TROVA TSTRA?", NameRef)}
           </span>
         </h2>
         <div className="flex justify-center items-center">
-          <button className="px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500">
+          <button
+            ref={buttonRef}
+            className="px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500"
+          >
             About Us →
           </button>
         </div>

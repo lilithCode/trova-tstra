@@ -40,10 +40,10 @@ return (
           <Image
             src="/logo.png"
             alt="Vauldex Logo"
-            width={100}
-            height={100}
+            width={150}
+            height={150}
             priority
-            className="w-[100px] h-[100px] object-contain"
+            className="w-[150px] h-[150px] object-contain"
           />
         </Link>
       </div>

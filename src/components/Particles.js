@@ -16,41 +16,41 @@ const StarParticles = () => {
         preset: "stars",
         particles: {
           number: {
-            value: 200,
+            value: 300,
             density: {
               enable: true,
-              value_area: 800
-            }
+              value_area: 800,
+            },
           },
           color: {
-            value: "#ffffff"
+            value: "#ffffff",
           },
           shape: {
-            type: "circle"
+            type: "circle",
           },
           opacity: {
             value: 1,
             random: true,
             anim: {
               enable: true,
-              speed: 0.5,
+              speed: 0,
               opacity_min: 0.1,
-              sync: false
-            }
+              sync: false,
+            },
           },
           size: {
-            value: 2,
+            value: 1,
             random: true,
             anim: {
               enable: true,
               speed: 0.5,
               size_min: 0.1,
-              sync: false
-            }
+              sync: false,
+            },
           },
           move: {
-            enable: true,
-            speed: 0.2,
+            enable: false,
+            speed: 0.01,
             direction: "none",
             random: true,
             straight: false,
@@ -58,19 +58,19 @@ const StarParticles = () => {
             attract: {
               enable: false,
               rotateX: 600,
-              rotateY: 1200
-            }
+              rotateY: 1200,
+            },
           },
           twinkle: {
             particles: {
               enable: true,
-              frequency: 0.05,
-              opacity: 1
-            }
-          }
+              frequency: 0.01,
+              opacity: 1,
+            },
+          },
         },
         background: {
-          opacity: 0
+          opacity: 0,
         },
         detectRetina: true,
         fpsLimit: 60,
@@ -78,14 +78,14 @@ const StarParticles = () => {
           detect_on: "canvas",
           events: {
             onhover: {
-              enable: false
+              enable: false,
             },
             onclick: {
-              enable: false
+              enable: false,
             },
-            resize: true
-          }
-        }
+            resize: true,
+          },
+        },
       }}
       style={{
         position: "absolute",
@@ -94,7 +94,6 @@ const StarParticles = () => {
         width: "100%",
         height: "100%",
         pointerEvents: "none",
-        zIndex: 20
       }}
     />
   );

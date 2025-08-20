@@ -19,6 +19,8 @@ const AboutComponent = () => {
   const contentContainerRef = useRef(null);
   const mainSvgRef = useRef(null);
   const devRefs = useRef([]);
+  const nextTextRef = useRef(null);
+  const gradientRef = useRef(null);
 
   const addToDevRefs = (el) => {
     if (el && !devRefs.current.includes(el)) {
@@ -32,42 +34,60 @@ const AboutComponent = () => {
         opacity: 0,
       });
 
-      gsap.set(
-        [ourRef.current.children, NameRef.current.children, buttonRef.current],
-        {
-          xPercent: 100,
-          yPercent: -100,
-          opacity: 0,
-          scale: 0.5,
-        }
-      );
+      gsap.set([ourRef.current.children, NameRef.current.children], {
+        xPercent: 100,
+        yPercent: -100,
+        opacity: 0,
+        scale: 0.5,
+      });
+
+      gsap.set(buttonRef.current, {
+        opacity: 0,
+        scale: 0.5,
+      });
 
       gsap.set([mainSvgRef.current, ...devRefs.current], {
         opacity: 0,
         scale: 0,
       });
 
+      gsap.set(nextTextRef.current, {
+        opacity: 0,
+        scale: 0,
+      });
+
+      gsap.set(gradientRef.current, {
+        opacity: 0,
+      });
+
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=8000",
+          end: "+=5000",
           pin: true,
           scrub: 1,
           markers: false,
         },
       });
 
+      masterTl.to([ourRef.current.children, NameRef.current.children], {
+        xPercent: 0,
+        yPercent: 0,
+        scale: 1,
+        opacity: 1,
+        stagger: 0.05,
+        ease: "power2.out",
+      });
+
       masterTl.to(
-        [ourRef.current.children, NameRef.current.children, buttonRef.current],
+        buttonRef.current,
         {
-          xPercent: 0,
-          yPercent: 0,
-          scale: 1,
           opacity: 1,
-          stagger: 0.05,
+          scale: 1,
           ease: "power2.out",
-        }
+        },
+        "+=0.2"
       );
 
       masterTl.to(
@@ -76,9 +96,8 @@ const AboutComponent = () => {
           opacity: 0.5,
           ease: "power2.inOut",
         },
-        "+=0.5"
+        ">"
       );
-
 
       masterTl.to(
         contentContainerRef.current,
@@ -99,18 +118,17 @@ const AboutComponent = () => {
         "<"
       );
 
-
       masterTl.to(
         mainSvgRef.current,
         {
-          opacity: 0.5,
+          opacity: 1,
           scale: 1.5,
           ease: "power2.out",
         },
         ">"
       );
 
-      devRefs.current.forEach((devSvg, index) => {
+      devRefs.current.forEach((devSvg) => {
         masterTl.to(
           devSvg,
           {
@@ -118,9 +136,30 @@ const AboutComponent = () => {
             scale: 1,
             ease: "power2.out",
           },
-          "+=0.2"
+          "+=0.05"
         );
       });
+
+      const newContentStartTime = ">0.5";
+
+      masterTl.to(
+        nextTextRef.current,
+        {
+          opacity: 1,
+          scale: 1,
+          ease: "power2.out",
+        },
+        newContentStartTime
+      );
+
+      masterTl.to(
+        gradientRef.current,
+        {
+          opacity: 1,
+          ease: "power2.out",
+        },
+        "<"
+      );
     },
     { scope: containerRef }
   );
@@ -158,7 +197,7 @@ const AboutComponent = () => {
         ref={contentContainerRef}
         className="flex flex-col items-center justify-center text-white py-8 z-10"
       >
-        <h2 className="text-7xl mb-6 text-center">
+        <h2 className="text-7xl mb-6 text-center font-thin">
           {renderCharacters("WHO IS", ourRef)}
           <span className="ml-4 font-bold text-[#cc5200]">
             {renderCharacters("TROVA TSTRA?", NameRef)}
@@ -167,13 +206,12 @@ const AboutComponent = () => {
         <div className="flex justify-center items-center">
           <button
             ref={buttonRef}
-            className="px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500"
+            className="px-8 py-2 text-white text-lg font-bold rounded-full border-2 border-orange-500"
           >
             About Us →
           </button>
         </div>
       </div>
-      {}
       <div className="absolute inset-0 z-20 flex items-center justify-center">
         <Image
           src="/bears/main.svg"
@@ -183,7 +221,6 @@ const AboutComponent = () => {
           height={1000}
           className="w-[60%] h-[80%] object-contain"
         />
-        {}
         <Image
           src="/bears/dev01.svg"
           alt="Developer 01"
@@ -247,7 +284,29 @@ const AboutComponent = () => {
           className="absolute"
           style={{ top: "15%", left: "40%" }}
         />
-       
+      </div>
+
+      <div
+        ref={gradientRef}
+        className="absolute z-25 w-[500px] h-[200px] rounded-full filter blur-3xl opacity-0.5"
+        style={{
+          background: "radial-gradient(circle, #003980 0%, #002e66 100%)",
+        }}
+      />
+
+      <div
+        ref={nextTextRef}
+        className="absolute z-30 text-center text-white text-8xl font-thin"
+      >
+        TROVA TSTRA
+        <br />
+        <span>WANTS</span>
+        <span className="text-[#cc5200] font-bold">YOU!</span>
+        <div className="pt-10 flex justify-center items-center">
+          <button className="px-10 py-2 text-white text-lg font-bold rounded-full border-2 border-orange-500">
+            Be a Part →
+          </button>
+        </div>
       </div>
     </div>
   );

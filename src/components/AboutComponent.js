@@ -17,11 +17,9 @@ const AboutComponent = () => {
   const backgroundRef = useRef(null);
   const buttonRef = useRef(null);
   const contentContainerRef = useRef(null);
-  // NEW: Refs for the main SVG and the dev SVGs
   const mainSvgRef = useRef(null);
   const devRefs = useRef([]);
 
-  // Use a helper function to add refs to the array
   const addToDevRefs = (el) => {
     if (el && !devRefs.current.includes(el)) {
       devRefs.current.push(el);
@@ -30,7 +28,6 @@ const AboutComponent = () => {
 
   useGSAP(
     () => {
-      // Set initial state for all elements to be hidden
       gsap.set(backgroundRef.current, {
         opacity: 0,
       });
@@ -45,25 +42,22 @@ const AboutComponent = () => {
         }
       );
 
-      // NEW: Set initial state for the new SVGs
       gsap.set([mainSvgRef.current, ...devRefs.current], {
         opacity: 0,
         scale: 0,
       });
 
-      // Create a single master timeline that will control everything
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=8000", // Increased total scroll distance
+          end: "+=8000",
           pin: true,
           scrub: 1,
           markers: false,
         },
       });
 
-      // Phase 1: Animate the initial text and button into view
       masterTl.to(
         [ourRef.current.children, NameRef.current.children, buttonRef.current],
         {
@@ -76,7 +70,6 @@ const AboutComponent = () => {
         }
       );
 
-      // Phase 2: Animate the SVG background to be visible
       masterTl.to(
         backgroundRef.current,
         {
@@ -86,9 +79,7 @@ const AboutComponent = () => {
         "+=0.5"
       );
 
-      // Phase 3: Hold the view
 
-      // Phase 4: Animate the text, button, and first SVG to fade out and shrink
       masterTl.to(
         contentContainerRef.current,
         {
@@ -108,21 +99,17 @@ const AboutComponent = () => {
         "<"
       );
 
-      // --- NEW ANIMATION PHASES ---
 
-      // Phase 5: Reveal the main.svg after the initial content has disappeared
       masterTl.to(
         mainSvgRef.current,
         {
-          opacity: 1,
-          scale: 1,
+          opacity: 0.5,
+          scale: 1.5,
           ease: "power2.out",
         },
-        ">" // Start this immediately after the previous animations complete
+        ">"
       );
 
-      // Phase 6: Sequentially reveal the dev SVGs
-      // We loop through the devRefs array and add a new animation for each
       devRefs.current.forEach((devSvg, index) => {
         masterTl.to(
           devSvg,
@@ -131,7 +118,7 @@ const AboutComponent = () => {
             scale: 1,
             ease: "power2.out",
           },
-          "+=0.5" // Start each subsequent animation 0.5 seconds after the previous one
+          "+=0.2"
         );
       });
     },
@@ -164,7 +151,7 @@ const AboutComponent = () => {
           alt="Background Pattern"
           width={1000}
           height={1000}
-          className="w-[70%] h-[90%] object-cover"
+          className="w-[60%] h-[80%] object-cover"
         />
       </div>
       <div
@@ -186,80 +173,81 @@ const AboutComponent = () => {
           </button>
         </div>
       </div>
-      {/* NEW: Container for the main SVG and dev SVGs */}
+      {}
       <div className="absolute inset-0 z-20 flex items-center justify-center">
         <Image
-          src="/main.svg"
+          src="/bears/main.svg"
           alt="Main SVG"
           ref={mainSvgRef}
           width={1000}
           height={1000}
-          className="w-[70%] h-[90%] object-contain"
+          className="w-[60%] h-[80%] object-contain"
         />
-        {/* Render dev SVGs with unique positions */}
+        {}
         <Image
           src="/bears/dev01.svg"
           alt="Developer 01"
           ref={addToDevRefs}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           className="absolute"
-          style={{ top: "30%", left: "20%" }}
+          style={{ top: "40%", left: "18%" }}
         />
         <Image
           src="/bears/dev02.svg"
           alt="Developer 02"
           ref={addToDevRefs}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           className="absolute"
-          style={{ top: "50%", left: "70%" }}
+          style={{ top: "15%", left: "65%" }}
         />
         <Image
           src="/bears/dev03.svg"
           alt="Developer 03"
           ref={addToDevRefs}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           className="absolute"
-          style={{ bottom: "20%", left: "45%" }}
+          style={{ bottom: "5%", left: "40%" }}
         />
         <Image
           src="/bears/dev04.svg"
           alt="Developer 04"
           ref={addToDevRefs}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           className="absolute"
-          style={{ top: "40%", left: "55%" }}
+          style={{ top: "15%", left: "28%" }}
         />
         <Image
           src="/bears/dev05.svg"
           alt="Developer 05"
           ref={addToDevRefs}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           className="absolute"
-          style={{ bottom: "10%", left: "30%" }}
+          style={{ bottom: "15%", left: "60%" }}
         />
         <Image
           src="/bears/dev06.svg"
           alt="Developer 06"
           ref={addToDevRefs}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           className="absolute"
-          style={{ top: "60%", left: "40%" }}
+          style={{ top: "40%", left: "72%" }}
         />
         <Image
           src="/bears/dev07.svg"
           alt="Developer 07"
           ref={addToDevRefs}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           className="absolute"
-          style={{ bottom: "5%", left: "60%" }}
+          style={{ top: "15%", left: "40%" }}
         />
+       
       </div>
     </div>
   );

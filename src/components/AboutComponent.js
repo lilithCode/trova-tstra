@@ -18,7 +18,6 @@ const AboutComponent = () => {
   const buttonRef = useRef(null);
   const contentContainerRef = useRef(null);
 
-  // --- NEW: A ref for the entire SVG "stage" ---
   const svgContainerRef = useRef(null);
   const mainSvgRef = useRef(null);
   const devRefs = useRef([]);
@@ -34,9 +33,6 @@ const AboutComponent = () => {
 
   useGSAP(
     () => {
-      // The animation logic remains the same, as it targets the same refs.
-      // The change is in the HTML structure, not the animation itself.
-      gsap.set(backgroundRef.current, { opacity: 0 });
       gsap.set([ourRef.current.children, NameRef.current.children], {
         xPercent: 100,
         yPercent: -100,
@@ -44,7 +40,7 @@ const AboutComponent = () => {
         scale: 0.5,
       });
       gsap.set(buttonRef.current, { opacity: 0, scale: 0.5 });
-      gsap.set([mainSvgRef.current, ...devRefs.current], {
+      gsap.set([mainSvgRef.current, backgroundRef.current, ...devRefs.current], {
         opacity: 0,
         scale: 0,
       });
@@ -77,22 +73,34 @@ const AboutComponent = () => {
       );
       masterTl.to(
         backgroundRef.current,
-        { opacity: 0.5, ease: "power2.inOut" },
-        ">",
+        { opacity: 1, scale: 1, ease: "power2.out" },
+        ">"
       );
+
       masterTl.to(
         contentContainerRef.current,
         { scale: 0, opacity: 0, ease: "power1.in" },
         ">1",
       );
       masterTl.to(
+        contentContainerRef.current,
+        {
+          scale: 0,
+          opacity: 0,
+          ease: "power1.in",
+          pointerEvents: "none", // 👈 important
+        },
+        ">1"
+      );
+
+      masterTl.to(
         backgroundRef.current,
-        { opacity: 0, ease: "power1.in" },
+        { opacity: 0, ease: "power1.in " },
         "<",
       );
       masterTl.to(
         mainSvgRef.current,
-        { opacity: 1, scale: 1.5, ease: "power2.out" },
+        { opacity: 1, scale: 1, ease: "power2.out" },
         ">",
       );
       devRefs.current.forEach((devSvg) => {
@@ -132,18 +140,20 @@ const AboutComponent = () => {
     >
       <div
         ref={backgroundRef}
-        className="absolute inset-0 z-0 flex items-center justify-center"
+        className="absolute w-[90%] max-w-3xl mx-auto z-10"
       >
+        {}
         <Image
           src="/backgroundPattern.svg"
-          alt="Background Pattern"
+          alt="pattern SVG"
+          ref={backgroundRef}
           width={1000}
           height={1000}
-          className="w-full h-full md:w-[60%] md:h-[80%] object-contain"
+          className="w-full h-auto object-contain relative z-0"
         />
       </div>
 
-      {/* Container for the initial text content */}
+      {}
       <div
         ref={contentContainerRef}
         className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 z-10"
@@ -154,33 +164,33 @@ const AboutComponent = () => {
             {renderCharacters("TROVA TSTRA?", NameRef)}
           </span>
         </h2>
-        <div className="flex justify-center items-center">
-          <button
-            ref={buttonRef}
-            className="px-8 py-2 text-white text-lg font-bold rounded-full border-2 border-orange-500"
-          >
-            About Us →
+        <div className=" mt-8 flex justify-center items-center">
+          <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
+            <span>About Us</span>
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
+              →
+            </span>
           </button>
         </div>
       </div>
 
-      {/* --- NEW: Responsive SVG Stage Container --- */}
-      {/* This container will scale, and all bears inside are positioned relative to it. */}
-      {/* It's hidden initially and appears later in the animation. */}
+      {}
+      {}
+      {}
       <div
         ref={svgContainerRef}
         className="absolute w-[90%] max-w-3xl mx-auto z-20"
       >
-        {/* The main SVG now acts as the base layer of the stage */}
+        {}
         <Image
           src="/bears/main.svg"
           alt="Main SVG"
           ref={mainSvgRef}
           width={1000}
           height={1000}
-          className="w-full h-auto object-contain relative z-0" // z-0 so it's behind the bears
+          className="w-full h-auto object-contain relative z-0"
         />
-        {/* Each developer bear is positioned absolutely *within* this container */}
+        {}
         <div
           ref={addToDevRefs}
           className="absolute w-[14%] h-auto"
@@ -210,7 +220,7 @@ const AboutComponent = () => {
         <div
           ref={addToDevRefs}
           className="absolute w-[14%] h-auto"
-          style={{ bottom: "5%", left: "20%" }}
+          style={{ bottom: "15%", left: "30%" }}
         >
           <Image
             src="/bears/dev03.svg"
@@ -249,7 +259,7 @@ const AboutComponent = () => {
         <div
           ref={addToDevRefs}
           className="absolute w-[14%] h-auto"
-          style={{ bottom: "2%", left: "70%" }}
+          style={{ top: "15%", left: "70%" }}
         >
           <Image
             src="/bears/dev06.svg"
@@ -276,7 +286,7 @@ const AboutComponent = () => {
 
       <div
         ref={gradientRef}
-        className="absolute z-20 w-[500px] h-[200px] rounded-full filter blur-3xl" // z-index lower than text
+        className="absolute z-20 w-[500px] h-[200px] rounded-full filter blur-3xl"
         style={{
           background:
             "radial-gradient(circle, rgba(0, 57, 128, 0.9) 0%, rgba(0, 46, 102, 0.2) 70%)",
@@ -291,9 +301,12 @@ const AboutComponent = () => {
         <br />
         <span>WANTS</span>
         <span className="text-[#cc5200] font-bold">YOU!</span>
-        <div className="pt-10 flex justify-center items-center">
-          <button className="px-10 py-2 text-white text-lg font-bold rounded-full border-2 border-orange-500">
-            Be a Part →
+        <div id="button" className=" mt-8 flex justify-center items-center">
+          <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
+            <span>Be a Part</span>
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
+              →
+            </span>
           </button>
         </div>
       </div>

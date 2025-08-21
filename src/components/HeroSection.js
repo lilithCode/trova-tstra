@@ -93,7 +93,7 @@ export default function SunsetScene() {
             );
             tl.to(bigBearRef.current, { y: 700, x: 0, ease: "none" }, 0);
             tl.to(smallBearsRef.current, { y: 300, x: 0, ease: "none" }, 0);
-            tl.to(flagRef.current, { y: -148, x: 0, ease: "none" }, 0);
+            tl.to(flagRef.current, { y: -180, x: 0, ease: "none" }, 0);
             tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
             tl.to(
               textContainerRef.current.children[0],
@@ -291,7 +291,7 @@ export default function SunsetScene() {
       </div>
       <div
         ref={flagRef}
-        className="absolute w-30 h-60 bottom-[-180px] left-1/2 transform -translate-x-1/2 z-50 lg:z-10"
+        className="absolute w-30 h-60 bottom-[-200px] left-1/2 transform -translate-x-1/2 z-50 lg:z-10"
       >
         <Image
           src="/sunset/flag.svg"

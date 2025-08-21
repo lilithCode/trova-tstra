@@ -273,7 +273,7 @@ const ForestComponent = () => {
         </div>
 
         <h1 className="text-4xl w-full md:text-6xl font-bold text-white">
-          Let's build your <br /> product together.
+          Let&apos;s build your <br /> product together.
         </h1>
 
         <p className="mt-4 text-lg md:text-xl text-white/80">

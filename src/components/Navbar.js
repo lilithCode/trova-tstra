@@ -45,8 +45,6 @@ const Navbar = () => {
   }, [menuOpen]);
 
   useGSAP(() => {
-  
-
     gsap.to(dividersRef.current, {
       opacity: 0,
       duration: 0.5,
@@ -60,11 +58,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav
-      ref={navRef}
-      className="w-full fixed inset-x-0 top-0 z-100 "
-    >
-      <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
+    <nav ref={navRef} className="w-full fixed inset-x-0 top-0 z-100 ">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
           <Link href="/" className="flex items-center">
             <Image
@@ -76,7 +71,7 @@ const Navbar = () => {
               className="object-contain w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] relative"
               sizes="(max-width: 640px) 100px, (max-width: 768px) 120px, 150px"
               style={{ position: "relative" }}
-           />
+            />
           </Link>
         </div>
         <div className="flex items-center">
@@ -114,7 +109,8 @@ const Navbar = () => {
                     ref={addToDividersRef}
                     aria-hidden="true"
                     className="text-[#794f35] text-lg font-bold select-none transition-opacity duration-300 opacity-100"
-                  >////
+                  >
+                    {/* Divider */}
                   </li>
                 )}
               </React.Fragment>

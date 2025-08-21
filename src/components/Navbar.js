@@ -45,15 +45,7 @@ const Navbar = () => {
   }, [menuOpen]);
 
   useGSAP(() => {
-    gsap.to(navRef.current, {
-      backgroundColor: "rgb(0,0,0)",
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top -50%",
-        end: "top -100%",
-        scrub: true,
-      },
-    });
+  
 
     gsap.to(dividersRef.current, {
       opacity: 0,
@@ -70,7 +62,7 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="w-full bg-transparent fixed inset-x-0 top-0 z-100 transition-colors duration-500"
+      className="w-full fixed inset-x-0 top-0 z-100 "
     >
       <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
@@ -120,7 +112,7 @@ const Navbar = () => {
                     ref={addToDividersRef}
                     aria-hidden="true"
                     className="text-[#794f35] text-lg font-bold select-none transition-opacity duration-300 opacity-100"
-                  >
+                  >////
                   </li>
                 )}
               </React.Fragment>

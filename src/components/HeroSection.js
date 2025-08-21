@@ -93,7 +93,7 @@ export default function SunsetScene() {
             );
             tl.to(bigBearRef.current, { y: 700, x: 0, ease: "none" }, 0);
             tl.to(smallBearsRef.current, { y: 300, x: 0, ease: "none" }, 0);
-            tl.to(flagRef.current, { y: -148, x: 0, ease: "none" }, 0);
+            tl.to(flagRef.current, { y: -180, x: 0, ease: "none" }, 0);
             tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
             tl.to(
               textContainerRef.current.children[0],
@@ -142,7 +142,7 @@ export default function SunsetScene() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full h-screen overflow-hidden" 
     >
       {}
       <div
@@ -257,10 +257,7 @@ export default function SunsetScene() {
           We bring your vision into reality, walking beside you as we shape the
           future together.
         </div>
-        <div
-          id="button"
-          className=" mt-8 flex justify-center items-center"
-        >
+        <div id="button" className=" mt-8 flex justify-center items-center">
           <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
             <span>Tell us your vision</span>
             <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
@@ -277,7 +274,7 @@ export default function SunsetScene() {
           alt="Big Bear"
           fill
           className="object-cover"
-          priority
+          
         />
       </div>
       <div ref={smallBearsRef} className="absolute inset-0 z-40 lg:z-40">
@@ -291,7 +288,7 @@ export default function SunsetScene() {
       </div>
       <div
         ref={flagRef}
-        className="absolute w-30 h-60 bottom-[-180px] left-1/2 transform -translate-x-1/2 z-50 lg:z-10"
+        className="absolute w-30 h-60 bottom-[-200px] left-1/2 transform -translate-x-1/2 z-50 lg:z-10"
       >
         <Image
           src="/sunset/flag.svg"

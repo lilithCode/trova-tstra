@@ -10,6 +10,7 @@ import BusinessComponent from "./../components/BusinessComponent";
 import AboutComponent from "./../components/AboutComponent";
 import Footer from "./../components/Footer";
 import ForestComponent from "./../components/ForestComponent";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -42,6 +43,9 @@ export default function Home() {
       <>
         <div className="relative min-h-screen bg-black">
           <Particles className="absolute inset-0 z-0" />
+          <div className="w-full bg-transparent fixed inset-x-0 top-0 z-100">
+            <Navbar />
+          </div>
           <HeroSection ref={heroRef} className="relative z-10" />
           <BusinessComponent className="relative z-10 mt-20" />
           <AboutComponent className="relative z-10 mt-20" />

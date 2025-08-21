@@ -97,11 +97,24 @@ export default function SunsetScene() {
 tl.to(
   flagRef.current,
   {
-    y: () => -(window.innerHeight * 0.17), 
+    y: () => -landscapeRef.current.offsetHeight * 0.2,
     ease: "none",
+    onUpdate: function () {
+      if (
+        this.targets()[0]._gsap.y <
+        -landscapeRef.current.offsetHeight * 0.2
+      ) {
+        gsap.set(flagRef.current, {
+          y: -landscapeRef.current.offsetHeight * 0.2,
+        });
+      }
+    },
   },
   0
 );
+
+
+
            tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
             tl.to(
               textContainerRef.current.children[0],

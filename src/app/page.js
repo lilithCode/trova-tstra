@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <>
-        <div className="relative min-h-screen bg-black">
+        <div className="relative min-h-screen bg-black overflow-hidden">
           <Particles className="absolute inset-0 z-0" />
           <div className="w-full bg-transparent fixed inset-x-0 top-0 z-100">
             <Navbar />

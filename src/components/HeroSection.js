@@ -142,7 +142,7 @@ export default function SunsetScene() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full h-screen overflow-hidden" 
     >
       {}
       <div
@@ -257,10 +257,7 @@ export default function SunsetScene() {
           We bring your vision into reality, walking beside you as we shape the
           future together.
         </div>
-        <div
-          id="button"
-          className=" mt-8 flex justify-center items-center"
-        >
+        <div id="button" className=" mt-8 flex justify-center items-center">
           <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
             <span>Tell us your vision</span>
             <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
@@ -277,7 +274,7 @@ export default function SunsetScene() {
           alt="Big Bear"
           fill
           className="object-cover"
-          priority
+          
         />
       </div>
       <div ref={smallBearsRef} className="absolute inset-0 z-40 lg:z-40">

@@ -24,7 +24,6 @@ const ForestComponent = () => {
   const bearRef = useRef(null);
   const sunRef = useRef(null);
 
-  const cloudRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   const textBlockRef = useRef(null);
 
   useGSAP(
@@ -37,12 +36,12 @@ const ForestComponent = () => {
         xPercent: 50,
       });
       gsap.set(sunRef.current, { opacity: 1, x: 0, y: 100 });
-      gsap.set(bearRef.current, { opacity: 0, y: 150 });
+      gsap.set(bearRef.current, { y: 150 });
+      gsap.set(textBlockRef.current, { y: 0, opacity: 1 });
 
-      gsap.set(textBlockRef.current, { y: 0, x: 0, opacity: 1 });
-
-      cloudRefs.forEach((ref, i) => {
-        gsap.set(ref.current, {
+      const clouds = gsap.utils.toArray(".cloud", containerRef.current);
+      clouds.forEach((cloud, i) => {
+        gsap.set(cloud, {
           opacity: 0.4,
           filter: "grayscale(100%)",
           x: -100 * (i + 1),
@@ -71,7 +70,6 @@ const ForestComponent = () => {
         },
       });
 
-
       gsap.to(
         [
           leftBackgroundRef.current,
@@ -91,16 +89,17 @@ const ForestComponent = () => {
         }
       );
 
-      cloudRefs.forEach((ref, i) => {
+      const width = typeof window !== "undefined" ? window.innerWidth : 1920;
+      clouds.forEach((cloud, i) => {
         gsap.fromTo(
-          ref.current,
+          cloud,
           {
             opacity: 0.4,
             filter: "grayscale(100%)",
             x: -50 - i * 50,
           },
           {
-            x: window.innerWidth + 50,
+            x: width + 100,
             opacity: 0.8,
             filter: "grayscale(0%)",
             ease: "none",
@@ -116,31 +115,33 @@ const ForestComponent = () => {
 
       gsap.fromTo(
         bearRef.current,
-        { y: 150, opacity: 0 },
+        { y: 150 },
         {
           y: -100,
-          opacity: 1,
           ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 30%",
             end: "bottom center",
             scrub: 1,
-
-        },
+          },
         }
       );
 
-      gsap.to(textBlockRef.current, {
-        y: -200,
-        opacity: 0.8,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 2,
-        },
-      });
+      gsap.fromTo(
+        textBlockRef.current,
+        { y: 0, opacity: 1 },
+        {
+          y: -200,
+          opacity: 0.8,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 2,
+          },
+        }
+      );
     },
     { scope: containerRef }
   );
@@ -159,7 +160,7 @@ const ForestComponent = () => {
             "linear-gradient(to bottom, #000000, #000033, #00004d,#000066)",
           opacity: 0.8,
         }}
-      ></div>
+      />
 
       {}
       <div
@@ -168,116 +169,107 @@ const ForestComponent = () => {
         style={{
           background: "radial-gradient(circle, #FFA500 0%, #FF6347 100%)",
         }}
-      ></div>
+      />
 
       {}
-      <Image
+      <div
         ref={sunRef}
-        src="/forest/sun.svg"
-        alt="Sun"
-        width={1500}
-        height={1500}
-        priority
         className="absolute z-20 right-[-10%] bottom-[-30%] translate-x-1/2"
-      />
+      >
+        <Image
+          src="/forest/sun.svg"
+          alt="Sun"
+          width={1200}
+          height={1200}
+          priority
+        />
+      </div>
 
       {}
-      <Image
-        ref={cloudRefs[0]}
-        src="/forest/night-cloud.svg"
-        alt="Cloud1"
-        width={250}
-        height={250}
-        className="absolute z-30 top-[0%] right-[50%]"
-      />
-      <Image
-        ref={cloudRefs[1]}
-        src="/forest/cloud.svg"
-        alt="Cloud2"
-        width={250}
-        height={250}
-        className="absolute z-30 top-[20%] left-[-20%]"
-      />
-      <Image
-        ref={cloudRefs[2]}
-        src="/forest/cloud.svg"
-        alt="Cloud3"
-        width={250}
-        height={250}
-        className="absolute z-30 top-[45%] left-[-50%]"
-      />
-      <Image
-        ref={cloudRefs[3]}
-        src="/forest/cloud.svg"
-        alt="Cloud4"
-        width={280}
-        height={280}
-        className="absolute z-30 top-[30%] left-[50%]"
-      />
+      <div className="cloud absolute z-30 top-[0%] right-[50%]">
+        <Image
+          src="/forest/night-cloud.svg"
+          alt="Cloud1"
+          width={200}
+          height={200}
+        />
+      </div>
+      <div className="cloud absolute z-30 top-[20%] left-[-20%]">
+        <Image src="/forest/cloud.svg" alt="Cloud2" width={220} height={220} />
+      </div>
+      <div className="cloud absolute z-30 top-[45%] left-[-50%]">
+        <Image src="/forest/cloud.svg" alt="Cloud3" width={220} height={220} />
+      </div>
+      <div className="cloud absolute z-30 top-[30%] left-[50%]">
+        <Image src="/forest/cloud.svg" alt="Cloud4" width={240} height={240} />
+      </div>
 
       {}
-      <Image
-        ref={leftBackgroundRef}
-        src="/forest/trees-left-background.svg"
-        alt="Left Background Trees"
-        width={2500}
-        height={2500}
-        className="absolute z-40 bottom-0 left-0"
-      />
-      <Image
-        ref={rightBackgroundRef}
-        src="/forest/trees-right-background.svg"
-        alt="Right Background Trees"
-        width={2500}
-        height={2500}
-        className="absolute z-40 bottom-0 right-0"
-      />
+      <div ref={leftBackgroundRef} className="absolute z-40 bottom-0 left-0">
+        <Image
+          src="/forest/trees-left-background.svg"
+          alt="Left Background Trees"
+          width={2000}
+          height={2000}
+        />
+      </div>
+      <div ref={rightBackgroundRef} className="absolute z-40 bottom-0 right-0">
+        <Image
+          src="/forest/trees-right-background.svg"
+          alt="Right Background Trees"
+          width={2000}
+          height={2000}
+        />
+      </div>
 
       {}
-      <Image
-        ref={leftForegroundRef}
-        src="/forest/trees-left-foreground.svg"
-        alt="Left Foreground Trees"
-        width={2500}
-        height={2500}
-        className="absolute z-50 bottom-0 left-0"
-      />
-      <Image
-        ref={rightForegroundRef}
-        src="/forest/trees-right-foreground.svg"
-        alt="Right Foreground Trees"
-        width={2500}
-        height={2500}
-        className="absolute z-50 bottom-0 right-0"
-      />
+      <div ref={leftForegroundRef} className="absolute z-50 bottom-0 left-0">
+        <Image
+          src="/forest/trees-left-foreground.svg"
+          alt="Left Foreground Trees"
+          width={2000}
+          height={2000}
+        />
+      </div>
+      <div ref={rightForegroundRef} className="absolute z-50 bottom-0 right-0">
+        <Image
+          src="/forest/trees-right-foreground.svg"
+          alt="Right Foreground Trees"
+          width={2000}
+          height={2000}
+        />
+      </div>
 
       {}
-      <div className="pt-[20%] absolute bottom-[-10%] left-1/2 -translate-x-1/2 z-10 w-[1500px] h-[1500px] flex items-end justify-center">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-40 w-full max-w-[1400px] flex justify-center">
+        {}
         <Image
           src="/forest/mountain.svg"
           alt="Mountain"
-          fill
-          priority
-          className="object-contain z-40"
+          width={1600}
+          height={800}
+          className="object-contain relative z-40"
         />
-        <Image
-          ref={bearRef}
-          src="/forest/big-bear.svg"
-          alt="Bear"
-          width={1500}
-          height={1500}
-          className="absolute bottom-[50px] z-20"
-        />
+
+        {}
+        <div ref={bearRef} className="absolute bottom-[220px] z-50">
+          <Image
+            src="/forest/big-bear.svg"
+            alt="Bear"
+            width={1500}
+            height={1500}
+            className="object-contain"
+          />
+        </div>
       </div>
 
       {}
       <div
         ref={textBlockRef}
-        className="absolute z-20 top-30 left-1/2 -translate-x-1/2 flex flex-col items-center text-center px-6"
+        className="absolute z-70 top-20 md:top-32 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center max-w-3xl"
       >
-        {}
         <div className="mb-6">
-          <span className="px-8 py-4 rounded-full bg-black/40 border border-white/20 text-sm text-white flex items-center gap-2">
+          <span className="px-6 py-3 rounded-full bg-black/40 border border-white/20 text-sm text-white flex items-center gap-2">
             <span className="relative flex items-center justify-center">
               <span className="w-2.5 h-2.5 rounded-full bg-green-400 relative z-10"></span>
               <span className="absolute w-4 h-4 rounded-full bg-green-400 opacity-70 animate-ping"></span>
@@ -286,21 +278,18 @@ const ForestComponent = () => {
           </span>
         </div>
 
-        {}
-        <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+        <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
           Let's build your <br /> product together.
         </h1>
 
-        {/* Subtext */}
-        <p className="mt-4 text-xl text-white/80 max-w-2xl">
+        <p className="mt-4 text-lg md:text-xl text-white/80">
           Partner with us for a seamless product development journey. <br />
           Our team is dedicated to working closely with you to achieve your
           goals.
         </p>
 
-        {/* Button */}
         <div className="pt-8 flex justify-center items-center">
-          <button className="bg-black px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300">
+          <button className="bg-black px-6 py-3 md:px-8 md:py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300">
             Contact Us →
           </button>
         </div>

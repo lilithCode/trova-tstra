@@ -100,9 +100,12 @@ const BusinessComponent = () => {
             priority
           />
         </div>
-        <div className="absolute top-[85%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
-          <button className="px-16 md:px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500 whitespace-nowrap">
-            Business Overview →
+        <div id="button" className="mt-8 flex justify-center items-center">
+          <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
+            <span>Business Overview</span>
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 cursor-pointer">
+              →
+            </span>
           </button>
         </div>
       </div>

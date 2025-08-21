@@ -17,8 +17,7 @@ export default function SunsetScene() {
   const smallBearsRef = useRef(null);
   const flagRef = useRef(null);
   const sun = useRef(null);
-  const moon = useRef(null);
-  const textContainerRef = useRef(null); // Ref for the text container
+  const textContainerRef = useRef(null);
 
   useGSAP(
     () => {
@@ -34,12 +33,10 @@ export default function SunsetScene() {
         (context) => {
           const { isDesktop } = context.conditions;
 
-          // --- ONLY DESKTOP GETS JAVASCRIPT ANIMATIONS ---
           if (isDesktop) {
-            // Make text/button invisible initially for the fade-in animation
             gsap.set([textContainerRef.current], { opacity: 1 });
-            gsap.set(textContainerRef.current.children[1], { opacity: 0 }); // text2Ref
-            gsap.set(textContainerRef.current.children[2], { opacity: 0 }); // buttonRef
+            gsap.set(textContainerRef.current.children[1], { opacity: 0 });
+            gsap.set(textContainerRef.current.children[2], { opacity: 0 });
 
             const tl = gsap.timeline({
               scrollTrigger: {
@@ -102,19 +99,19 @@ export default function SunsetScene() {
               textContainerRef.current.children[0],
               { scale: 0.8, ease: "power2.inOut" },
               0.1,
-            ); // text1Ref
+            );
             tl.fromTo(
               textContainerRef.current.children[1],
               { opacity: 0, y: "50%" },
               { scale: 0.9, opacity: 1, y: "0%", ease: "power2.inOut" },
               0.3,
-            ); // text2Ref
+            );
             tl.fromTo(
               textContainerRef.current.children[2],
               { y: 0, opacity: 0, scale: 0.5 },
               { opacity: 1, scale: 1, y: 0, ease: "power2.inOut" },
               0.6,
-            ); // buttonRef
+            );
 
             const secondHalfStart = 1;
             tl.to(
@@ -124,7 +121,6 @@ export default function SunsetScene() {
                 mountain3Ref.current,
                 landscapeRef.current,
                 flagRef.current,
-                moon.current,
                 sun.current,
               ],
               { y: "200%", ease: "none" },
@@ -137,7 +133,6 @@ export default function SunsetScene() {
               secondHalfStart,
             );
           }
-          // No GSAP code will run on mobile.
         },
       );
     },
@@ -149,7 +144,7 @@ export default function SunsetScene() {
       ref={containerRef}
       className="relative w-full h-screen overflow-hidden"
     >
-      {/* Background elements are always present */}
+      {}
       <div
         ref={backgroundRef}
         className="absolute inset-0 z-0"
@@ -168,16 +163,6 @@ export default function SunsetScene() {
           borderRadius: "50%",
         }}
       ></div>
-
-      <div ref={moon} className="w-60 h-60 absolute top-[10%] left-[10%] z-8">
-        <Image
-          fill
-          priority
-          src="/sunset/moon.svg"
-          alt="Moon"
-          className="w-full h-full object-contain"
-        />
-      </div>
 
       <div className="cloud absolute w-[10%] h-[15%] top-[20%] left-[5%] z-8">
         <Image
@@ -253,7 +238,7 @@ export default function SunsetScene() {
         />
       </div>
 
-      {/* Centering container for all text and button content */}
+      {}
       <div
         ref={textContainerRef}
         className="absolute inset-0 z-50 flex flex-col items-center justify-center text-center text-white p-4"
@@ -272,14 +257,20 @@ export default function SunsetScene() {
           We bring your vision into reality, walking beside you as we shape the
           future together.
         </div>
-        <div id="button" className="mt-8 flex justify-center items-center">
-          <button className="px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500">
-            Tell us your vision →
+        <div
+          id="button"
+          className=" mt-8 flex justify-center items-center"
+        >
+          <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
+            <span>Tell us your vision</span>
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
+              →
+            </span>
           </button>
         </div>
       </div>
 
-      {/* --- Static positioning for mobile, GSAP overrides on desktop --- */}
+      {}
       <div ref={bigBearRef} className="absolute inset-0 z-40 lg:z-40">
         <Image
           src="/sunset/big-bear.svg"
@@ -300,7 +291,7 @@ export default function SunsetScene() {
       </div>
       <div
         ref={flagRef}
-        className="absolute w-30 h-60 bottom-[-150px] left-1/2 transform -translate-x-1/2 z-50 lg:z-50"
+        className="absolute w-30 h-60 bottom-[-180px] left-1/2 transform -translate-x-1/2 z-50 lg:z-10"
       >
         <Image
           src="/sunset/flag.svg"

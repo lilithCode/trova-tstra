@@ -168,7 +168,7 @@ const AboutComponent = () => {
       </div>
 
       {}
-      <div className="absolute z-50 bottom-[38%] left-0 right-0 flex justify-center">
+      <div className="absolute z-50 bottom-[35%] left-0 right-0 flex justify-center">
         <button
           ref={buttonRef}
           className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2"

@@ -59,7 +59,7 @@ const BusinessComponent = () => {
         ease: "power2.out",
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const renderCharacters = (text, ref) => {
@@ -87,11 +87,11 @@ const BusinessComponent = () => {
           </span>
         </h2>
         <p className="text-2xl mb-4">Vauldex In-House Solutions</p>
-        <p className="text-xl mb-8 px-6 md:px-32 lg:px-64">
+        <p className="text-xl mb-2 md:mb-8 px-6 md:px-32 lg:px-64">
           At Vauldex, we build products that blend fresh ideas with smart
           tech—ready to help your business grow with confidence.
         </p>
-        <div className="relative w-[70%] h-[600px] left-[15%] flex justify-center items-center">
+        <div className="relative w-[90%] md:w-[70%] h-[400px] md:h-[600px] left-[5%] md:left-[15%] flex justify-center items-center">
           <Image
             src="/business-home.svg"
             alt="Business Structure"
@@ -100,10 +100,8 @@ const BusinessComponent = () => {
             priority
           />
         </div>
-        <div
-          className="absolute top-[85%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center"
-        >
-          <button className="px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500">
+        <div className="absolute top-[85%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
+          <button className="px-16 md:px-8 py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500 whitespace-nowrap">
             Business Overview →
           </button>
         </div>

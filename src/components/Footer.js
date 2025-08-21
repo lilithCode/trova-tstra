@@ -4,36 +4,39 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <footer
-      className="bg-black text-white py-6 relative w-full"
+      className="bg-black text-white py-12 relative w-full"
       style={{
         backgroundColor: "#000000",
-        position: "relative",
-        width: "100%",
       }}
     >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between  mb-8">
-          <div className="space-y-6 w-1/2">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={100}
-              height={100}
-              className="hover:scale-105 transition-transform duration-300 cursor-pointer"
-            />
+        {/* Main Content: Stacks vertically on screens smaller than lg, row on lg and up */}
+        <div className="flex flex-col lg:flex-row justify-between mb-8">
+          {/* Left Column: Full width and centered below lg, adjusts for desktop */}
+          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left mb-10 lg:mb-0">
+            <div className="mb-6">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={100}
+                height={100}
+                className="hover:scale-105 transition-transform duration-300 cursor-pointer"
+              />
+            </div>
 
-            <div>
-              <h3 className="text-[18px] font-semibold mb-3 hover:text-orange-400 transition-colors duration-300 cursor-pointer">
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-3 hover:text-orange-400 transition-colors duration-300 cursor-pointer">
                 Realizing Your Creative Vision
               </h3>
-              <p className="text-gray-300 text-[17px] max-w-[480px] leading-relaxed hover:text-gray-200 transition-colors duration-300 cursor-pointer">
+              <p className="text-gray-300 text-base max-w-md leading-relaxed hover:text-gray-200 transition-colors duration-300 cursor-pointer">
                 Tstra is the place where your imagination comes to life. We
                 bring your vision into reality, walking beside you as we shape
                 the future together.
               </p>
             </div>
 
-            <div className="flex items-center gap-16">
+            {/* Message & Socials: Stacks on mobile, becomes a row on md screens */}
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
               <div>
                 <button className="border border-white rounded-full px-6 py-3 hover:cursor-pointer transition-all duration-300 flex items-center space-x-2 group">
                   <span>Message us</span>
@@ -53,25 +56,26 @@ const Footer = () => {
                 </button>
               </div>
 
-              <div className="flex flex-col items-center gap-8">
+              <div className="flex flex-col items-center gap-4">
                 <h4 className="font-semibold hover:text-orange-400 transition-colors duration-300 cursor-pointer">
                   Follow us on
                 </h4>
                 <div className="grid grid-cols-4 gap-3">
+                  {/* Social Icons */}
                   <div className="text-center">
-                    <div className="w-14 h-14 bg-[#5a5a5a] hover:bg-[#1E73BE] hover:cursor-pointer transition-all duration-300 rounded-full border-10 border-[#1a1b22] hover:border-[#0f1016] flex items-center justify-center mx-auto mb-1">
+                    <div className="w-14 h-14 bg-[#5a5a5a] hover:bg-[#1E73BE] hover:cursor-pointer transition-all duration-300 rounded-full flex items-center justify-center mx-auto mb-1">
                       <span className="text-sm pb-1 font-bold">in</span>
                     </div>
                     <span className="text-xs">Linkedin</span>
                   </div>
                   <div className="text-center">
-                    <div className="w-14 h-14 bg-[#5a5a5a] hover:bg-[#1E73BE] hover:cursor-pointer transition-all duration-300 rounded-full border-10 border-[#1a1b22] hover:border-[#0f1016] flex items-center justify-center mx-auto mb-1">
+                    <div className="w-14 h-14 bg-[#5a5a5a] hover:bg-[#1E73BE] hover:cursor-pointer transition-all duration-300 rounded-full flex items-center justify-center mx-auto mb-1">
                       <span className="text-sm font-bold">f</span>
                     </div>
                     <span className="text-xs">Facebook</span>
                   </div>
                   <div className="text-center">
-                    <div className="w-14 h-14 bg-[#5a5a5a] hover:bg-[#1E73BE] hover:cursor-pointer transition-all duration-300 rounded-full border-10 border-[#1a1b22] hover:border-[#0f1016] flex items-center justify-center mx-auto mb-1">
+                    <div className="w-14 h-14 bg-[#5a5a5a] hover:bg-[#1E73BE] hover:cursor-pointer transition-all duration-300 rounded-full flex items-center justify-center mx-auto mb-1">
                       <svg
                         className="w-5 h-5"
                         fill="currentColor"
@@ -83,7 +87,7 @@ const Footer = () => {
                     <span className="text-xs">Instagram</span>
                   </div>
                   <div className="text-center">
-                    <div className="w-14 h-14 bg-[#5a5a5a] hover:bg-[#1E73BE] hover:cursor-pointer transition-all duration-300 rounded-full border-10 border-[#1a1b22] hover:border-[#0f1016] flex items-center justify-center mx-auto mb-1">
+                    <div className="w-14 h-14 bg-[#5a5a5a] hover:bg-[#1E73BE] hover:cursor-pointer transition-all duration-300 rounded-full flex items-center justify-center mx-auto mb-1">
                       <span className="text-sm font-bold">X</span>
                     </div>
                     <span className="text-xs">X</span>
@@ -92,18 +96,20 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="w-1/2 flex justify-end gap-42 mt-10">
+
+          {/* Right Column: Stacks and centers below lg, becomes a row on lg and up */}
+          <div className="w-full lg:w-1/2 flex flex-col md:flex-row items-center md:justify-center lg:justify-end gap-12 lg:gap-24 text-center md:text-left">
             <div className="space-y-3">
-              <ul className="space-y-3 text-[16px] text-[#d1d5db]">
-                <li className="flex items-center">
+              <ul className="space-y-3 text-base text-[#d1d5db]">
+                <li>
                   <a
                     href="#"
-                    className="border-l-4 border-transparent hover:text-gray-300 hover:border-orange-500 transition-all duration-500 pl-2"
+                    className="border-l-4 border-transparent hover:text-gray-300 hover:border-orange-500 transition-all duration-300 pl-2"
                   >
                     HOME
                   </a>
                 </li>
-                <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
+                <li className="ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-300 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <a
                     href="#"
@@ -112,7 +118,7 @@ const Footer = () => {
                     ABOUT US
                   </a>
                 </li>
-                <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
+                <li className="ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-300 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <a
                     href="#"
@@ -121,7 +127,7 @@ const Footer = () => {
                     BUSINESS
                   </a>
                 </li>
-                <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
+                <li className="ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-300 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <a
                     href="#"
@@ -130,7 +136,7 @@ const Footer = () => {
                     COMPANY
                   </a>
                 </li>
-                <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
+                <li className="ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-300 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <a
                     href="#"
@@ -139,7 +145,7 @@ const Footer = () => {
                     CAREERS
                   </a>
                 </li>
-                <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
+                <li className="ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-300 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <a
                     href="#"
@@ -151,7 +157,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="text-[16px]">
+            <div className="text-base">
               <h4 className="font-semibold mb-3 hover:text-orange-400 transition-colors duration-300 cursor-pointer">
                 Group company
               </h4>
@@ -162,33 +168,34 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Bottom Section: Stacks vertically and centers on mobile */}
         <div className="border-t border-[#262626] pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-[#d1d5db] text-[17px] hover:text-white transition-colors duration-300 cursor-pointer">
+          <div className="flex flex-col md:flex-row justify-between items-center text-center space-y-4 md:space-y-0">
+            <div className="text-[#d1d5db] text-base hover:text-white transition-colors duration-300 cursor-pointer">
               © 2024 Tstra, Inc. All rights reserved.
             </div>
-            <div className="flex flex-wrap gap-6 text-sm">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
               <a
                 href="#"
-                className="text-[#d1d5db] hover:cursor-pointer text-[17px] hover:text-white underline transition-colors duration-300"
+                className="text-[#d1d5db] hover:cursor-pointer text-base hover:text-white underline transition-colors duration-300"
               >
                 Information Security
               </a>
               <a
                 href="#"
-                className="text-[#d1d5db] hover:cursor-pointer text-[17px] hover:text-white underline transition-colors duration-300"
+                className="text-[#d1d5db] hover:cursor-pointer text-base hover:text-white underline transition-colors duration-300"
               >
                 Privacy Policy
               </a>
               <a
                 href="#"
-                className="text-[#d1d5db] hover:cursor-pointer text-[17px] hover:text-white underline transition-colors duration-300"
+                className="text-[#d1d5db] hover:cursor-pointer text-base hover:text-white underline transition-colors duration-300"
               >
                 Cookie Policy
               </a>
               <a
                 href="#"
-                className="text-[#d1d5db] hover:cursor-pointer text-[17px] hover:text-white underline transition-colors duration-300"
+                className="text-[#d1d5db] hover:cursor-pointer text-base hover:text-white underline transition-colors duration-300"
               >
                 SNS Policy
               </a>

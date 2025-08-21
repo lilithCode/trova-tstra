@@ -285,7 +285,7 @@ tl.to(
           alt="Big Bear"
           width={1600}
           height={1500}
-          className="w-100vw] max-w-[1500px] h-auto object-contain"
+          className="w-[100vw] max-w-[1500px] h-auto object-contain"
           priority
         />
       </div>

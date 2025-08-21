@@ -88,7 +88,6 @@ const AboutComponent = () => {
           scale: 0,
           opacity: 0,
           ease: "power1.in",
-          pointerEvents: "none", // 👈 important
         },
         ">1"
       );
@@ -165,9 +164,12 @@ const AboutComponent = () => {
           </span>
         </h2>
         <div className=" mt-8 flex justify-center items-center">
-          <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
+          <button
+            ref={buttonRef}
+            className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2"
+          >
             <span>About Us</span>
-            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
               →
             </span>
           </button>

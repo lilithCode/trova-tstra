@@ -164,31 +164,31 @@ const Footer = () => {
 
         <div className="border-t border-[#262626] pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-[#d1d5db] text-[17px] hover:text-white transition-colors duration-300 cursor-pointer">
+            <div className="text-[#d1d5db] text-[15px] md:text-[17px] hover:text-white transition-colors duration-300 cursor-pointer">
               © 2024 Tstra, Inc. All rights reserved.
             </div>
             <div className="flex justify-center gap-6 text-sm">
               <a
                 href="#"
-                className="text-[#d1d5db] hover:cursor-pointer text-[17px] hover:text-white underline transition-colors duration-300"
+                className="text-[#d1d5db] hover:cursor-pointer text-[15px] md:text-[17px] hover:text-white underline transition-colors duration-300"
               >
                 Information Security
               </a>
               <a
                 href="#"
-                className="text-[#d1d5db] hover:cursor-pointer text-[17px] hover:text-white underline transition-colors duration-300"
+                className="text-[#d1d5db] hover:cursor-pointer text-[15px] md:text-[17px] hover:text-white underline transition-colors duration-300"
               >
                 Privacy Policy
               </a>
               <a
                 href="#"
-                className="text-[#d1d5db] hover:cursor-pointer text-[17px] hover:text-white underline transition-colors duration-300"
+                className="text-[#d1d5db] hover:cursor-pointer text-[15px] md:text-[17px] hover:text-white underline transition-colors duration-300"
               >
                 Cookie Policy
               </a>
               <a
                 href="#"
-                className="text-[#d1d5db] hover:cursor-pointer text-[17px] hover:text-white underline transition-colors duration-300"
+                className="text-[#d1d5db] hover:cursor-pointer text-[15px] md:text-[17px] hover:text-white underline transition-colors duration-300"
               >
                 SNS Policy
               </a>

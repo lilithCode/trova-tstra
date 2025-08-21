@@ -34,6 +34,7 @@ export default function SunsetScene() {
           const { isDesktop } = context.conditions;
 
           if (isDesktop) {
+            gsap.set(flagRef.current, { y: "10%" });
             gsap.set([textContainerRef.current], { opacity: 1 });
             gsap.set(textContainerRef.current.children[1], { opacity: 0 });
             gsap.set(textContainerRef.current.children[2], { opacity: 0 });
@@ -91,10 +92,17 @@ export default function SunsetScene() {
               { filter: "grayscale(1) brightness(0.5)", ease: "none" },
               0,
             );
-            tl.to(bigBearRef.current, { y: 700, x: 0, ease: "none" }, 0);
-            tl.to(smallBearsRef.current, { y: 300, x: 0, ease: "none" }, 0);
-            tl.to(flagRef.current, { y: -180, x: 0, ease: "none" }, 0);
-            tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
+           tl.to(bigBearRef.current, { y: "150%", x: 0, ease: "none" }, 0);
+           tl.to(smallBearsRef.current, { y: "150%", x: 0, ease: "none" }, 0);
+tl.to(
+  flagRef.current,
+  {
+    y: () => -(window.innerHeight * 0.17), 
+    ease: "none",
+  },
+  0
+);
+           tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
             tl.to(
               textContainerRef.current.children[0],
               { scale: 0.8, ease: "power2.inOut" },
@@ -210,7 +218,7 @@ export default function SunsetScene() {
         />
       </div>
 
-      <div ref={mountain1Ref} className="absolute inset-0 z-7">
+      <div ref={mountain1Ref} className="absolute inset-0 z-13">
         <Image
           src="/sunset/mountain-1.svg"
           alt="Mountain 1"
@@ -228,7 +236,7 @@ export default function SunsetScene() {
           priority
         />
       </div>
-      <div ref={mountain3Ref} className="absolute inset-0 z-10">
+      <div ref={mountain3Ref} className="absolute inset-0 z-5">
         <Image
           src="/sunset/mountain-3.svg"
           alt="Mountain 3"
@@ -274,7 +282,7 @@ export default function SunsetScene() {
           alt="Big Bear"
           fill
           className="object-cover"
-          
+          priority
         />
       </div>
       <div ref={smallBearsRef} className="absolute inset-0 z-40 lg:z-40">
@@ -288,7 +296,7 @@ export default function SunsetScene() {
       </div>
       <div
         ref={flagRef}
-        className="absolute w-30 h-60 bottom-[-200px] left-1/2 transform -translate-x-1/2 z-50 lg:z-10"
+        className="absolute w-30 h-60 bottom-[-200px] left-1/2 transform -translate-x-1/2 z-40 lg:z-40"
       >
         <Image
           src="/sunset/flag.svg"
@@ -298,7 +306,7 @@ export default function SunsetScene() {
           priority
         />
       </div>
-      <div ref={landscapeRef} className="absolute inset-0 z-20 lg:z-20">
+      <div ref={landscapeRef} className="absolute inset-0 z-60 lg:z-60">
         <Image
           src="/sunset/landscape.svg"
           alt="Landscape"

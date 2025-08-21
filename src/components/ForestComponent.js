@@ -113,12 +113,11 @@ const ForestComponent = () => {
         );
       });
 
-      // Bear rises but stays on mountain peak
       gsap.fromTo(
         bearRef.current,
         { y: 150 },
         {
-          y: -3, // just enough movement
+          y: -3,
           ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,

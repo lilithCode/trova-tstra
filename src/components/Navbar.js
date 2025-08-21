@@ -70,11 +70,13 @@ const Navbar = () => {
             <Image
               src="/logo.png"
               alt="Vauldex Logo"
-              width={150}
-              height={150}
+              width={100}
+              height={100}
               priority
-              className="w-[150px] h-[150px] object-contain"
-            />
+              className="object-contain w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] relative"
+              sizes="(max-width: 640px) 100px, (max-width: 768px) 120px, 150px"
+              style={{ position: "relative" }}
+           />
           </Link>
         </div>
         <div className="flex items-center">

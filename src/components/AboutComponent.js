@@ -21,14 +21,11 @@ const AboutComponent = () => {
   const svgContainerRef = useRef(null);
   const mainSvgRef = useRef(null);
   const devRefs = useRef([]);
-
   const nextTextRef = useRef(null);
   const gradientRef = useRef(null);
 
   const addToDevRefs = (el) => {
-    if (el && !devRefs.current.includes(el)) {
-      devRefs.current.push(el);
-    }
+    if (el && !devRefs.current.includes(el)) devRefs.current.push(el);
   };
 
   useGSAP(
@@ -40,12 +37,22 @@ const AboutComponent = () => {
         scale: 0.5,
       });
       gsap.set(buttonRef.current, { opacity: 0, scale: 0.5 });
-      gsap.set([mainSvgRef.current, backgroundRef.current, ...devRefs.current], {
-        opacity: 0,
-        scale: 0,
-      });
+      gsap.set(
+        [mainSvgRef.current, backgroundRef.current, ...devRefs.current],
+        {
+          opacity: 0,
+          scale: 0,
+        }
+      );
       gsap.set(nextTextRef.current, { opacity: 0, scale: 0 });
       gsap.set(gradientRef.current, { opacity: 0 });
+
+      gsap.set(
+        [svgContainerRef.current, gradientRef.current, backgroundRef.current],
+        {
+          pointerEvents: "none",
+        }
+      );
 
       const masterTl = gsap.timeline({
         scrollTrigger: {
@@ -66,11 +73,13 @@ const AboutComponent = () => {
         stagger: 0.05,
         ease: "power2.out",
       });
+
       masterTl.to(
         buttonRef.current,
         { opacity: 1, scale: 1, ease: "power2.out" },
-        "+=0.2",
+        "+=0.2"
       );
+
       masterTl.to(
         backgroundRef.current,
         { opacity: 1, scale: 1, ease: "power2.out" },
@@ -78,46 +87,40 @@ const AboutComponent = () => {
       );
 
       masterTl.to(
-        contentContainerRef.current,
+        [contentContainerRef.current, buttonRef.current],
         { scale: 0, opacity: 0, ease: "power1.in" },
-        ">1",
-      );
-      masterTl.to(
-        contentContainerRef.current,
-        {
-          scale: 0,
-          opacity: 0,
-          ease: "power1.in",
-        },
         ">1"
       );
 
       masterTl.to(
         backgroundRef.current,
-        { opacity: 0, ease: "power1.in " },
-        "<",
+        { opacity: 0, ease: "power1.in" },
+        "<"
       );
+
       masterTl.to(
         mainSvgRef.current,
         { opacity: 1, scale: 1, ease: "power2.out" },
-        ">",
+        ">"
       );
+
       devRefs.current.forEach((devSvg) => {
         masterTl.to(
           devSvg,
           { opacity: 1, scale: 1, ease: "power2.out" },
-          "+=0.05",
+          "+=0.05"
         );
       });
+
       const newContentStartTime = ">0.5";
       masterTl.to(
         nextTextRef.current,
         { opacity: 1, scale: 1, ease: "power2.out" },
-        newContentStartTime,
+        newContentStartTime
       );
       masterTl.to(gradientRef.current, { opacity: 1, ease: "power2.out" }, "<");
     },
-    { scope: containerRef },
+    { scope: containerRef }
   );
 
   const renderCharacters = (text, ref) => {
@@ -137,15 +140,14 @@ const AboutComponent = () => {
       ref={containerRef}
       className="relative z-10 min-h-screen bg-transparent flex items-center justify-center overflow-hidden"
     >
+      {}
       <div
         ref={backgroundRef}
         className="absolute w-[90%] max-w-3xl mx-auto z-10"
       >
-        {}
         <Image
           src="/backgroundPattern.svg"
           alt="pattern SVG"
-          ref={backgroundRef}
           width={1000}
           height={1000}
           className="w-full h-auto object-contain relative z-0"
@@ -155,7 +157,7 @@ const AboutComponent = () => {
       {}
       <div
         ref={contentContainerRef}
-        className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 z-10"
+        className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 z-20"
       >
         <h2 className="text-4xl md:text-7xl mb-6 text-center font-thin">
           {renderCharacters("WHO IS", ourRef)}
@@ -163,27 +165,26 @@ const AboutComponent = () => {
             {renderCharacters("TROVA TSTRA?", NameRef)}
           </span>
         </h2>
-        <div className=" mt-8 flex justify-center items-center">
-          <button
-            ref={buttonRef}
-            className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2"
-          >
-            <span>About Us</span>
-            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
-              →
-            </span>
-          </button>
-        </div>
       </div>
 
       {}
-      {}
+      <div className="absolute z-50 bottom-[38%] left-0 right-0 flex justify-center">
+        <button
+          ref={buttonRef}
+          className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2"
+        >
+          <span>About Us</span>
+          <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
+            →
+          </span>
+        </button>
+      </div>
+
       {}
       <div
         ref={svgContainerRef}
         className="absolute w-[90%] max-w-3xl mx-auto z-20"
       >
-        {}
         <Image
           src="/bears/main.svg"
           alt="Main SVG"
@@ -192,6 +193,7 @@ const AboutComponent = () => {
           height={1000}
           className="w-full h-auto object-contain relative z-0"
         />
+
         {}
         <div
           ref={addToDevRefs}
@@ -201,7 +203,6 @@ const AboutComponent = () => {
           <Image
             src="/bears/dev01.svg"
             alt="Developer 01"
-            layout="responsive"
             width={150}
             height={150}
           />
@@ -214,7 +215,6 @@ const AboutComponent = () => {
           <Image
             src="/bears/dev02.svg"
             alt="Developer 02"
-            layout="responsive"
             width={150}
             height={150}
           />
@@ -227,7 +227,6 @@ const AboutComponent = () => {
           <Image
             src="/bears/dev03.svg"
             alt="Developer 03"
-            layout="responsive"
             width={150}
             height={150}
           />
@@ -240,7 +239,6 @@ const AboutComponent = () => {
           <Image
             src="/bears/dev04.svg"
             alt="Developer 04"
-            layout="responsive"
             width={150}
             height={150}
           />
@@ -253,7 +251,6 @@ const AboutComponent = () => {
           <Image
             src="/bears/dev05.svg"
             alt="Developer 05"
-            layout="responsive"
             width={150}
             height={150}
           />
@@ -266,7 +263,6 @@ const AboutComponent = () => {
           <Image
             src="/bears/dev06.svg"
             alt="Developer 06"
-            layout="responsive"
             width={150}
             height={150}
           />
@@ -279,13 +275,13 @@ const AboutComponent = () => {
           <Image
             src="/bears/dev07.svg"
             alt="Developer 07"
-            layout="responsive"
             width={150}
             height={150}
           />
         </div>
       </div>
 
+      {}
       <div
         ref={gradientRef}
         className="absolute z-20 w-[500px] h-[200px] rounded-full filter blur-3xl"
@@ -295,18 +291,19 @@ const AboutComponent = () => {
         }}
       />
 
+      {}
       <div
         ref={nextTextRef}
-        className="absolute z-30 text-center text-white text-5xl md:text-8xl font-thin"
+        className="absolute z-40 text-center text-white text-5xl md:text-8xl font-thin"
       >
         TROVA TSTRA
         <br />
         <span>WANTS</span>
         <span className="text-[#cc5200] font-bold">YOU!</span>
-        <div id="button" className=" mt-8 flex justify-center items-center">
+        <div id="button" className="mt-8 flex justify-center items-center">
           <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
             <span>Be a Part</span>
-            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
               →
             </span>
           </button>

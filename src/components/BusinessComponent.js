@@ -80,7 +80,7 @@ const BusinessComponent = () => {
       className="relative z-10 mt-20 min-h-screen bg-transparent"
     >
       <div className="container mx-auto text-white text-center py-8">
-        <h2 className="text-7xl mb-6">
+        <h2 className="text-4xl md:text-7xl mb-6">
           {renderCharacters("OUR", ourRef)}
           <span className="ml-4 font-bold text-orange-700">
             {renderCharacters("BUSINESS", businessRef)}

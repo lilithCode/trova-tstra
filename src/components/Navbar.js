@@ -70,7 +70,7 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="w-full bg-transparent fixed inset-x-0 top-0 z-50 transition-colors duration-500"
+      className="w-full bg-transparent fixed inset-x-0 top-0 z-100 transition-colors duration-500"
     >
       <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
         <div className="flex items-center cursor-pointer">

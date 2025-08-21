@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="w-full bg-transparent fixed inset-x-0 top-0 z-50">
+        <div className="w-full bg-transparent fixed inset-x-0 top-0 z-100">
           <Navbar />
         </div>
         <main className="relative">

@@ -60,11 +60,11 @@ const ForestComponent = () => {
       });
 
       gsap.to(sunRef.current, {
-        y: -400,
-        x: -200,
+        y: -200,
+        x: -90,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 50%",
+          start: "top 30%",
           end: "+=500",
           scrub: 2,
         },
@@ -113,11 +113,12 @@ const ForestComponent = () => {
         );
       });
 
+      // Bear rises but stays on mountain peak
       gsap.fromTo(
         bearRef.current,
         { y: 150 },
         {
-          y: -100,
+          y: -3, // just enough movement
           ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,
@@ -174,15 +175,9 @@ const ForestComponent = () => {
       {}
       <div
         ref={sunRef}
-        className="absolute z-20 right-[-10%] bottom-[-30%] translate-x-1/2"
+        className="absolute z-10 left-2/3 bottom-[10%] -translate-x-1/2"
       >
-        <Image
-          src="/forest/sun.svg"
-          alt="Sun"
-          width={1200}
-          height={1200}
-          priority
-        />
+        <Image src="/forest/sun.svg" alt="Sun" width={2500} height={2500} />
       </div>
 
       {}
@@ -241,23 +236,23 @@ const ForestComponent = () => {
       </div>
 
       {}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-40 w-full max-w-[1400px] flex justify-center">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-full max-w-[1400px] flex justify-center">
         {}
         <Image
           src="/forest/mountain.svg"
           alt="Mountain"
           width={1600}
           height={800}
-          className="object-contain relative z-40"
+          className="object-contain relative z-30"
         />
 
         {}
-        <div ref={bearRef} className="absolute bottom-[220px] z-50">
+        <div ref={bearRef} className="absolute bottom-[0px] z-20">
           <Image
             src="/forest/big-bear.svg"
             alt="Bear"
-            width={1500}
-            height={1500}
+            width={2500}
+            height={2500}
             className="object-contain"
           />
         </div>
@@ -266,7 +261,7 @@ const ForestComponent = () => {
       {}
       <div
         ref={textBlockRef}
-        className="absolute z-70 top-20 md:top-32 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center max-w-3xl"
+        className="absolute z-70 top-20 md:top-32 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-full"
       >
         <div className="mb-6">
           <span className="px-6 py-3 rounded-full bg-black/40 border border-white/20 text-sm text-white flex items-center gap-2">
@@ -278,7 +273,7 @@ const ForestComponent = () => {
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+        <h1 className="text-4xl w-full md:text-6xl font-bold text-white">
           Let's build your <br /> product together.
         </h1>
 

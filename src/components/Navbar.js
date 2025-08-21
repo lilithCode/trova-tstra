@@ -7,7 +7,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Ensure GSAP plugins are registered globally once
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -27,7 +26,6 @@ const Navbar = () => {
   const menuRef = useRef(null);
   const navRef = useRef(null);
 
-  // New ref for the divider lines
   const dividersRef = useRef([]);
   const addToDividersRef = (el) => {
     if (el && !dividersRef.current.includes(el)) {
@@ -36,7 +34,6 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    // Event listener for closing menu on outside click
     if (!menuOpen) return;
     function handleClick(e) {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -48,7 +45,6 @@ const Navbar = () => {
   }, [menuOpen]);
 
   useGSAP(() => {
-    // GSAP ScrollTrigger animation for navbar background
     gsap.to(navRef.current, {
       backgroundColor: "rgb(0,0,0)",
       scrollTrigger: {
@@ -59,14 +55,13 @@ const Navbar = () => {
       },
     });
 
-    // New GSAP animation to hide the dividers on scroll
     gsap.to(dividersRef.current, {
       opacity: 0,
       duration: 0.5,
       scrollTrigger: {
         trigger: document.documentElement,
-        start: "top -200%", // Adjust this value to control when the animation starts
-        end: "top -300%", // Adjust this value to control when the animation ends
+        start: "top -200%",
+        end: "top -300%",
         scrub: true,
       },
     });
@@ -121,13 +116,11 @@ const Navbar = () => {
                   </Link>
                 </li>
                 {idx < navLinks.length - 1 && (
-                  // Assign the ref to the list item
                   <li
                     ref={addToDividersRef}
                     aria-hidden="true"
                     className="text-[#794f35] text-lg font-bold select-none transition-opacity duration-300 opacity-100"
                   >
-                    /////
                   </li>
                 )}
               </React.Fragment>

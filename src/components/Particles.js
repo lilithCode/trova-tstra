@@ -70,7 +70,6 @@ const StarParticles = () => {
           },
         },
         background: {
-          // This will make the canvas transparent, allowing the container's background to show through.
           opacity: 0,
         },
         detectRetina: true,
@@ -95,7 +94,6 @@ const StarParticles = () => {
         width: "100%",
         height: "100%",
         pointerEvents: "none",
-        // This is where you set the gradient background.
         background: "linear-gradient(to bottom, #000000, #27279b)",
       }}
     />

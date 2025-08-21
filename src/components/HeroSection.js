@@ -150,7 +150,7 @@ tl.to(
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden" 
+      className="relative w-full h-screen overflow-hidden"
     >
       {}
       <div
@@ -276,24 +276,34 @@ tl.to(
       </div>
 
       {}
-      <div ref={bigBearRef} className="absolute inset-0 z-40 lg:z-40">
+      <div
+        ref={bigBearRef}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[60]"
+      >
         <Image
           src="/sunset/big-bear.svg"
           alt="Big Bear"
-          fill
-          className="object-cover"
+          width={1600}
+          height={1500}
+          className="w-[100vw] max-w-[1500px] h-auto object-contain"
           priority
         />
       </div>
-      <div ref={smallBearsRef} className="absolute inset-0 z-40 lg:z-40">
+
+      <div
+        ref={smallBearsRef}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[60]"
+      >
         <Image
           src="/sunset/small-bears.svg"
           alt="Small Bears"
-          fill
-          className="object-cover"
+          width={1600}
+          height={1500}
+          className="w-[100vw] max-w-[1500px] h-auto object-contain"
           priority
         />
       </div>
+
       <div
         ref={flagRef}
         className="absolute w-30 h-60 bottom-[-200px] left-1/2 transform -translate-x-1/2 z-40 lg:z-40"
@@ -306,12 +316,16 @@ tl.to(
           priority
         />
       </div>
-      <div ref={landscapeRef} className="absolute inset-0 z-60 lg:z-60">
+      <div
+        ref={landscapeRef}
+        className="absolute bottom-0 left-0 w-full h-auto z-[100]"
+      >
         <Image
           src="/sunset/landscape.svg"
           alt="Landscape"
-          fill
-          className="object-cover"
+          width={1920}
+          height={500}
+          className="w-full h-auto object-cover"
           priority
         />
       </div>

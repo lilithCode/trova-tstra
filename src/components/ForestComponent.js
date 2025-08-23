@@ -83,9 +83,10 @@ const ForestComponent = () => {
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 80%",
+            start: "top bottom",
             end: "center center",
             scrub: 2,
+            markers:true,
           },
         }
       );

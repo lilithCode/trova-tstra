@@ -6,6 +6,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { usePathname } from "next/navigation";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -21,7 +22,7 @@ const navLinks = [
 ];
 
 const Navbar = () => {
-  const activeHref = "/";
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const navRef = useRef(null);
@@ -82,13 +83,13 @@ const Navbar = () => {
                   <Link href={link.href}>
                     <span
                       className={`py-1 font-medium text-base tracking-wide relative transition-colors whitespace-nowrap ${
-                        activeHref === link.href
+                        pathname === link.href
                           ? "text-white"
                           : "text-white/80 hover:text-white"
                       }`}
                     >
                       {link.name}
-                      {activeHref === link.href && (
+                      {pathname === link.href && (
                         <span
                           className="absolute left-0 -bottom-1 w-full h-[2px]"
                           style={{
@@ -157,7 +158,7 @@ const Navbar = () => {
                 <Link key={link.name} href={link.href}>
                   <span
                     className={`block px-4 py-2 font-medium text-lg tracking-wide transition-colors whitespace-nowrap w-full text-left ${
-                      activeHref === link.href
+                      pathname === link.href
                         ? "text-white border-b-2 border-[#FF7F32]"
                         : "text-white/80 hover:text-white"
                     }`}

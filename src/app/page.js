@@ -13,8 +13,6 @@ export default function Home() {
       <HeroSection className="relative z-10" />
       <BusinessComponent className="relative z-10 mt-20" />
       <AboutComponent className="relative z-10 mt-20" />
-      <ForestComponent className="relative z-10 mt-20" />
-      <Footer className="relative z-10 mt-20" />
     </>
   );
 }

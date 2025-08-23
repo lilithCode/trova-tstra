@@ -110,7 +110,7 @@ const Navbar = () => {
                     aria-hidden="true"
                     className="text-[#794f35] text-lg font-bold select-none transition-opacity duration-300 opacity-100"
                   >
-                    {/* Divider */}
+                    {"//////"}
                   </li>
                 )}
               </React.Fragment>

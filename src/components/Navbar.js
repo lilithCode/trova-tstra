@@ -13,11 +13,11 @@ if (typeof window !== "undefined") {
 
 const navLinks = [
   { name: "HOME", href: "/" },
-  { name: "ABOUT US", href: "/Particles" },
-  { name: "BUSSINESS", href: "/business" },
-  { name: "COMPANY", href: "/company" },
-  { name: "CAREERS", href: "/careers" },
-  { name: "CONTACT", href: "/contact" },
+  { name: "ABOUT US", href: "/About" },
+  { name: "BUSINESS", href: "/Business" },
+  { name: "COMPANY", href: "/Company" },
+  { name: "CAREERS", href: "/Careers" },
+  { name: "CONTACT", href: "/Contact" },
 ];
 
 const Navbar = () => {

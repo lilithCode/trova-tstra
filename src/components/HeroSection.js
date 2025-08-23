@@ -262,7 +262,7 @@ tl.to(
       {}
       <div
         ref={textContainerRef}
-        className="absolute inset-0 z-50 flex flex-col items-center justify-center text-center text-white p-4"
+        className="absolute inset-0 z-90 flex flex-col items-center justify-center text-center text-white p-4"
       >
         <div className="w-full">
           <span className="text-4xl md:text-5xl lg:text-6xl">

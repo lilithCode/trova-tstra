@@ -146,7 +146,6 @@ const About = () => {
 
   return (
     <div className="relative w-full overflow-hidden z-20">
-      {}
       <div className="relative h-screen w-full">
         <div
           className="absolute inset-0 z-0"

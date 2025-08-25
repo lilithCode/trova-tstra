@@ -38,6 +38,7 @@ const ForestComponent = () => {
       gsap.set(sunRef.current, { opacity: 1, x: 0, y: 100 });
       gsap.set(bearRef.current, { y: 150 });
       gsap.set(textBlockRef.current, { y: 0, opacity: 1 });
+      
 
       const clouds = gsap.utils.toArray(".cloud", containerRef.current);
       clouds.forEach((cloud, i) => {
@@ -53,7 +54,7 @@ const ForestComponent = () => {
         ease: "power1.inOut",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 30%",
+          start: "top top",
           end: "center center",
           scrub: 2,
         },
@@ -69,6 +70,13 @@ const ForestComponent = () => {
           scrub: 2,
         },
       });
+      gsap.set([leftBackgroundRef.current, leftForegroundRef.current], {
+        xPercent: -15,
+      });
+
+      gsap.set([rightBackgroundRef.current, rightForegroundRef.current], {
+        xPercent: 15,
+      });
 
       gsap.to(
         [
@@ -79,10 +87,10 @@ const ForestComponent = () => {
         ],
         {
           xPercent: 0,
-          ease: "none",
+          ease: "power1.inOut",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 80%",
+            start: "top bottom",
             end: "center center",
             scrub: 2,
           },

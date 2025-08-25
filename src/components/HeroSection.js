@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 export default function SunsetScene() {
   const containerRef = useRef(null);
@@ -57,7 +58,7 @@ export default function SunsetScene() {
                 filter: "grayscale(1) brightness(0.5) opacity(0.5) ",
                 ease: "none",
               },
-              0,
+              0
             );
             tl.to(backgroundRef.current, { opacity: 0, ease: "none" }, 0);
             tl.to(mountain1Ref.current, { y: 50, x: -50, ease: "none" }, 0);
@@ -68,7 +69,7 @@ export default function SunsetScene() {
               sun.current,
               { filter: "brightness(1) saturate(1)" },
               { filter: "brightness(2) saturate(0)", ease: "none" },
-              0,
+              0
             );
             tl.set(
               sun.current,
@@ -79,7 +80,7 @@ export default function SunsetScene() {
                 y: "0%",
                 filter: "brightness(1) saturate(0)",
               },
-              0.5,
+              0.5
             );
             tl.to(sun.current, { y: -300, x: -50, ease: "none" }, 0.5);
             tl.fromTo(
@@ -90,48 +91,46 @@ export default function SunsetScene() {
               ],
               { filter: "grayscale(0) brightness(1)" },
               { filter: "grayscale(1) brightness(0.5)", ease: "none" },
-              0,
+              0
             );
-           tl.to(bigBearRef.current, { y: "150%", x: 0, ease: "none" }, 0);
-           tl.to(smallBearsRef.current, { y: "150%", x: 0, ease: "none" }, 0);
-tl.to(
-  flagRef.current,
-  {
-    y: () => -landscapeRef.current.offsetHeight * 0.2,
-    ease: "none",
-    onUpdate: function () {
-      if (
-        this.targets()[0]._gsap.y <
-        -landscapeRef.current.offsetHeight * 0.2
-      ) {
-        gsap.set(flagRef.current, {
-          y: -landscapeRef.current.offsetHeight * 0.2,
-        });
-      }
-    },
-  },
-  0
-);
+            tl.to(bigBearRef.current, { y: "150%", x: 0, ease: "none" }, 0);
+            tl.to(smallBearsRef.current, { y: "150%", x: 0, ease: "none" }, 0);
+            tl.to(
+              flagRef.current,
+              {
+                y: () => -landscapeRef.current.offsetHeight * 0.2,
+                ease: "none",
+                onUpdate: function () {
+                  if (
+                    this.targets()[0]._gsap.y <
+                    -landscapeRef.current.offsetHeight * 0.2
+                  ) {
+                    gsap.set(flagRef.current, {
+                      y: -landscapeRef.current.offsetHeight * 0.2,
+                    });
+                  }
+                },
+              },
+              0
+            );
 
-
-
-           tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
+            tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
             tl.to(
               textContainerRef.current.children[0],
               { scale: 0.8, ease: "power2.inOut" },
-              0.1,
+              0.1
             );
             tl.fromTo(
               textContainerRef.current.children[1],
               { opacity: 0, y: "50%" },
               { scale: 0.9, opacity: 1, y: "0%", ease: "power2.inOut" },
-              0.3,
+              0.3
             );
             tl.fromTo(
               textContainerRef.current.children[2],
               { y: 0, opacity: 0, scale: 0.5 },
               { opacity: 1, scale: 1, y: 0, ease: "power2.inOut" },
-              0.6,
+              0.6
             );
 
             const secondHalfStart = 1;
@@ -145,19 +144,21 @@ tl.to(
                 sun.current,
               ],
               { y: "200%", ease: "none" },
-              secondHalfStart,
+              secondHalfStart
             );
             tl.to(".cloud", { y: "500%", ease: "none" }, secondHalfStart);
+
+            // Removed the y: "-100%" animation from textContainerRef to keep the button in place.
             tl.to(
               textContainerRef.current,
-              { y: "-100%", opacity: 0, ease: "none" },
-              secondHalfStart,
+              { opacity: 0, ease: "none" },
+              secondHalfStart
             );
           }
-        },
+        }
       );
     },
-    { scope: containerRef },
+    { scope: containerRef }
   );
 
   return (
@@ -177,7 +178,7 @@ tl.to(
 
       <div
         ref={sun}
-        className="w-80 h-80 absolute top-[60%] right-[200px] -translate-x-1/2 z-8"
+        className="w-80 h-80 absolute top-[60%] right-[200px] -translate-x-1/2 z-2"
         style={{
           background:
             "radial-gradient(circle, rgba(255, 255, 255, 0.7) 30%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0) 70%)",
@@ -262,7 +263,7 @@ tl.to(
       {}
       <div
         ref={textContainerRef}
-        className="absolute inset-0 z-90 flex flex-col items-center justify-center text-center text-white p-4"
+        className="absolute inset-0 z-110 flex flex-col items-center justify-center text-center text-white p-4"
       >
         <div className="w-full">
           <span className="text-4xl md:text-5xl lg:text-6xl">
@@ -278,14 +279,16 @@ tl.to(
           We bring your vision into reality, walking beside you as we shape the
           future together.
         </div>
-        <div id="button" className=" mt-8 flex justify-center items-center">
-          <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
-            <span>Tell us your vision</span>
-            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
-              →
-            </span>
-          </button>
-        </div>
+        <Link href="/Contact">
+          <div id="button" className=" mt-8 flex justify-center items-center">
+            <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
+              <span>Tell us your vision</span>
+              <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 ">
+                →
+              </span>
+            </button>
+          </div>
+        </Link>
       </div>
 
       {}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -101,12 +102,14 @@ const BusinessComponent = () => {
           />
         </div>
         <div id="button" className="mt-8 flex justify-center items-center">
-          <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
-            <span>Business Overview</span>
-            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 cursor-pointer">
-              →
-            </span>
-          </button>
+          <Link href="/Business">
+            <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
+              <span>Business Overview</span>
+              <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 cursor-pointer">
+                →
+              </span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

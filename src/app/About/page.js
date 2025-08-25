@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ForestComponent from "./../../components/ForestComponent";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -131,9 +133,9 @@ const About = () => {
         {
           autoAlpha: 1,
           y: 0,
-          duration: 1,
+          duration: 0.4,
           ease: "power3.out",
-          delay: i * 0.1,
+          delay: Math.floor(i / 2) * 0.4,
           scrollTrigger: {
             trigger: card,
             start: "top 90%",
@@ -142,6 +144,7 @@ const About = () => {
         }
       );
     });
+
   }, []);
 
   return (
@@ -216,7 +219,6 @@ const About = () => {
           />
         </div>
       </div>
-
       {}
       <section
         ref={philosophyRef}
@@ -250,7 +252,6 @@ const About = () => {
           ))}
         </div>
       </section>
-
       {}
       <section
         ref={missionRef}
@@ -284,7 +285,6 @@ const About = () => {
           ))}
         </div>
       </section>
-
       <section
         ref={coreValuesRef}
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200 text-center"
@@ -296,14 +296,14 @@ const About = () => {
         {}
         <div className="relative w-full">
           {}
-          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent -translate-y-1/2 z-10"></div>
+          <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-500 to-transparent -translate-y-1/2 z-10"></div>
 
           {}
-          <div className="absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-transparent via-orange-500 to-transparent -translate-x-1/2 z-10"></div>
+          <div className="hidden md:block  absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-transparent via-gray-500 to-transparent -translate-x-1/2 z-10"></div>
 
           {}
           <div
-            className="absolute z-20 w-28 h-28 p-2 rounded-4xl border-2 border-[#E87722] bg-gray-900 flex items-center justify-center transform transition-transform duration-500
+            className="hidden md:block  absolute z-20 w-28 h-28 p-2 rounded-4xl border-2 border-[#101828] bg-gray-900 items-center justify-center transform transition-transform duration-500
           top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
           >
             <Image
@@ -321,12 +321,12 @@ const About = () => {
               <div
                 key={i}
                 ref={(el) => (coreValueCards.current[i] = el)}
-                className="mt-6 relative flex flex-col p-8 rounded-xl backdrop-blur-sm transform transition duration-500"
+                className="mt-6 relative flex flex-col p-8 rounded-xl transform transition duration-300"
               >
                 {}
                 <div
-                  className="absolute z-30 w-28 h-28 p-2 rounded-4xl border-2 border-[#E87722] bg-gray-900 flex items-center justify-center transform transition-transform duration-500
-                  -top-10 left-1/2 -translate-x-1/2 rotate-25
+                  className="absolute z-30 w-28 h-28 p-6 rounded-4xl border-2 border-[#E87722] bg-gray-900 flex items-center justify-center transform transition-transform duration-300
+                  -top-6 left-1/2 -translate-x-1/2 rotate-25
                   group-hover:scale-110"
                 >
                   <Image
@@ -334,11 +334,11 @@ const About = () => {
                     alt="Bear icon"
                     width={80}
                     height={80}
-                    className="p-2 w-full h-full object-contain rotate-[-25deg]"
+                    className=" w-full h-full object-contain rotate-[-25deg]"
                   />
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 mt-12 text-[#E87722]">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 mt-20 text-[#E87722]">
                   {value.title}
                 </h3>
                 <p className="text-base font-light text-gray-300 leading-relaxed">
@@ -349,6 +349,7 @@ const About = () => {
           </div>
         </div>
       </section>
+      <ForestComponent className="relative z-20 mt-20" />
     </div>
   );
 };

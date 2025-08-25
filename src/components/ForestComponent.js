@@ -5,6 +5,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -30,10 +32,10 @@ const ForestComponent = () => {
     () => {
       gsap.set(sunsetRef.current, { opacity: 0 });
       gsap.set([leftBackgroundRef.current, leftForegroundRef.current], {
-        xPercent: -50,
+        xPercent: -15,
       });
       gsap.set([rightBackgroundRef.current, rightForegroundRef.current], {
-        xPercent: 50,
+        xPercent: 15,
       });
       gsap.set(sunRef.current, { opacity: 1, x: 0, y: 100 });
       gsap.set(bearRef.current, { y: 150 });
@@ -290,11 +292,13 @@ const ForestComponent = () => {
           goals.
         </p>
 
+        <Link href="/Contact">
         <div className="pt-8 flex justify-center items-center">
           <button className="bg-black px-6 py-3 md:px-8 md:py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300">
             Contact Us →
           </button>
         </div>
+        </Link>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
 
+
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -100,7 +101,7 @@ const Navbar = () => {
                         <span
                           className="absolute left-0 -bottom-1 w-full h-[2px]"
                           style={{
-                            background: "#FF7F32",
+                            background: "#bd4904",
                             height: "2px",
                             bottom: "-4px",
                             position: "absolute",

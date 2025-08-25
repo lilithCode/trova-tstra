@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -88,7 +89,17 @@ const AboutComponent = () => {
 
       masterTl.to(
         [contentContainerRef.current, buttonRef.current],
-        { scale: 0, opacity: 0, ease: "power1.in" },
+        {
+          scale: 0,
+          opacity: 0,
+          ease: "power1.in",
+          z: -1,
+          onComplete: () => {
+            if (buttonRef.current) {
+              buttonRef.current.style.pointerEvents = "none";
+            }
+          },
+        },
         ">1"
       );
 
@@ -168,16 +179,18 @@ const AboutComponent = () => {
       </div>
 
       {}
-      <div className="absolute z-50 bottom-[35%] left-0 right-0 flex justify-center">
-        <button
-          ref={buttonRef}
-          className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2"
-        >
-          <span>About Us</span>
-          <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
-            →
-          </span>
-        </button>
+      <div className="absolute z-30 bottom-[35%] left-0 right-0 flex justify-center">
+        <Link href="/About">
+          <button
+            ref={buttonRef}
+            className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2"
+          >
+            <span>About Us</span>
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
+              →
+            </span>
+          </button>
+        </Link>
       </div>
 
       {}
@@ -300,14 +313,16 @@ const AboutComponent = () => {
         <br />
         <span>WANTS</span>
         <span className="text-[#cc5200] font-bold">YOU!</span>
-        <div id="button" className="mt-8 flex justify-center items-center">
-          <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
-            <span>Be a Part</span>
-            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
-              →
-            </span>
-          </button>
-        </div>
+        <Link href="/Careers">
+          <div id="button" className="mt-8 flex justify-center items-center">
+            <button className="cursor-pointer group px-6 py-3 md:px-8 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2 z-40">
+              <span>Be a Part</span>
+              <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
+                →
+              </span>
+            </button>
+          </div>
+        </Link>
       </div>
     </div>
   );

@@ -3,6 +3,8 @@ import Navbar from "@/components/Navbar";
 import Particles from "./../components/Particles";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import NextTopLoader from "nextjs-toploader";
+
 
 export const metadata = {
   title: "Trova Tstra",
@@ -13,6 +15,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-black overflow-x-hidden">
+        <NextTopLoader
+          color="#E87722" 
+          height={3}
+          showSpinner={false}
+          crawlSpeed={200}
+        />
         <ScrollToTop /> {}
         <div className="fixed inset-0 -z-10 overflow-hidden">
           <Particles />

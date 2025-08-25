@@ -5,6 +5,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -290,11 +292,13 @@ const ForestComponent = () => {
           goals.
         </p>
 
+        <Link href="/Contact">
         <div className="pt-8 flex justify-center items-center">
           <button className="bg-black px-6 py-3 md:px-8 md:py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300">
             Contact Us →
           </button>
         </div>
+        </Link>
       </div>
     </div>
   );

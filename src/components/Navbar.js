@@ -126,7 +126,7 @@ const Navbar = () => {
 
           {}
           <button
-            className="block xl:hidden ml-4 p-2 focus:outline-none"
+            className="block xl:hidden ml-4 p-6 focus:outline-none"
             aria-label="Open menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >

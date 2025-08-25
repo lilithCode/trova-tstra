@@ -92,8 +92,8 @@ const Navbar = () => {
                     <span
                       className={`py-1 font-medium text-base tracking-wide relative transition-colors whitespace-nowrap ${
                         pathname === link.href
-                          ? "text-white"
-                          : "text-white/80 hover:text-white"
+                          ? "text-white "
+                          : "text-white/80 hover:text-white "
                       }`}
                     >
                       {link.name}
@@ -126,7 +126,7 @@ const Navbar = () => {
 
           {}
           <button
-            className="block xl:hidden ml-4 p-2 focus:outline-none"
+            className="block xl:hidden ml-4 p-6 focus:outline-none"
             aria-label="Open menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >

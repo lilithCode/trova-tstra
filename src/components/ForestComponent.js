@@ -30,10 +30,10 @@ const ForestComponent = () => {
     () => {
       gsap.set(sunsetRef.current, { opacity: 0 });
       gsap.set([leftBackgroundRef.current, leftForegroundRef.current], {
-        xPercent: -50,
+        xPercent: -15,
       });
       gsap.set([rightBackgroundRef.current, rightForegroundRef.current], {
-        xPercent: 50,
+        xPercent: 15,
       });
       gsap.set(sunRef.current, { opacity: 1, x: 0, y: 100 });
       gsap.set(bearRef.current, { y: 150 });

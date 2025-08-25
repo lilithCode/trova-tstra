@@ -28,16 +28,24 @@ const StarParticles = () => {
           shape: {
             type: "circle",
           },
+          twinkle: {
+            particles: {
+              enable: true,
+              frequency: 0.2,
+              opacity: 1,
+            },
+          },
           opacity: {
             value: 1,
             random: true,
             anim: {
               enable: true,
-              speed: 0,
-              opacity_min: 0.1,
+              speed: 2,
+              opacity_min: 0.2,
               sync: false,
             },
           },
+
           size: {
             value: 1,
             random: true,
@@ -59,13 +67,6 @@ const StarParticles = () => {
               enable: false,
               rotateX: 600,
               rotateY: 1200,
-            },
-          },
-          twinkle: {
-            particles: {
-              enable: true,
-              frequency: 0.01,
-              opacity: 1,
             },
           },
         },

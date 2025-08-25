@@ -61,8 +61,13 @@ const Navbar = () => {
   return (
     <nav ref={navRef} className="w-full fixed inset-x-0 top-0 z-100 ">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {}
         <div className="flex items-center cursor-pointer">
-          <Link href="/" className="flex items-center">
+          <Link
+            href="/"
+            className="flex items-center"
+            onClick={() => setMenuOpen(false)}
+          >
             <Image
               src="/logo.png"
               alt="Vauldex Logo"
@@ -75,6 +80,8 @@ const Navbar = () => {
             />
           </Link>
         </div>
+
+        {}
         <div className="flex items-center">
           <ul className="hidden xl:flex items-center gap-2 ml-12 whitespace-nowrap">
             {navLinks.map((link, idx) => (
@@ -95,8 +102,6 @@ const Navbar = () => {
                           style={{
                             background: "#FF7F32",
                             height: "2px",
-                            width: "100%",
-                            left: 0,
                             bottom: "-4px",
                             position: "absolute",
                           }}
@@ -117,6 +122,8 @@ const Navbar = () => {
               </React.Fragment>
             ))}
           </ul>
+
+          {}
           <button
             className="block xl:hidden ml-4 p-2 focus:outline-none"
             aria-label="Open menu"
@@ -136,6 +143,8 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+
+      {}
       {menuOpen && (
         <>
           <div
@@ -146,6 +155,7 @@ const Navbar = () => {
             ref={menuRef}
             className="xl:hidden fixed top-0 right-0 h-screen w-4/5 max-w-xs bg-[#793909] shadow-lg z-50 flex flex-col animate-slidein"
           >
+            {}
             <button
               className="absolute top-4 right-4 text-5xl p-2 focus:outline-none text-[#FF7F32]"
               aria-label="Close menu"
@@ -153,9 +163,15 @@ const Navbar = () => {
             >
               &times;
             </button>
+
+            {}
             <div className="flex flex-col items-start pt-24 px-6 gap-6 w-full">
               {navLinks.map((link) => (
-                <Link key={link.name} href={link.href}>
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                >
                   <span
                     className={`block px-4 py-2 font-medium text-lg tracking-wide transition-colors whitespace-nowrap w-full text-left ${
                       pathname === link.href

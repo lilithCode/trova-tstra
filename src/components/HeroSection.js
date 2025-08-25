@@ -177,7 +177,7 @@ tl.to(
 
       <div
         ref={sun}
-        className="w-80 h-80 absolute top-[60%] right-[200px] -translate-x-1/2 z-8"
+        className="w-80 h-80 absolute top-[60%] right-[200px] -translate-x-1/2 z-2"
         style={{
           background:
             "radial-gradient(circle, rgba(255, 255, 255, 0.7) 30%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0) 70%)",

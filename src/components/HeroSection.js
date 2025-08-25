@@ -260,7 +260,6 @@ export default function SunsetScene() {
         />
       </div>
 
-      {}
       <div
         ref={textContainerRef}
         className="absolute inset-0 z-110 flex flex-col items-center justify-center text-center text-white p-4"

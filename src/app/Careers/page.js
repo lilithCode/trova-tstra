@@ -1,7 +1,8 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Link from "next/link";
-import ForestComponent from "./../../components/ForestComponent";
-
+const ForestComponent = lazy(() =>
+  import("./../../components/ForestComponent")
+);
 const Careers = () => {
   return (
     <>
@@ -22,7 +23,9 @@ const Careers = () => {
           </Link>
         </div>
       </div>
-      <ForestComponent className="relative z-20 mt-20" />
+  <Suspense fallback={<div>Loading...</div>}>
+        <ForestComponent className="relative z-20 mt-20" />
+      </Suspense>
     </>
   );
 };

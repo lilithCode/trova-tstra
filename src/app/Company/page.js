@@ -1,35 +1,39 @@
-import React from "react";
-import ForestComponent from "./../../components/ForestComponent";
 
+import React, { lazy, Suspense } from "react";
+import { Metadata } from "next";
+
+const ForestComponent = lazy(() =>
+  import("./../../components/ForestComponent")
+);
+
+const companyInfo = [
+  { label: "Company Name", value: "Vauldex Inc." },
+  { label: "Capital", value: "10,000,000 Yen" },
+  { label: "Founding", value: "April 2013" },
+  { label: "Establishment", value: "June 2018" },
+  {
+    label: "Address",
+    value:
+      "6F, Hakataeki Higashi Ozaki Bld, 1-16-7 Hakataeki Higashi, Hakata-ku, Fukuoka-shi, Fukuoka 812-0013, Japan",
+  },
+  { label: "Phone Number", value: "050-5213-9400" },
+  { label: "Officer", value: "Ryo Ejima" },
+  { label: "Number of Employees", value: "50 (December 2024 in group)" },
+];
+
+const OverseasInfo = [
+  {
+    label: "Philippines",
+    address:
+      "6F, FLB Corporate Center, Archbishop Reyes Ave, Cebu City, 6000 Cebu",
+  },
+  {
+    label: "Phone Number",
+    value: "+63 323540955",
+  },
+];
 
 const Company = () => {
-  const companyInfo = [
-    { label: "Company Name", value: "Vauldex Inc." },
-    { label: "Capital", value: "10,000,000 Yen" },
-    { label: "Founding", value: "April 2013" },
-    { label: "Establishment", value: "June 2018" },
-    {
-      label: "Address",
-      value:
-        "6F, Hakataeki Higashi Ozaki Bld, 1-16-7 Hakataeki Higashi, Hakata-ku, Fukuoka-shi, Fukuoka 812-0013, Japan",
-    },
-    { label: "Phone Number", value: "050-5213-9400" },
-    { label: "Officer", value: "Ryo Ejima" },
-    { label: "Number of Employees", value: "50 (December 2024 in group)" },
-  ];
-
-  const OverseasInfo = [
-    {
-      label: "Philippines",
-      address:
-        "6F, FLB Corporate Center, Archbishop Reyes Ave, Cebu City, 6000 Cebu",
-    },
-    {
-      label: "Phone Number",
-      value: "+63 323540955",
-    },
-  ];
-
   return (
     <div className="relative z-10 flex flex-col items-center justify-center text-white">
       <h1 className="min-h-screen text-5xl md:text-7xl lg:text-8xl font-bold flex justify-center items-center">
@@ -83,7 +87,9 @@ const Company = () => {
           ))}
         </div>
       </div>
-      <ForestComponent className="relative z-20 mt-20" />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ForestComponent className="relative z-20 mt-20" />
+      </Suspense>
     </div>
   );
 };

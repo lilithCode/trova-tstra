@@ -7,10 +7,6 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 const BusinessComponent = () => {
   const containerRef = useRef(null);
   const ourRef = useRef(null);
@@ -18,6 +14,8 @@ const BusinessComponent = () => {
 
   useGSAP(
     () => {
+      gsap.registerPlugin(ScrollTrigger);
+
       gsap.set(ourRef.current.children, {
         xPercent: 100,
         yPercent: -100,
@@ -60,7 +58,7 @@ const BusinessComponent = () => {
         ease: "power2.out",
       });
     },
-    { scope: containerRef },
+    { scope: containerRef }
   );
 
   const renderCharacters = (text, ref) => {
@@ -87,18 +85,18 @@ const BusinessComponent = () => {
             {renderCharacters("BUSINESS", businessRef)}
           </span>
         </h2>
-        <p className="text-2xl mb-4">Vauldex In-House Solutions</p>
+        <p className="text-2xl mb-4">Trova Tstra In-House Solutions</p>
         <p className="text-xl mb-2 md:mb-8 px-6 md:px-32 lg:px-64">
-          At Vauldex, we build products that blend fresh ideas with smart
+          At Trova Tstra, we build products that blend fresh ideas with smart
           tech—ready to help your business grow with confidence.
         </p>
         <div className="relative w-[90%] md:w-[70%] h-[400px] md:h-[600px] left-[5%] md:left-[15%] flex justify-center items-center">
           <Image
             src="/business-home.svg"
             alt="Business Structure"
-            layout="fill"
-            objectFit="contain"
-            priority
+            fill
+            className="object-contain"
+            loading="lazy"
           />
         </div>
         <div id="button" className="mt-8 flex justify-center items-center">

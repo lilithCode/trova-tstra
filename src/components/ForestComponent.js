@@ -2,15 +2,10 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const ForestComponent = () => {
   const containerRef = useRef(null);
@@ -30,6 +25,9 @@ const ForestComponent = () => {
 
   useGSAP(
     () => {
+      // The `useGSAP` hook automatically ensures this code runs client-side.
+      gsap.registerPlugin(ScrollTrigger);
+
       gsap.set(sunsetRef.current, { opacity: 0 });
       gsap.set([leftBackgroundRef.current, leftForegroundRef.current], {
         xPercent: -15,
@@ -40,7 +38,6 @@ const ForestComponent = () => {
       gsap.set(sunRef.current, { opacity: 1, x: 0, y: 100 });
       gsap.set(bearRef.current, { y: 150 });
       gsap.set(textBlockRef.current, { y: 0, opacity: 1 });
-      
 
       const clouds = gsap.utils.toArray(".cloud", containerRef.current);
       clouds.forEach((cloud, i) => {
@@ -61,7 +58,6 @@ const ForestComponent = () => {
           scrub: 2,
         },
       });
-      
 
       gsap.to(sunRef.current, {
         y: -200,
@@ -80,7 +76,6 @@ const ForestComponent = () => {
       gsap.set([rightBackgroundRef.current, rightForegroundRef.current], {
         xPercent: 15,
       });
-    
 
       gsap.to(
         [
@@ -163,7 +158,6 @@ const ForestComponent = () => {
       ref={containerRef}
       className="relative w-full min-h-[100vh] md:min-h-[150vh] lg:min-h-[170vh] overflow-hidden flex items-center justify-center"
     >
-      {}
       <div
         ref={blueRef}
         className="absolute inset-0 z-0"
@@ -174,7 +168,6 @@ const ForestComponent = () => {
         }}
       />
 
-      {}
       <div
         ref={sunsetRef}
         className="absolute inset-0 z-10"
@@ -183,40 +176,65 @@ const ForestComponent = () => {
         }}
       />
 
-      {}
       <div
         ref={sunRef}
         className="absolute z-10 left-2/3 bottom-[10%] -translate-x-1/2"
       >
-        <Image src="/forest/sun.svg" alt="Sun" width={2500} height={2500} />
+        <Image
+          src="/forest/sun.svg"
+          alt="Sun"
+          width={2500}
+          height={2500}
+          loading="lazy"
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
+        />
       </div>
 
-      {}
       <div className="cloud absolute z-30 top-[0%] right-[50%]">
         <Image
           src="/forest/night-cloud.svg"
           alt="Cloud1"
           width={200}
           height={200}
+          loading="lazy"
         />
       </div>
       <div className="cloud absolute z-30 top-[20%] left-[-20%]">
-        <Image src="/forest/cloud.svg" alt="Cloud2" width={220} height={220} />
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud2"
+          width={220}
+          height={220}
+          loading="lazy"
+        />
       </div>
       <div className="cloud absolute z-30 top-[45%] left-[-50%]">
-        <Image src="/forest/cloud.svg" alt="Cloud3" width={220} height={220} />
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud3"
+          width={220}
+          height={220}
+          loading="lazy"
+        />
       </div>
       <div className="cloud absolute z-30 top-[30%] left-[50%]">
-        <Image src="/forest/cloud.svg" alt="Cloud4" width={240} height={240} />
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud4"
+          width={240}
+          height={240}
+          loading="lazy"
+        />
       </div>
 
-      {}
       <div ref={leftBackgroundRef} className="absolute z-40 bottom-0 left-0">
         <Image
           src="/forest/trees-left-background.svg"
           alt="Left Background Trees"
           width={2000}
           height={2000}
+          loading="lazy"
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
         />
       </div>
       <div ref={rightBackgroundRef} className="absolute z-40 bottom-0 right-0">
@@ -225,16 +243,19 @@ const ForestComponent = () => {
           alt="Right Background Trees"
           width={2000}
           height={2000}
+          loading="lazy"
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
         />
       </div>
 
-      {}
       <div ref={leftForegroundRef} className="absolute z-50 bottom-0 left-0">
         <Image
           src="/forest/trees-left-foreground.svg"
           alt="Left Foreground Trees"
           width={2000}
           height={2000}
+          loading="lazy"
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
         />
       </div>
       <div ref={rightForegroundRef} className="absolute z-50 bottom-0 right-0">
@@ -243,21 +264,22 @@ const ForestComponent = () => {
           alt="Right Foreground Trees"
           width={2000}
           height={2000}
+          loading="lazy"
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
         />
       </div>
 
-      {}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-full  flex justify-center">
-        {}
         <Image
           src="/forest/mountain.svg"
           alt="Mountain"
           width={2600}
           height={2600}
           className="object-contain relative z-30"
+          loading="lazy"
+          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw, 70vw"
         />
 
-        {}
         <div ref={bearRef} className="absolute bottom-[0px] z-20">
           <Image
             src="/forest/big-bear.svg"
@@ -265,11 +287,12 @@ const ForestComponent = () => {
             width={2500}
             height={2500}
             className="object-contain"
+            loading="lazy"
+            sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw, 70vw"
           />
         </div>
       </div>
 
-      {}
       <div
         ref={textBlockRef}
         className="absolute z-70 top-20 md:top-70 lg:top-70 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-full"
@@ -295,11 +318,11 @@ const ForestComponent = () => {
         </p>
 
         <Link href="/Contact">
-        <div className="pt-8 flex justify-center items-center">
-          <button className="bg-black px-6 py-3 md:px-8 md:py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300">
-            Contact Us →
-          </button>
-        </div>
+          <div className="pt-8 flex justify-center items-center">
+            <button className="bg-black px-6 py-3 md:px-8 md:py-4 text-white text-lg font-bold rounded-full border-2 border-orange-500 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300">
+              Contact Us →
+            </button>
+          </div>
         </Link>
       </div>
     </div>

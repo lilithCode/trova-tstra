@@ -1,17 +1,13 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
-
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const navLinks = [
   { name: "HOME", href: "/" },
@@ -47,6 +43,9 @@ const Navbar = () => {
   }, [menuOpen]);
 
   useGSAP(() => {
+    // Register ScrollTrigger inside the hook to ensure it runs on the client.
+    gsap.registerPlugin(ScrollTrigger);
+
     gsap.to(dividersRef.current, {
       opacity: 0,
       duration: 0.5,
@@ -60,29 +59,27 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav ref={navRef} className="w-full fixed inset-x-0 top-0 z-100 ">
+    <nav ref={navRef} className="w-full fixed inset-x-0 top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {}
         <div className="flex items-center cursor-pointer">
           <Link
             href="/"
             className="flex items-center"
             onClick={() => setMenuOpen(false)}
+            aria-label="Go to home page"
           >
             <Image
               src="/logo.png"
-              alt="Vauldex Logo"
-              width={100}
-              height={100}
-              priority
+              alt="Tstra Company Logo"
+              width={150}
+              height={150}
+              priority // The navbar is always visible, so the logo image should be a priority.
               className="object-contain w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] relative"
               sizes="(max-width: 640px) 100px, (max-width: 768px) 120px, 150px"
-              style={{ position: "relative" }}
             />
           </Link>
         </div>
 
-        {}
         <div className="flex items-center">
           <ul className="hidden xl:flex items-center gap-2 ml-12 whitespace-nowrap">
             {navLinks.map((link, idx) => (
@@ -99,12 +96,10 @@ const Navbar = () => {
                       {link.name}
                       {pathname === link.href && (
                         <span
-                          className="absolute left-0 -bottom-1 w-full h-[2px]"
+                          className="absolute left-0 w-full h-[2px]"
                           style={{
                             background: "#bd4904",
-                            height: "2px",
                             bottom: "-4px",
-                            position: "absolute",
                           }}
                         ></span>
                       )}
@@ -124,7 +119,6 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {}
           <button
             className="block xl:hidden ml-4 p-6 focus:outline-none"
             aria-label="Open menu"
@@ -145,18 +139,17 @@ const Navbar = () => {
         </div>
       </div>
 
-      {}
       {menuOpen && (
         <>
           <div
             className="fixed inset-0 z-40 xl:hidden"
             style={{ background: "rgba(0,0,0,0.1)" }}
+            onClick={() => setMenuOpen(false)} // Add an overlay click handler
           />
           <div
             ref={menuRef}
             className="xl:hidden fixed top-0 right-0 h-screen w-4/5 max-w-xs bg-[#793909] shadow-lg z-50 flex flex-col animate-slidein"
           >
-            {}
             <button
               className="absolute top-4 right-4 text-5xl p-2 focus:outline-none text-[#FF7F32]"
               aria-label="Close menu"
@@ -165,7 +158,6 @@ const Navbar = () => {
               &times;
             </button>
 
-            {}
             <div className="flex flex-col items-start pt-24 px-6 gap-6 w-full">
               {navLinks.map((link) => (
                 <Link

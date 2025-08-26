@@ -1,12 +1,14 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, lazy, Suspense } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ForestComponent from "./../../components/ForestComponent";
-
 
 gsap.registerPlugin(ScrollTrigger);
+
+const ForestComponent = lazy(() =>
+  import("./../../components/ForestComponent")
+);
 
 const coreValuesData = [
   {
@@ -35,6 +37,7 @@ const About = () => {
   const philosophyRef = useRef(null);
   const missionRef = useRef(null);
   const coreValuesRef = useRef(null);
+  const forestRef = useRef(null);
   const philosophyParagraphs = useRef([]);
   const missionParagraphs = useRef([]);
   const coreValueCards = useRef([]);
@@ -145,6 +148,21 @@ const About = () => {
       );
     });
 
+    gsap.fromTo(
+      forestRef.current,
+      { autoAlpha: 0, y: 50 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: forestRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
   }, []);
 
   return (
@@ -158,7 +176,6 @@ const About = () => {
           }}
         ></div>
 
-        {}
         <div className="relative z-40 h-full flex flex-col items-center justify-center text-center text-white px-4">
           <h1 className="text-5xl md:text-8xl font-extrabold tracking-wide">
             ABOUT TROVA TSTRA
@@ -170,14 +187,13 @@ const About = () => {
           </p>
         </div>
 
-        {}
         <div className="absolute inset-0 z-20">
           <Image
             src="/sunset/mountain-1.svg"
             alt="Mountain 1"
             fill
             className="object-cover"
-            priority
+            loading="lazy"
           />
         </div>
         <div className="absolute inset-0 z-10">
@@ -186,7 +202,7 @@ const About = () => {
             alt="Mountain 2"
             fill
             className="object-cover"
-            priority
+            loading="lazy"
           />
         </div>
         <div className="absolute inset-0 z-5">
@@ -195,31 +211,37 @@ const About = () => {
             alt="Mountain 3"
             fill
             className="object-cover"
-            priority
+            loading="lazy"
           />
         </div>
-        <div className="absolute bottom-0 left-0 w-full z-50">
+
+        <div className="absolute bottom-0 left-0 w-full z-20 overflow-hidden">
           <Image
             src="/AboutUs/bears.svg"
             alt="Bears"
             width={1920}
             height={500}
-            className="w-full h-auto object-cover"
-            priority
+            className="w-full h-auto object-cover origin-bottom
+               scale-[2] sm:scale-125 md:scale-100"
+            sizes="(max-width: 640px) 170vw, (max-width: 768px) 125vw, 100vw"
+            loading="lazy"
           />
         </div>
-        <div className="absolute bottom-0 left-0 w-full z-50">
+
+        <div className="absolute bottom-0 left-0 w-full z-40 overflow-hidden">
           <Image
             src="/AboutUs/land.svg"
             alt="Land"
             width={1920}
             height={500}
-            className="w-full h-auto object-cover"
-            priority
+            className="w-full h-auto object-cover origin-bottom
+               scale-[1.9] sm:scale-135 md:scale-100"
+            sizes="(max-width: 640px) 190vw, (max-width: 768px) 135vw, 100vw"
+            loading="lazy"
           />
         </div>
       </div>
-      {}
+
       <section
         ref={philosophyRef}
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200"
@@ -234,6 +256,7 @@ const About = () => {
             height={100}
             width={100}
             className="ml-[10%] w-10 md:w-20 lg:w-30"
+            loading="lazy"
           />
           <h3 className="text-center text-4xl md:text-6xl font-bold mb-10">
             The Pursuit of Kotowari
@@ -252,13 +275,13 @@ const About = () => {
           ))}
         </div>
       </section>
-      {}
+
       <section
         ref={missionRef}
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200"
       >
         <h2 className=" text-left text-4xl md:text-6xl mb-8">
-          OUR <span className="text-[#E87722] font -bold">MISSION</span>
+          OUR <span className="text-[#E87722] font-bold">MISSION</span>
         </h2>
         <div className="mb-10 mt-10 flex w-full flex-col  justify-center gap-8 ">
           <Image
@@ -267,6 +290,7 @@ const About = () => {
             height={100}
             width={100}
             className="ml-[10%] w-10 md:w-20 lg:w-30"
+            loading="lazy"
           />
           <h3 className="text-center text-4xl md:text-6xl font-bold mb-10">
             Realizing your creative vision
@@ -274,7 +298,7 @@ const About = () => {
         </div>
         <div className=" text-left ml-auto text-lg md:text-xl leading-relaxed space-y-6">
           {[
-            "The desire to create—it begins as a spark deep within, an unexpected idea, a stirring sense of challenge ahead. It is the thrill of stepping into the unknown, the anticipation of what's possible. At Vauldex, our purpose is to be the place where these creative aspirations take shape.",
+            "The desire to create—it begins as a spark deep within, an unexpected idea, a stirring sense of challenge ahead. It is the thrill of stepping into the unknown, the anticipation of what's possible. At Trova Tstra, our purpose is to be the place where these creative aspirations take shape.",
             "As we pursue our own passion for creation, we hold the dreams of our customers and partners as dearly as our own.",
             "We exist to awaken the innate curiosity and creativity within people, transforming ideas into tangible reality. By cultivating and bringing these visions to life, we introduce new value to the world.",
             "The drive to create is something that resides within all of us. Believing in its limitless potential, we dedicate ourselves to its realization—continuously evolving, innovating, and pushing the boundaries of what's possible.",
@@ -293,15 +317,11 @@ const About = () => {
           OUR <span className="text-[#E87722] font-bold">CORE VALUES</span>
         </h2>
 
-        {}
         <div className="relative w-full">
-          {}
           <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-500 to-transparent -translate-y-1/2 z-10"></div>
 
-          {}
           <div className="hidden md:block  absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-transparent via-gray-500 to-transparent -translate-x-1/2 z-10"></div>
 
-          {}
           <div
             className="hidden md:block  absolute z-20 w-28 h-28 p-2 rounded-4xl border-2 border-[#101828] bg-gray-900 items-center justify-center transform transition-transform duration-500
           top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
@@ -312,10 +332,10 @@ const About = () => {
               width={80}
               height={80}
               className="p-2 w-full h-full object-contain rotate-[-45deg]"
+              loading="lazy"
             />
           </div>
 
-          {}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-16 gap-y-24 w-full items-center justify-center relative z-0">
             {coreValuesData.map((value, i) => (
               <div
@@ -323,7 +343,6 @@ const About = () => {
                 ref={(el) => (coreValueCards.current[i] = el)}
                 className="mt-6 relative flex flex-col p-8 rounded-xl transform transition duration-300"
               >
-                {}
                 <div
                   className="absolute z-30 w-28 h-28 p-6 rounded-4xl border-2 border-[#E87722] bg-gray-900 flex items-center justify-center transform transition-transform duration-300
                   -top-6 left-1/2 -translate-x-1/2 rotate-25
@@ -335,6 +354,7 @@ const About = () => {
                     width={80}
                     height={80}
                     className=" w-full h-full object-contain rotate-[-25deg]"
+                    loading="lazy"
                   />
                 </div>
 
@@ -349,7 +369,11 @@ const About = () => {
           </div>
         </div>
       </section>
-      <ForestComponent className="relative z-20 mt-20" />
+      <div ref={forestRef}>
+        <Suspense fallback={<div>Loading Forest...</div>}>
+          <ForestComponent className="relative z-20 mt-20" />
+        </Suspense>
+      </div>
     </div>
   );
 };

@@ -7,10 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 const AboutComponent = () => {
   const containerRef = useRef(null);
   const ourRef = useRef(null);
@@ -31,6 +27,8 @@ const AboutComponent = () => {
 
   useGSAP(
     () => {
+      gsap.registerPlugin(ScrollTrigger);
+
       gsap.set([ourRef.current.children, NameRef.current.children], {
         xPercent: 100,
         yPercent: -100,
@@ -151,7 +149,6 @@ const AboutComponent = () => {
       ref={containerRef}
       className="relative z-10 min-h-screen bg-transparent flex items-center justify-center overflow-hidden"
     >
-      {}
       <div
         ref={backgroundRef}
         className="absolute w-[90%] max-w-3xl mx-auto z-10"
@@ -162,10 +159,11 @@ const AboutComponent = () => {
           width={1000}
           height={1000}
           className="w-full h-auto object-contain relative z-0"
+          loading="lazy"
+          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 70vw, 800px"
         />
       </div>
 
-      {}
       <div
         ref={contentContainerRef}
         className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 z-20"
@@ -178,7 +176,6 @@ const AboutComponent = () => {
         </h2>
       </div>
 
-      {}
       <div className="absolute z-30 bottom-[35%] left-0 right-0 flex justify-center">
         <Link href="/About">
           <button
@@ -193,7 +190,6 @@ const AboutComponent = () => {
         </Link>
       </div>
 
-      {}
       <div
         ref={svgContainerRef}
         className="absolute w-[90%] max-w-3xl mx-auto z-20"
@@ -205,9 +201,10 @@ const AboutComponent = () => {
           width={1000}
           height={1000}
           className="w-full h-auto object-contain relative z-0"
+          loading="lazy"
+          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 70vw, 800px"
         />
 
-        {}
         <div
           ref={addToDevRefs}
           className="absolute w-[14%] h-auto"
@@ -218,6 +215,7 @@ const AboutComponent = () => {
             alt="Developer 01"
             width={150}
             height={150}
+            loading="lazy"
           />
         </div>
         <div
@@ -230,6 +228,7 @@ const AboutComponent = () => {
             alt="Developer 02"
             width={150}
             height={150}
+            loading="lazy"
           />
         </div>
         <div
@@ -242,6 +241,7 @@ const AboutComponent = () => {
             alt="Developer 03"
             width={150}
             height={150}
+            loading="lazy"
           />
         </div>
         <div
@@ -254,6 +254,7 @@ const AboutComponent = () => {
             alt="Developer 04"
             width={150}
             height={150}
+            loading="lazy"
           />
         </div>
         <div
@@ -266,6 +267,7 @@ const AboutComponent = () => {
             alt="Developer 05"
             width={150}
             height={150}
+            loading="lazy"
           />
         </div>
         <div
@@ -278,6 +280,7 @@ const AboutComponent = () => {
             alt="Developer 06"
             width={150}
             height={150}
+            loading="lazy"
           />
         </div>
         <div
@@ -290,11 +293,11 @@ const AboutComponent = () => {
             alt="Developer 07"
             width={150}
             height={150}
+            loading="lazy"
           />
         </div>
       </div>
 
-      {}
       <div
         ref={gradientRef}
         className="absolute z-20 w-[500px] h-[200px] rounded-full filter blur-3xl"
@@ -304,7 +307,6 @@ const AboutComponent = () => {
         }}
       />
 
-      {}
       <div
         ref={nextTextRef}
         className="absolute z-40 text-center text-white text-5xl md:text-8xl font-thin"

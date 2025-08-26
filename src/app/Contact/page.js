@@ -1,8 +1,13 @@
+
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
-import ForestComponent from "./../../components/ForestComponent";
+import React, { useState, useRef, useEffect, lazy, Suspense } from "react";
+
+const ForestComponent = lazy(() =>
+  import("./../../components/ForestComponent")
+);
+
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -53,7 +58,7 @@ const Contact = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -360,7 +365,9 @@ const Contact = () => {
           </div>
         </form>
       </div>
-      <ForestComponent className="relative z-20 mt-20" />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ForestComponent className="relative z-20 mt-20" />
+      </Suspense>
     </div>
   );
 };

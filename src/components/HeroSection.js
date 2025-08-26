@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -147,8 +147,6 @@ export default function SunsetScene() {
               secondHalfStart
             );
             tl.to(".cloud", { y: "500%", ease: "none" }, secondHalfStart);
-
-            // Removed the y: "-100%" animation from textContainerRef to keep the button in place.
             tl.to(
               textContainerRef.current,
               { opacity: 0, ease: "none" },
@@ -166,7 +164,6 @@ export default function SunsetScene() {
       ref={containerRef}
       className="relative w-full h-screen overflow-hidden"
     >
-      {}
       <div
         ref={backgroundRef}
         className="absolute inset-0 z-0"
@@ -188,47 +185,52 @@ export default function SunsetScene() {
 
       <div className="cloud absolute w-[10%] h-[15%] top-[20%] left-[5%] z-8">
         <Image
-          fill
-          priority
           src="/sunset/cloud.svg"
           alt="Cloud"
+          width={250}
+          height={375}
           className="w-full h-full object-contain"
+          loading="lazy"
         />
       </div>
       <div className="cloud absolute w-[15%] h-[15%] top-[40%] right-[5%] z-6">
         <Image
-          fill
-          priority
           src="/sunset/cloud.svg"
           alt="Cloud"
+          width={375}
+          height={375}
           className="w-full h-full object-contain"
+          loading="lazy"
         />
       </div>
       <div className="cloud absolute w-[15%] h-[25%] top-[40%] left-[20%] z-7">
         <Image
-          fill
-          priority
           src="/sunset/cloud.svg"
           alt="Cloud"
+          width={375}
+          height={625}
           className="w-full h-full object-contain"
+          loading="lazy"
         />
       </div>
       <div className="cloud absolute w-[10%] h-[18%] top-[20%] right-[15%] z-7">
         <Image
-          fill
-          priority
           src="/sunset/cloud.svg"
           alt="Cloud"
+          width={250}
+          height={450}
           className="w-full h-full object-contain"
+          loading="lazy"
         />
       </div>
       <div className="cloud absolute w-[15%] h-[22%] top-[20%] left-[35%] z-8">
         <Image
-          fill
-          priority
           src="/sunset/cloud.svg"
           alt="Cloud"
+          width={375}
+          height={550}
           className="w-full h-full object-contain"
+          loading="lazy"
         />
       </div>
 
@@ -236,27 +238,30 @@ export default function SunsetScene() {
         <Image
           src="/sunset/mountain-1.svg"
           alt="Mountain 1"
-          fill
-          className="object-cover"
-          priority
+          width={1920}
+          height={1080}
+          className="w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
       <div ref={mountain2Ref} className="absolute inset-0 z-9">
         <Image
           src="/sunset/mountain-2.svg"
           alt="Mountain 2"
-          fill
-          className="object-cover"
-          priority
+          width={1920}
+          height={1080}
+          className="w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
       <div ref={mountain3Ref} className="absolute inset-0 z-5">
         <Image
           src="/sunset/mountain-3.svg"
           alt="Mountain 3"
-          fill
-          className="object-cover"
-          priority
+          width={1920}
+          height={1080}
+          className="w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
 
@@ -290,32 +295,31 @@ export default function SunsetScene() {
         </Link>
       </div>
 
-      {}
       <div
         ref={bigBearRef}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[60]"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[60] w-[100vw] max-w-[1500px]"
       >
         <Image
           src="/sunset/big-bear.svg"
           alt="Big Bear"
           width={1600}
           height={1500}
-          className="w-[100vw] max-w-[1500px] h-auto object-contain"
-          priority
+          className="w-full h-auto object-contain"
+          loading="lazy"
         />
       </div>
 
       <div
         ref={smallBearsRef}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[60]"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[60] w-[100vw] max-w-[1500px]"
       >
         <Image
           src="/sunset/small-bears.svg"
           alt="Small Bears"
           width={1600}
           height={1500}
-          className="w-[100vw] max-w-[1500px] h-auto object-contain"
-          priority
+          className="w-full h-auto object-contain"
+          loading="lazy"
         />
       </div>
 
@@ -326,9 +330,10 @@ export default function SunsetScene() {
         <Image
           src="/sunset/flag.svg"
           alt="Flag"
-          fill
-          className="object-cover"
-          priority
+          width={375}
+          height={750}
+          className="w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
       <div

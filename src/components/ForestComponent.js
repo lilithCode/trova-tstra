@@ -61,6 +61,7 @@ const ForestComponent = () => {
           scrub: 2,
         },
       });
+      
 
       gsap.to(sunRef.current, {
         y: -200,
@@ -79,6 +80,7 @@ const ForestComponent = () => {
       gsap.set([rightBackgroundRef.current, rightForegroundRef.current], {
         xPercent: 15,
       });
+    
 
       gsap.to(
         [
@@ -159,7 +161,7 @@ const ForestComponent = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden flex items-center justify-center"
+      className="relative w-full min-h-[100vh] md:min-h-[150vh] lg:min-h-[170vh] overflow-hidden flex items-center justify-center"
     >
       {}
       <div
@@ -245,13 +247,13 @@ const ForestComponent = () => {
       </div>
 
       {}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-full max-w-[1400px] flex justify-center">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-full  flex justify-center">
         {}
         <Image
           src="/forest/mountain.svg"
           alt="Mountain"
-          width={1600}
-          height={800}
+          width={2600}
+          height={2600}
           className="object-contain relative z-30"
         />
 
@@ -270,7 +272,7 @@ const ForestComponent = () => {
       {}
       <div
         ref={textBlockRef}
-        className="absolute z-70 top-20 md:top-32 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-full"
+        className="absolute z-70 top-20 md:top-70 lg:top-70 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-full"
       >
         <div className="mb-6">
           <span className="px-6 py-3 rounded-full bg-black/40 border border-white/20 text-sm text-white flex items-center gap-2">

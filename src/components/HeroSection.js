@@ -166,23 +166,13 @@ export default function SunsetScene() {
     >
       <div
         ref={backgroundRef}
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(circle at bottom, #F9D390 0%, #E87722 70%)",
-        }}
+        className="absolute inset-0 z-0 bg-radial-gradient-sunset"
       ></div>
 
       <div
         ref={sun}
-        className="w-80 h-80 absolute top-[60%] right-[200px] -translate-x-1/2 z-2"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(255, 255, 255, 0.7) 30%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0) 70%)",
-          borderRadius: "50%",
-        }}
+        className="w-80 h-80 absolute top-[60%] right-sun -translate-x-1/2 z-2 bg-radial-gradient-sun rounded-full"
       ></div>
-
       <div className="cloud absolute w-[10%] h-[15%] top-[20%] left-[5%] z-8">
         <Image
           src="/sunset/cloud.svg"

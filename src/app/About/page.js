@@ -42,139 +42,66 @@ const About = () => {
   const missionParagraphs = useRef([]);
   const coreValueCards = useRef([]);
 
+  const createScrollTriggerAnimation = (
+    ref,
+    yFrom = 50,
+    duration = 1.2,
+    startTrigger = "top 85%"
+  ) => {
+    gsap.fromTo(
+      ref,
+      { autoAlpha: 0, y: yFrom },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ref,
+          start: startTrigger,
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  };
+
   useEffect(() => {
-    gsap.fromTo(
-      philosophyRef.current,
-      { autoAlpha: 0, y: 50 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: philosophyRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    gsap.fromTo(
-      missionRef.current,
-      { autoAlpha: 0, y: 50 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: missionRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    gsap.fromTo(
-      coreValuesRef.current,
-      { autoAlpha: 0, y: 50 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: coreValuesRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
+    createScrollTriggerAnimation(philosophyRef.current);
+    createScrollTriggerAnimation(missionRef.current);
+    createScrollTriggerAnimation(coreValuesRef.current);
+    createScrollTriggerAnimation(forestRef.current);
 
     philosophyParagraphs.current.forEach((p, i) => {
-      gsap.fromTo(
-        p,
-        { autoAlpha: 0, y: 30 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          delay: i * 0.2,
-          scrollTrigger: {
-            trigger: p,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      createScrollTriggerAnimation(p, 30, 1, "top 90%");
     });
 
     missionParagraphs.current.forEach((p, i) => {
-      gsap.fromTo(
-        p,
-        { autoAlpha: 0, y: 30 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          delay: i * 0.2,
-          scrollTrigger: {
-            trigger: p,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      createScrollTriggerAnimation(p, 30, 1, "top 90%");
     });
 
-    coreValueCards.current.forEach((card, i) => {
-      gsap.fromTo(
-        card,
-        { autoAlpha: 0, y: 30 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power3.out",
-          delay: Math.floor(i / 2) * 0.4,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    });
-
+  coreValueCards.current.forEach((card) => {
     gsap.fromTo(
-      forestRef.current,
-      { autoAlpha: 0, y: 50 },
+      card,
+      { autoAlpha: 0, y: 30 },
       {
         autoAlpha: 1,
         y: 0,
-        duration: 1.2,
+        duration: 0.3,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: forestRef.current,
-          start: "top 85%",
+          trigger: card,
+          start: "top 90%",
           toggleActions: "play none none reverse",
         },
       }
     );
+  });
   }, []);
 
   return (
     <div className="relative w-full overflow-hidden z-20">
       <div className="relative h-screen w-full">
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            background:
-              "radial-gradient(circle at bottom, #F9D390 0%, #E87722 70%)",
-          }}
-        ></div>
+        <div className="absolute inset-0 z-0 bg-radial-gradient-sunset"></div>
 
         <div className="relative z-40 h-full flex flex-col items-center justify-center text-center text-white px-4">
           <h1 className="text-5xl md:text-8xl font-extrabold tracking-wide">
@@ -247,7 +174,7 @@ const About = () => {
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200"
       >
         <h2 className=" text-left text-4xl md:text-6xl mb-8">
-          OUR <span className="text-[#E87722] font-bold">PHILOSOPHY</span>
+          OUR <span className="text-accent-light font-bold">PHILOSOPHY</span>
         </h2>
         <div className="mb-10 mt-10 flex w-full flex-col  justify-center gap-8 ">
           <Image
@@ -281,7 +208,7 @@ const About = () => {
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200"
       >
         <h2 className=" text-left text-4xl md:text-6xl mb-8">
-          OUR <span className="text-[#E87722] font-bold">MISSION</span>
+          OUR <span className="text-accent-light font-bold">MISSION</span>
         </h2>
         <div className="mb-10 mt-10 flex w-full flex-col  justify-center gap-8 ">
           <Image
@@ -314,7 +241,7 @@ const About = () => {
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200 text-center"
       >
         <h2 className="text-4xl md:text-6xl mb-28">
-          OUR <span className="text-[#E87722] font-bold">CORE VALUES</span>
+          OUR <span className="text-accent-light font-bold">CORE VALUES</span>
         </h2>
 
         <div className="relative w-full">
@@ -323,7 +250,7 @@ const About = () => {
           <div className="hidden md:block  absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-transparent via-gray-500 to-transparent -translate-x-1/2 z-10"></div>
 
           <div
-            className="hidden md:block  absolute z-20 w-28 h-28 p-2 rounded-4xl border-2 border-[#101828] bg-gray-900 items-center justify-center transform transition-transform duration-500
+            className="hidden md:block absolute z-20 w-28 h-28 p-2 rounded-4xl border-2 border-gray-900 bg-gray-900 items-center justify-center transform transition-transform duration-500
           top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
           >
             <Image
@@ -331,7 +258,7 @@ const About = () => {
               alt="Core Values Logo"
               width={80}
               height={80}
-              className="p-2 w-full h-full object-contain rotate-[-45deg]"
+              className="p-2 w-full h-full object-contain -rotate-45"
               loading="lazy"
             />
           </div>
@@ -344,7 +271,7 @@ const About = () => {
                 className="mt-6 relative flex flex-col p-8 rounded-xl transform transition duration-300"
               >
                 <div
-                  className="absolute z-30 w-28 h-28 p-6 rounded-4xl border-2 border-[#E87722] bg-gray-900 flex items-center justify-center transform transition-transform duration-300
+                  className="absolute z-30 w-28 h-28 p-6 rounded-4xl border-2 border-accent-light bg-gray-900 flex items-center justify-center transform transition-transform duration-300
                   -top-6 left-1/2 -translate-x-1/2 rotate-25
                   group-hover:scale-110"
                 >
@@ -353,12 +280,12 @@ const About = () => {
                     alt="Bear icon"
                     width={80}
                     height={80}
-                    className=" w-full h-full object-contain rotate-[-25deg]"
+                    className=" w-full h-full object-contain -rotate-25"
                     loading="lazy"
                   />
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 mt-20 text-[#E87722]">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 mt-20 text-accent-light">
                   {value.title}
                 </h3>
                 <p className="text-base font-light text-gray-300 leading-relaxed">

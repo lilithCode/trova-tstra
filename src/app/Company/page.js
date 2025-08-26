@@ -1,7 +1,4 @@
-
 import React, { lazy, Suspense } from "react";
-import { Metadata } from "next";
-
 const ForestComponent = lazy(() =>
   import("./../../components/ForestComponent")
 );

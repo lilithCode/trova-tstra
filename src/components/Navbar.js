@@ -9,6 +9,10 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const navLinks = [
   { name: "HOME", href: "/" },
   { name: "ABOUT US", href: "/About" },
@@ -43,9 +47,6 @@ const Navbar = () => {
   }, [menuOpen]);
 
   useGSAP(() => {
-    // Register ScrollTrigger inside the hook to ensure it runs on the client.
-    gsap.registerPlugin(ScrollTrigger);
-
     gsap.to(dividersRef.current, {
       opacity: 0,
       duration: 0.5,
@@ -59,7 +60,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav ref={navRef} className="w-full fixed inset-x-0 top-0 z-50">
+    <nav ref={navRef} className="w-full fixed inset-x-0 top-0 z-100">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
           <Link
@@ -73,7 +74,7 @@ const Navbar = () => {
               alt="Tstra Company Logo"
               width={150}
               height={150}
-              priority // The navbar is always visible, so the logo image should be a priority.
+              priority
               className="object-contain w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] relative"
               sizes="(max-width: 640px) 100px, (max-width: 768px) 120px, 150px"
             />
@@ -87,7 +88,7 @@ const Navbar = () => {
                 <li>
                   <Link href={link.href}>
                     <span
-                      className={`py-1 font-medium text-base tracking-wide relative transition-colors whitespace-nowrap ${
+                      className={`relative py-1 font-medium text-base tracking-wide transition-colors whitespace-nowrap ${
                         pathname === link.href
                           ? "text-white"
                           : "text-white/80 hover:text-white"
@@ -95,13 +96,8 @@ const Navbar = () => {
                     >
                       {link.name}
                       {pathname === link.href && (
-                        <span
-                          className="absolute left-0 w-full h-[2px]"
-                          style={{
-                            background: "#bd4904",
-                            bottom: "-4px",
-                          }}
-                        ></span>
+                        // Key change here: added block to make the line a separate layer
+                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-orange-500 block"></span>
                       )}
                     </span>
                   </Link>
@@ -110,7 +106,7 @@ const Navbar = () => {
                   <li
                     ref={addToDividersRef}
                     aria-hidden="true"
-                    className="text-[#794f35] text-lg font-bold select-none transition-opacity duration-300 opacity-100"
+                    className="text-orange-800 text-lg font-bold select-none transition-opacity duration-300 opacity-100"
                   >
                     {"//////"}
                   </li>
@@ -142,16 +138,15 @@ const Navbar = () => {
       {menuOpen && (
         <>
           <div
-            className="fixed inset-0 z-40 xl:hidden"
-            style={{ background: "rgba(0,0,0,0.1)" }}
-            onClick={() => setMenuOpen(false)} // Add an overlay click handler
+            className="fixed inset-0 z-40 xl:hidden bg-black/10"
+            onClick={() => setMenuOpen(false)}
           />
           <div
             ref={menuRef}
-            className="xl:hidden fixed top-0 right-0 h-screen w-4/5 max-w-xs bg-[#793909] shadow-lg z-50 flex flex-col animate-slidein"
+            className="xl:hidden fixed top-0 right-0 h-screen w-4/5 max-w-xs bg-orange-700 shadow-lg z-50 flex flex-col animate-slidein"
           >
             <button
-              className="absolute top-4 right-4 text-5xl p-2 focus:outline-none text-[#FF7F32]"
+              className="absolute top-4 right-4 text-5xl p-2 focus:outline-none text-orange-600"
               aria-label="Close menu"
               onClick={() => setMenuOpen(false)}
             >
@@ -168,7 +163,7 @@ const Navbar = () => {
                   <span
                     className={`block px-4 py-2 font-medium text-lg tracking-wide transition-colors whitespace-nowrap w-full text-left ${
                       pathname === link.href
-                        ? "text-white border-b-2 border-[#FF7F32]"
+                        ? "text-white border-b-2 border-orange-600"
                         : "text-white/80 hover:text-white"
                     }`}
                   >

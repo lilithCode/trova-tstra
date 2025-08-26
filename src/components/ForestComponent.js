@@ -2,10 +2,14 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const ForestComponent = () => {
   const containerRef = useRef(null);
@@ -25,9 +29,6 @@ const ForestComponent = () => {
 
   useGSAP(
     () => {
-      // The `useGSAP` hook automatically ensures this code runs client-side.
-      gsap.registerPlugin(ScrollTrigger);
-
       gsap.set(sunsetRef.current, { opacity: 0 });
       gsap.set([leftBackgroundRef.current, leftForegroundRef.current], {
         xPercent: -15,
@@ -156,38 +157,23 @@ const ForestComponent = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-[100vh] md:min-h-[150vh] lg:min-h-[170vh] overflow-hidden flex items-center justify-center"
+      className="relative w-full min-h-[100vh] md:min-h-150vh lg:min-h-170vh overflow-hidden flex items-center justify-center"
     >
       <div
         ref={blueRef}
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, #000000, #000033, #00004d,#000066)",
-          opacity: 0.8,
-        }}
+        className="absolute inset-0 z-0 bg-linear-gradient-blue opacity-80"
       />
 
       <div
         ref={sunsetRef}
-        className="absolute inset-0 z-10"
-        style={{
-          background: "radial-gradient(circle, #FFA500 0%, #FF6347 100%)",
-        }}
+        className="absolute inset-0 z-10 bg-radial-gradient-orange"
       />
 
       <div
         ref={sunRef}
         className="absolute z-10 left-2/3 bottom-[10%] -translate-x-1/2"
       >
-        <Image
-          src="/forest/sun.svg"
-          alt="Sun"
-          width={2500}
-          height={2500}
-          loading="lazy"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
-        />
+        <Image src="/forest/sun.svg" alt="Sun" width={2500} height={2500} />
       </div>
 
       <div className="cloud absolute z-30 top-[0%] right-[50%]">
@@ -196,35 +182,16 @@ const ForestComponent = () => {
           alt="Cloud1"
           width={200}
           height={200}
-          loading="lazy"
         />
       </div>
       <div className="cloud absolute z-30 top-[20%] left-[-20%]">
-        <Image
-          src="/forest/cloud.svg"
-          alt="Cloud2"
-          width={220}
-          height={220}
-          loading="lazy"
-        />
+        <Image src="/forest/cloud.svg" alt="Cloud2" width={220} height={220} />
       </div>
       <div className="cloud absolute z-30 top-[45%] left-[-50%]">
-        <Image
-          src="/forest/cloud.svg"
-          alt="Cloud3"
-          width={220}
-          height={220}
-          loading="lazy"
-        />
+        <Image src="/forest/cloud.svg" alt="Cloud3" width={220} height={220} />
       </div>
       <div className="cloud absolute z-30 top-[30%] left-[50%]">
-        <Image
-          src="/forest/cloud.svg"
-          alt="Cloud4"
-          width={240}
-          height={240}
-          loading="lazy"
-        />
+        <Image src="/forest/cloud.svg" alt="Cloud4" width={240} height={240} />
       </div>
 
       <div ref={leftBackgroundRef} className="absolute z-40 bottom-0 left-0">
@@ -233,8 +200,6 @@ const ForestComponent = () => {
           alt="Left Background Trees"
           width={2000}
           height={2000}
-          loading="lazy"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
         />
       </div>
       <div ref={rightBackgroundRef} className="absolute z-40 bottom-0 right-0">
@@ -243,8 +208,6 @@ const ForestComponent = () => {
           alt="Right Background Trees"
           width={2000}
           height={2000}
-          loading="lazy"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
         />
       </div>
 
@@ -254,8 +217,6 @@ const ForestComponent = () => {
           alt="Left Foreground Trees"
           width={2000}
           height={2000}
-          loading="lazy"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
         />
       </div>
       <div ref={rightForegroundRef} className="absolute z-50 bottom-0 right-0">
@@ -264,8 +225,6 @@ const ForestComponent = () => {
           alt="Right Foreground Trees"
           width={2000}
           height={2000}
-          loading="lazy"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 40vw, 30vw"
         />
       </div>
 
@@ -276,32 +235,28 @@ const ForestComponent = () => {
           width={2600}
           height={2600}
           className="object-contain relative z-30"
-          loading="lazy"
-          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw, 70vw"
         />
 
-        <div ref={bearRef} className="absolute bottom-[0px] z-20">
+        <div ref={bearRef} className="absolute bottom-0 z-20">
           <Image
             src="/forest/big-bear.svg"
             alt="Bear"
             width={2500}
             height={2500}
             className="object-contain"
-            loading="lazy"
-            sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw, 70vw"
           />
         </div>
       </div>
 
       <div
         ref={textBlockRef}
-        className="absolute z-70 top-20 md:top-70 lg:top-70 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-full"
+        className="absolute z-70 top-70 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-full"
       >
         <div className="mb-6">
           <span className="px-6 py-3 rounded-full bg-black/40 border border-white/20 text-sm text-white flex items-center gap-2">
             <span className="relative flex items-center justify-center">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-400 relative z-10"></span>
-              <span className="absolute w-4 h-4 rounded-full bg-green-400 opacity-70 animate-ping"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-online relative z-10"></span>
+              <span className="absolute w-4 h-4 rounded-full bg-online-70 animate-ping"></span>
             </span>
             Available for work
           </span>

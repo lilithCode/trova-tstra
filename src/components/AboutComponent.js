@@ -300,11 +300,7 @@ const AboutComponent = () => {
 
       <div
         ref={gradientRef}
-        className="absolute z-20 w-[500px] h-[200px] rounded-full filter blur-3xl"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(0, 57, 128, 0.9) 0%, rgba(0, 46, 102, 0.2) 70%)",
-        }}
+        className="absolute z-20 w-[500px] h-[200px] rounded-full filter blur-3xl bg-radial-gradient-blur"
       />
 
       <div

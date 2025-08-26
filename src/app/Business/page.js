@@ -1,4 +1,4 @@
-
+"use client";
 import React, { lazy, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,7 +26,7 @@ const Business = () => {
             </p>
           </div>
 
-          <div className="mt-[10%] flex flex-col space-y-24">
+          <div className="mt-35 flex flex-col space-y-24">
             {BusinessData.map((item, index) => (
               <div key={item.id} className="flex flex-col">
                 <div

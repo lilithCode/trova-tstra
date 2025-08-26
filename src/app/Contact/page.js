@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useRef, useEffect, lazy, Suspense } from "react";
@@ -6,8 +5,6 @@ import React, { useState, useRef, useEffect, lazy, Suspense } from "react";
 const ForestComponent = lazy(() =>
   import("./../../components/ForestComponent")
 );
-
-
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -131,7 +128,7 @@ const Contact = () => {
         placeholder={placeholder}
         value={formData[name]}
         onChange={handleInputChange}
-        className={`bg-[#1a1a2e] text-white w-full focus:outline-none placeholder-gray-400 text-lg md:text-xl py-4 px-6 border border-transparent focus:border-orange-500 transition-colors duration-200`}
+        className={`bg-field text-white w-full focus:outline-none placeholder-gray-400 text-lg md:text-xl py-4 px-6 border border-transparent focus:border-orange-500 transition-colors duration-200`}
       />
       {validationErrors[name] && (
         <p className="text-red-500 text-sm mt-1">{validationErrors[name]}</p>
@@ -178,7 +175,7 @@ const Contact = () => {
               Inquiry Category <span className="text-red-500">*</span>
             </label>
             <div
-              className={`bg-[#1a1a2e] border-2 border-transparent focus-within:border-orange-500 transition-colors duration-200 cursor-pointer`}
+              className={`bg-field border-2 border-transparent focus-within:border-orange-500 transition-colors duration-200 cursor-pointer`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <div className="flex justify-between items-center py-4 px-6">
@@ -206,7 +203,7 @@ const Contact = () => {
               </div>
             </div>
             {isDropdownOpen && (
-              <ul className="absolute top-full left-0 mt-2 w-full bg-[#1a1a2e] border border-gray-600 max-h-60 overflow-y-auto z-50">
+              <ul className="absolute top-full left-0 mt-2 w-full bg-field border border-gray-600 max-h-60 overflow-y-auto z-50">
                 <li
                   key="default"
                   className={`py-4 px-6 text-lg md:text-xl cursor-pointer ${
@@ -257,7 +254,7 @@ const Contact = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  className={`bg-[#1a1a2e] text-white w-full focus:outline-none placeholder-gray-400 text-lg md:text-xl py-4 px-6 border border-transparent focus:border-orange-500 transition-colors duration-200`}
+                  className={`bg-field text-white w-full focus:outline-none placeholder-gray-400 text-lg md:text-xl py-4 px-6 border border-transparent focus:border-orange-500 transition-colors duration-200`}
                 />
                 {validationErrors.firstName && (
                   <p className="text-red-500 text-sm mt-1">
@@ -274,7 +271,7 @@ const Contact = () => {
                   name="middleName"
                   value={formData.middleName}
                   onChange={handleInputChange}
-                  className={`bg-[#1a1a2e] text-white w-full focus:outline-none placeholder-gray-400 text-lg md:text-xl py-4 px-6 transition-colors duration-200 border border-transparent focus:border-orange-500`}
+                  className={`bg-field text-white w-full focus:outline-none placeholder-gray-400 text-lg md:text-xl py-4 px-6 transition-colors duration-200 border border-transparent focus:border-orange-500`}
                 />
               </div>
               <div>
@@ -286,7 +283,7 @@ const Contact = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  className={`bg-[#1a1a2e] text-white w-full focus:outline-none placeholder-gray-400 text-lg md:text-xl py-4 px-6 border border-transparent focus:border-orange-500 transition-colors duration-200`}
+                  className={`bg-field text-white w-full focus:outline-none placeholder-gray-400 text-lg md:text-xl py-4 px-6 border border-transparent focus:border-orange-500 transition-colors duration-200`}
                 />
                 {validationErrors.lastName && (
                   <p className="text-red-500 text-sm mt-1">
@@ -317,7 +314,7 @@ const Contact = () => {
               value={formData.inquiryDetails}
               onChange={handleInputChange}
               rows="5"
-              className={`bg-[#1a1a2e] text-white w-full focus:outline-none resize-none text-lg md:text-xl py-4 px-6 border border-transparent focus:border-orange-500 transition-colors duration-200`}
+              className={`bg-field text-white w-full focus:outline-none resize-none text-lg md:text-xl py-4 px-6 border border-transparent focus:border-orange-500 transition-colors duration-200`}
             ></textarea>
             {validationErrors.inquiryDetails && (
               <p className="text-red-500 text-sm mt-1">

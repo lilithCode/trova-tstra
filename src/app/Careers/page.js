@@ -1,3 +1,4 @@
+"use client";
 import React, { lazy, Suspense } from "react";
 import Link from "next/link";
 const ForestComponent = lazy(() =>
@@ -12,8 +13,8 @@ const Careers = () => {
             Coming Soon
           </h1>
           <Link href="/">
-            <div id="button" className="mt-20 flex justify-center items-center">
-              <button className="cursor-pointer group px-5 md:px-10 py-3 lg:px-20 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
+            <div id="button" className="mt-35 flex justify-center items-center">
+              <button className="cursor-pointer group px-10 md:px-20 py-3 lg:px-40 md:py-4 text-white text-base md:text-lg font-bold rounded-full border-2 border-orange-500 flex items-center gap-2">
                 <span>{"Back to Home"}</span>
                 <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
                   →
@@ -23,7 +24,7 @@ const Careers = () => {
           </Link>
         </div>
       </div>
-  <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
         <ForestComponent className="relative z-20 mt-20" />
       </Suspense>
     </>

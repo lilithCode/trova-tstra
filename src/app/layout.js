@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import Navbar from "@/components/Navbar";
@@ -7,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import DynamicParticles from "@/components/DynamicParticles";
 
 export const metadata = {
+  metadataBase: new URL("https://www.trovatstra.com"),
   title: {
     default: "Trova Tstra ",
     template: "%s | Trova Tstra",

@@ -60,10 +60,13 @@ export default function SunsetScene() {
               },
               0
             );
+
             tl.to(backgroundRef.current, { opacity: 0, ease: "none" }, 0);
+
             tl.to(mountain1Ref.current, { y: 50, x: -50, ease: "none" }, 0);
             tl.to(mountain2Ref.current, { y: 50, x: 50, ease: "none" }, 0);
             tl.to(mountain3Ref.current, { y: 50, x: 50, ease: "none" }, 0);
+
             tl.to(sun.current, { y: 300, x: -300, ease: "none" }, 0);
             tl.fromTo(
               sun.current,
@@ -83,6 +86,7 @@ export default function SunsetScene() {
               0.5
             );
             tl.to(sun.current, { y: -300, x: -50, ease: "none" }, 0.5);
+
             tl.fromTo(
               [
                 mountain1Ref.current,
@@ -93,8 +97,10 @@ export default function SunsetScene() {
               { filter: "grayscale(1) brightness(0.5)", ease: "none" },
               0
             );
+
             tl.to(bigBearRef.current, { y: "150%", x: 0, ease: "none" }, 0);
             tl.to(smallBearsRef.current, { y: "150%", x: 0, ease: "none" }, 0);
+
             tl.to(
               flagRef.current,
               {
@@ -115,6 +121,7 @@ export default function SunsetScene() {
             );
 
             tl.to(landscapeRef.current, { y: 20, x: 0, ease: "none" }, 0);
+
             tl.to(
               textContainerRef.current.children[0],
               { scale: 0.8, ease: "power2.inOut" },
@@ -171,8 +178,9 @@ export default function SunsetScene() {
 
       <div
         ref={sun}
-        className="w-80 h-80 absolute top-[60%] right-sun -translate-x-1/2 z-2 bg-radial-gradient-sun rounded-full"
+        className="w-80 h-80 absolute top-[60%] md:top-[65%] lg:top-[55%] right-[-190px] sm:right-[-100px] md:right-6 -translate-x-1/2 z-2 bg-radial-gradient-sun rounded-full"
       ></div>
+
       <div className="cloud absolute w-[10%] h-[15%] top-[20%] left-[5%] z-8">
         <Image
           src="/sunset/cloud.svg"
@@ -224,7 +232,7 @@ export default function SunsetScene() {
         />
       </div>
 
-      <div ref={mountain1Ref} className="absolute inset-0 z-13">
+      <div ref={mountain1Ref} className="absolute inset-0 z-13 ">
         <Image
           src="/sunset/mountain-1.svg"
           alt="Mountain 1"
@@ -287,7 +295,7 @@ export default function SunsetScene() {
 
       <div
         ref={bigBearRef}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[60] w-[100vw] max-w-[1500px]"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-60 w-[100vw] max-w-[1500px]"
       >
         <Image
           src="/sunset/big-bear.svg"
@@ -301,7 +309,7 @@ export default function SunsetScene() {
 
       <div
         ref={smallBearsRef}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[60] w-[100vw] max-w-[1500px]"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-60 w-[100vw] max-w-[1500px]"
       >
         <Image
           src="/sunset/small-bears.svg"
@@ -315,7 +323,7 @@ export default function SunsetScene() {
 
       <div
         ref={flagRef}
-        className="absolute w-30 h-60 bottom-[-200px] left-1/2 transform -translate-x-1/2 z-40 lg:z-40"
+        className="absolute w-30 h-60 bottom-neg-200 left-1/2 transform -translate-x-1/2 z-40 lg:z-40"
       >
         <Image
           src="/sunset/flag.svg"
@@ -326,9 +334,10 @@ export default function SunsetScene() {
           loading="lazy"
         />
       </div>
+
       <div
         ref={landscapeRef}
-        className="absolute bottom-0 left-0 w-full h-auto z-[100]"
+        className="absolute bottom-0 left-0 w-full h-auto z-100"
       >
         <Image
           src="/sunset/landscape.svg"

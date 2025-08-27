@@ -56,6 +56,14 @@ const BusinessComponent = () => {
         stagger: 0.05,
         ease: "power2.out",
       });
+
+      // Cleanup function
+      return () => {
+        if (tl.scrollTrigger) {
+          tl.scrollTrigger.kill();
+        }
+        tl.kill();
+      };
     },
     { scope: containerRef }
   );

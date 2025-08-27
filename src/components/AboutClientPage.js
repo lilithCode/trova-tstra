@@ -1,12 +1,16 @@
 "use client";
-import React, { useEffect, useRef, lazy, Suspense } from "react";
+import React, { useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ForestComponent = lazy(() => import("./ForestComponent"));
+// Use next/dynamic for the ForestComponent
+const ForestComponent = dynamic(() => import("./ForestComponent"), {
+  suspense: true,
+});
 
 const coreValuesData = [
   {
@@ -40,45 +44,48 @@ const AboutClientPage = () => {
   const missionParagraphs = useRef([]);
   const coreValueCards = useRef([]);
 
-  const createScrollTriggerAnimation = (
-    ref,
-    yFrom = 50,
-    duration = 1.2,
-    startTrigger = "top 85%"
-  ) => {
-    gsap.fromTo(
-      ref,
-      { autoAlpha: 0, y: yFrom },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ref,
-          start: startTrigger,
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  };
-
   useEffect(() => {
+    const createdTriggers = [];
+
+    const createScrollTriggerAnimation = (
+      ref,
+      yFrom = 50,
+      duration = 1.2,
+      startTrigger = "top 85%"
+    ) => {
+      const anim = gsap.fromTo(
+        ref,
+        { autoAlpha: 0, y: yFrom },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref,
+            start: startTrigger,
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+      createdTriggers.push(anim.scrollTrigger);
+    };
+
     createScrollTriggerAnimation(philosophyRef.current);
     createScrollTriggerAnimation(missionRef.current);
     createScrollTriggerAnimation(coreValuesRef.current);
     createScrollTriggerAnimation(forestRef.current);
 
-    philosophyParagraphs.current.forEach((p, i) => {
+    philosophyParagraphs.current.forEach((p) => {
       createScrollTriggerAnimation(p, 30, 1, "top 90%");
     });
 
-    missionParagraphs.current.forEach((p, i) => {
+    missionParagraphs.current.forEach((p) => {
       createScrollTriggerAnimation(p, 30, 1, "top 90%");
     });
 
     coreValueCards.current.forEach((card) => {
-      gsap.fromTo(
+      const anim = gsap.fromTo(
         card,
         { autoAlpha: 0, y: 30 },
         {
@@ -93,7 +100,27 @@ const AboutClientPage = () => {
           },
         }
       );
+      createdTriggers.push(anim.scrollTrigger);
     });
+
+    // Cleanup function
+    return () => {
+      createdTriggers.forEach((trigger) => {
+        if (trigger) {
+          trigger.kill();
+        }
+      });
+      // Also kill any tweens associated with the elements to be safe
+      gsap.killTweensOf([
+        philosophyRef.current,
+        missionRef.current,
+        coreValuesRef.current,
+        forestRef.current,
+        ...philosophyParagraphs.current,
+        ...missionParagraphs.current,
+        ...coreValueCards.current,
+      ]);
+    };
   }, []);
 
   return (

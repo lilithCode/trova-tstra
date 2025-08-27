@@ -1,7 +1,10 @@
 "use client";
 
-import React, { useState, lazy, Suspense } from "react";
-const ForestComponent = lazy(() => import("./ForestComponent"));
+import React, { useState, Suspense } from "react";
+import dynamic from "next/dynamic";
+const ForestComponent = dynamic(() => import("./ForestComponent"), {
+  suspense: true,
+});
 
 const InputField = ({
   label,

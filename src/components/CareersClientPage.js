@@ -1,7 +1,12 @@
 "use client";
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
-const ForestComponent = lazy(() => import("./ForestComponent"));
+import dynamic from "next/dynamic";
+
+const ForestComponent = dynamic(() => import("./ForestComponent"), {
+  suspense: true,
+});
+
 const CareersClientPage = () => {
   return (
     <>
@@ -27,6 +32,6 @@ const CareersClientPage = () => {
       </Suspense>
     </>
   );
-}
+};
 
-export default CareersClientPage
+export default CareersClientPage;

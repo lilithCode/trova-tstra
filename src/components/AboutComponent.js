@@ -128,6 +128,13 @@ const AboutComponent = () => {
         newContentStartTime
       );
       masterTl.to(gradientRef.current, { opacity: 1, ease: "power2.out" }, "<");
+      // Cleanup function
+      return () => {
+        if (masterTl.scrollTrigger) {
+          masterTl.scrollTrigger.kill();
+        }
+        masterTl.kill();
+      };
     },
     { scope: containerRef }
   );

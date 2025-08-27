@@ -20,9 +20,9 @@ const Footer = () => {
             </Link>
 
             <div>
-              <h3 className="text-[18px] font-semibold mb-3 hover:text-orange-400 transition-colors duration-300 cursor-pointer">
+              <h2 className="text-[18px] font-semibold mb-3 hover:text-orange-400 transition-colors duration-300 cursor-pointer">
                 Realizing Your Creative Vision
-              </h3>
+              </h2>
               <p className="text-gray-300 text-[17px] max-w-[480px] leading-relaxed hover:text-gray-200 transition-colors duration-300 cursor-pointer">
                 Tstra is the place where your imagination comes to life. We
                 bring your vision into reality, walking beside you as we shape
@@ -53,9 +53,9 @@ const Footer = () => {
               </div>
 
               <div className="flex flex-col items-start lg:items-center gap-8">
-                <h4 className="font-semibold hover:text-orange-400 transition-colors duration-300 cursor-pointer">
+                <h3 className="font-semibold hover:text-orange-400 transition-colors duration-300 cursor-pointer">
                   Follow us on
-                </h4>
+                </h3>
                 <div className="grid grid-cols-4 gap-3">
                   <div className="text-center">
                     <Link
@@ -175,9 +175,9 @@ const Footer = () => {
             </div>
 
             <div className="text-[16px]">
-              <h4 className="font-semibold mb-3 hover:text-orange-400 transition-colors duration-300 cursor-pointer">
+              <h3 className="font-semibold mb-3 hover:text-orange-400 transition-colors duration-300 cursor-pointer">
                 Group company
-              </h4>
+              </h3>
               <p className="text-[#d1d5db] hover:cursor-pointer -ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
                 Tstra Technologies
               </p>

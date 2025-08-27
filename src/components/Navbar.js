@@ -47,7 +47,7 @@ const Navbar = () => {
   }, [menuOpen]);
 
   useGSAP(() => {
-    gsap.to(dividersRef.current, {
+    const animation = gsap.to(dividersRef.current, {
       opacity: 0,
       duration: 0.5,
       scrollTrigger: {
@@ -57,6 +57,13 @@ const Navbar = () => {
         scrub: true,
       },
     });
+    // Cleanup function
+    return () => {
+      if (animation.scrollTrigger) {
+        animation.scrollTrigger.kill();
+      }
+      animation.kill();
+    };
   }, []);
 
   return (

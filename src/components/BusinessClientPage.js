@@ -1,11 +1,14 @@
 "use client";
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import dynamic from "next/dynamic";
 import BusinessData from "@/components/BusinessData";
 
-const ForestComponent = lazy(() => import("./ForestComponent"));
+const ForestComponent = dynamic(() => import("./ForestComponent"), {
+  suspense: true,
+});
+
 const BusinessClientPage = () => {
   return (
     <>

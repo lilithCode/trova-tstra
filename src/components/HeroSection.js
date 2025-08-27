@@ -152,8 +152,21 @@ export default function SunsetScene() {
               secondHalfStart
             );
           }
+          // Cleanup function
+          return () => {
+            if (context.conditions.isDesktop) {
+              // Kill all ScrollTriggers created by the timeline
+              if (tl.scrollTrigger) {
+                tl.scrollTrigger.kill();
+              }
+              // Kill the timeline itself
+              tl.kill();
+            }
+          };
         }
       );
+      // Return a cleanup function for the matchMedia instance
+      return () => mm.revert();
     },
     { scope: containerRef }
   );

@@ -85,7 +85,7 @@ const ForestComponent = () => {
         0
       );
 
-      gsap.to(sunRef.current, {
+      const sunAnimation = gsap.to(sunRef.current, {
         y: -200,
         x: -90,
         scrollTrigger: {
@@ -96,7 +96,7 @@ const ForestComponent = () => {
         },
       });
 
-      gsap.fromTo(
+      const bearAnimation = gsap.fromTo(
         bearRef.current,
         { y: 150 },
         {
@@ -111,7 +111,7 @@ const ForestComponent = () => {
         }
       );
 
-      gsap.to(textBlockRef.current, {
+      const textAnimation = gsap.to(textBlockRef.current, {
         y: -200,
         opacity: 0.8,
         scrollTrigger: {
@@ -121,6 +121,38 @@ const ForestComponent = () => {
           scrub: 2,
         },
       });
+      // Cleanup function
+      return () => {
+        // Kill the timeline and its ScrollTrigger
+        if (tl.scrollTrigger) {
+          tl.scrollTrigger.kill();
+        }
+        tl.kill();
+
+        // Kill other animations and their ScrollTriggers
+        if (sunAnimation.scrollTrigger) {
+          sunAnimation.scrollTrigger.kill();
+        }
+        sunAnimation.kill();
+
+        if (bearAnimation.scrollTrigger) {
+          bearAnimation.scrollTrigger.kill();
+        }
+        bearAnimation.kill();
+
+        if (textAnimation.scrollTrigger) {
+          textAnimation.scrollTrigger.kill();
+        }
+        textAnimation.kill();
+
+        // Kill cloud animations
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (clouds.some((cloud) => trigger.trigger === cloud.parentElement)) {
+            trigger.kill();
+          }
+        });
+        clouds.forEach((cloud) => gsap.killTweensOf(cloud));
+      };
     },
     { scope: containerRef }
   );

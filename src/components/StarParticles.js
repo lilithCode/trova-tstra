@@ -16,7 +16,7 @@ const StarParticles = () => {
         preset: "stars",
         particles: {
           number: {
-            value: 80, // Reduced from 300
+            value: 80,
             density: {
               enable: true,
               value_area: 800,
@@ -40,7 +40,7 @@ const StarParticles = () => {
             random: true,
             anim: {
               enable: true,
-              speed: 1, // Adjusted speed for better visuals with fewer particles
+              speed: 1,
               opacity_min: 0.2,
               sync: false,
             },

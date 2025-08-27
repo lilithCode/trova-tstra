@@ -28,114 +28,106 @@ const AboutComponent = () => {
   useGSAP(
     () => {
       gsap.registerPlugin(ScrollTrigger);
-      const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 1024px)", () => {
-        // GSAP animations will only run on screens wider than 1024px
-        gsap.set([ourRef.current.children, NameRef.current.children], {
-          xPercent: 100,
-          yPercent: -100,
+      gsap.set([ourRef.current.children, NameRef.current.children], {
+        xPercent: 100,
+        yPercent: -100,
+        opacity: 0,
+        scale: 0.5,
+      });
+      gsap.set(buttonRef.current, { opacity: 0, scale: 0.5 });
+      gsap.set(
+        [mainSvgRef.current, backgroundRef.current, ...devRefs.current],
+        {
           opacity: 0,
-          scale: 0.5,
-        });
-        gsap.set(buttonRef.current, { opacity: 0, scale: 0.5 });
-        gsap.set(
-          [mainSvgRef.current, backgroundRef.current, ...devRefs.current],
-          {
-            opacity: 0,
-            scale: 0,
-          }
-        );
-        gsap.set(nextTextRef.current, { opacity: 0, scale: 0 });
-        gsap.set(gradientRef.current, { opacity: 0 });
+          scale: 0,
+        }
+      );
+      gsap.set(nextTextRef.current, { opacity: 0, scale: 0 });
+      gsap.set(gradientRef.current, { opacity: 0 });
 
-        gsap.set(
-          [svgContainerRef.current, gradientRef.current, backgroundRef.current],
-          {
-            pointerEvents: "none",
-          }
-        );
+      gsap.set(
+        [svgContainerRef.current, gradientRef.current, backgroundRef.current],
+        {
+          pointerEvents: "none",
+        }
+      );
 
-        const masterTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=5000",
-            pin: true,
-            scrub: 1,
-            markers: false,
+      const masterTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=5000",
+          pin: true,
+          scrub: 1,
+          markers: false,
+        },
+      });
+
+      masterTl.to([ourRef.current.children, NameRef.current.children], {
+        xPercent: 0,
+        yPercent: 0,
+        scale: 1,
+        opacity: 1,
+        stagger: 0.05,
+        ease: "power2.out",
+      });
+
+      masterTl.to(
+        buttonRef.current,
+        { opacity: 1, scale: 1, ease: "power2.out" },
+        "+=0.2"
+      );
+
+      masterTl.to(
+        backgroundRef.current,
+        { opacity: 1, scale: 1, ease: "power2.out" },
+        ">"
+      );
+
+      masterTl.to(
+        [contentContainerRef.current, buttonRef.current],
+        {
+          scale: 0,
+          opacity: 0,
+          ease: "power1.in",
+          z: -1,
+          onComplete: () => {
+            if (buttonRef.current) {
+              buttonRef.current.style.pointerEvents = "none";
+            }
           },
-        });
+        },
+        ">1"
+      );
 
-        masterTl.to([ourRef.current.children, NameRef.current.children], {
-          xPercent: 0,
-          yPercent: 0,
-          scale: 1,
-          opacity: 1,
-          stagger: 0.05,
-          ease: "power2.out",
-        });
+      masterTl.to(
+        backgroundRef.current,
+        { opacity: 0, ease: "power1.in" },
+        "<"
+      );
 
+      masterTl.to(
+        mainSvgRef.current,
+        { opacity: 1, scale: 1, ease: "power2.out" },
+        ">"
+      );
+
+      devRefs.current.forEach((devSvg) => {
         masterTl.to(
-          buttonRef.current,
+          devSvg,
           { opacity: 1, scale: 1, ease: "power2.out" },
-          "+=0.2"
-        );
-
-        masterTl.to(
-          backgroundRef.current,
-          { opacity: 1, scale: 1, ease: "power2.out" },
-          ">"
-        );
-
-        masterTl.to(
-          [contentContainerRef.current, buttonRef.current],
-          {
-            scale: 0,
-            opacity: 0,
-            ease: "power1.in",
-            z: -1,
-            onComplete: () => {
-              if (buttonRef.current) {
-                buttonRef.current.style.pointerEvents = "none";
-              }
-            },
-          },
-          ">1"
-        );
-
-        masterTl.to(
-          backgroundRef.current,
-          { opacity: 0, ease: "power1.in" },
-          "<"
-        );
-
-        masterTl.to(
-          mainSvgRef.current,
-          { opacity: 1, scale: 1, ease: "power2.out" },
-          ">"
-        );
-
-        devRefs.current.forEach((devSvg) => {
-          masterTl.to(
-            devSvg,
-            { opacity: 1, scale: 1, ease: "power2.out" },
-            "+=0.05"
-          );
-        });
-
-        const newContentStartTime = ">0.5";
-        masterTl.to(
-          nextTextRef.current,
-          { opacity: 1, scale: 1, ease: "power2.out" },
-          newContentStartTime
-        );
-        masterTl.to(
-          gradientRef.current,
-          { opacity: 1, ease: "power2.out" },
-          "<"
+          "+=0.05"
         );
       });
+
+      const newContentStartTime = ">0.5";
+      masterTl.to(
+        nextTextRef.current,
+        { opacity: 1, scale: 1, ease: "power2.out" },
+        newContentStartTime
+      );
+      masterTl.to(gradientRef.current, { opacity: 1, ease: "power2.out" }, "<");
     },
     { scope: containerRef }
   );
@@ -168,7 +160,7 @@ const AboutComponent = () => {
           height={1000}
           className="w-full h-auto object-contain relative z-0"
           loading="lazy"
-          sizes="(max-width: 768px) 90vw, 896px"
+          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 70vw, 800px"
         />
       </div>
 
@@ -210,7 +202,7 @@ const AboutComponent = () => {
           height={1000}
           className="w-full h-auto object-contain relative z-0"
           loading="lazy"
-          sizes="(max-width: 768px) 90vw, 896px"
+          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 70vw, 800px"
         />
 
         <div

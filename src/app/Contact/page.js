@@ -2,7 +2,7 @@ import React from "react";
 import ContactClientPage from "@/components/ContactClientPage";
 
 export const metadata = {
-  title: "Contact Us",
+  title: "Contact",
   description:
     "Get in touch with Trova Tstra for inquiries about system development, project cost estimates, or general questions. Contact us via our online form or by phone.",
   keywords: [
@@ -20,14 +20,14 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "Trova Tstra | Contact Us ",
+    title: "Trova Tstra | Contact",
     description:
       "Get in touch with Trova Tstra for inquiries about system development, project cost estimates, or general questions.",
     url: "https://trova-tstra-git-stagging-ibrahim-devs-projects.vercel.app/Contact",
   },
 
   twitter: {
-    title: "Trova Tstra | Contact Us ",
+    title: "Trova Tstra | Contact",
     description:
       "Get in touch with Trova Tstra for inquiries about system development, project cost estimates, or general questions.",
   },

@@ -17,6 +17,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-tsparticles": "^2.12.2",
+    "resend": "^6.0.1",
     "tsparticles": "^3.9.1",
     "tsparticles-preset-stars": "^2.12.0"
   },

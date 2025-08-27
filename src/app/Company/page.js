@@ -1,7 +1,7 @@
 import React from "react";
 import CompanyClientPage from "@/components/CompanyClientPage";
 export const metadata = {
-  title: "Company Profile",
+  title: "Company",
   description:
     "Find detailed information about Vauldex Inc., including our address in Fukuoka, Japan, overseas office in the Philippines, capital, and establishment history.",
   keywords: [

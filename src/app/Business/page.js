@@ -2,7 +2,7 @@ import React from "react";
 import BusinessClientPage from "@/components/BusinessClientPage";
 
 export const metadata = {
-  title: "Our Business",
+  title: "Business",
   description:
     "Explore Vauldex in-house solutions from Trova Tstra. Discover our portfolio of products designed to blend fresh ideas with smart technology for business growth.",
   keywords: [

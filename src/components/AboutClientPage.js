@@ -6,9 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ForestComponent = lazy(() =>
-  import("./ForestComponent")
-);
+const ForestComponent = lazy(() => import("./ForestComponent"));
 
 const coreValuesData = [
   {
@@ -120,7 +118,8 @@ const AboutClientPage = () => {
             alt="Mountain 1"
             fill
             className="object-cover"
-            loading="lazy"
+            priority
+            sizes="100vw"
           />
         </div>
         <div className="absolute inset-0 z-10">
@@ -129,7 +128,8 @@ const AboutClientPage = () => {
             alt="Mountain 2"
             fill
             className="object-cover"
-            loading="lazy"
+            priority
+            sizes="100vw"
           />
         </div>
         <div className="absolute inset-0 z-5">
@@ -138,7 +138,8 @@ const AboutClientPage = () => {
             alt="Mountain 3"
             fill
             className="object-cover"
-            loading="lazy"
+            priority
+            sizes="100vw"
           />
         </div>
 
@@ -164,7 +165,7 @@ const AboutClientPage = () => {
             className="w-full h-auto object-cover origin-bottom
                  scale-[1.9] sm:scale-135 md:scale-100"
             sizes="(max-width: 640px) 190vw, (max-width: 768px) 135vw, 100vw"
-            loading="lazy"
+            priority
           />
         </div>
       </div>

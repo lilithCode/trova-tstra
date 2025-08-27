@@ -173,7 +173,13 @@ const ForestComponent = () => {
         ref={sunRef}
         className="absolute z-10 left-2/3 bottom-[10%] -translate-x-1/2"
       >
-        <Image src="/forest/sun.svg" alt="Sun" width={2500} height={2500} />
+        <Image
+          src="/forest/sun.svg"
+          alt="Sun"
+          width={2500}
+          height={2500}
+          loading="lazy"
+        />
       </div>
 
       <div className="cloud absolute z-30 top-[0%] right-[50%]">
@@ -185,13 +191,31 @@ const ForestComponent = () => {
         />
       </div>
       <div className="cloud absolute z-30 top-[20%] left-[-20%]">
-        <Image src="/forest/cloud.svg" alt="Cloud2" width={220} height={220} />
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud2"
+          width={220}
+          height={220}
+          loading="lazy"
+        />
       </div>
       <div className="cloud absolute z-30 top-[45%] left-[-50%]">
-        <Image src="/forest/cloud.svg" alt="Cloud3" width={220} height={220} />
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud3"
+          width={220}
+          height={220}
+          loading="lazy"
+        />
       </div>
       <div className="cloud absolute z-30 top-[30%] left-[50%]">
-        <Image src="/forest/cloud.svg" alt="Cloud4" width={240} height={240} />
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud4"
+          width={240}
+          height={240}
+          loading="lazy"
+        />
       </div>
 
       <div ref={leftBackgroundRef} className="absolute z-40 bottom-0 left-0">
@@ -200,6 +224,7 @@ const ForestComponent = () => {
           alt="Left Background Trees"
           width={2000}
           height={2000}
+          loading="lazy"
         />
       </div>
       <div ref={rightBackgroundRef} className="absolute z-40 bottom-0 right-0">
@@ -208,6 +233,7 @@ const ForestComponent = () => {
           alt="Right Background Trees"
           width={2000}
           height={2000}
+          loading="lazy"
         />
       </div>
 
@@ -217,6 +243,7 @@ const ForestComponent = () => {
           alt="Left Foreground Trees"
           width={2000}
           height={2000}
+          loading="lazy"
         />
       </div>
       <div ref={rightForegroundRef} className="absolute z-50 bottom-0 right-0">
@@ -225,6 +252,7 @@ const ForestComponent = () => {
           alt="Right Foreground Trees"
           width={2000}
           height={2000}
+          loading="lazy"
         />
       </div>
 
@@ -235,6 +263,7 @@ const ForestComponent = () => {
           width={2600}
           height={2600}
           className="object-contain relative z-30"
+          loading="lazy"
         />
 
         <div ref={bearRef} className="absolute bottom-0 z-20">
@@ -244,6 +273,7 @@ const ForestComponent = () => {
             width={2500}
             height={2500}
             className="object-contain"
+            loading="lazy"
           />
         </div>
       </div>

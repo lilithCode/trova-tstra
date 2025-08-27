@@ -1,9 +1,12 @@
 import "./globals.css";
+import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import DynamicParticles from "@/components/DynamicParticles";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   metadataBase: new URL(
@@ -68,7 +71,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-black overflow-x-hidden">
+      <body className={`${inter.className} bg-black overflow-x-hidden`}>
         <NextTopLoader
           color="#E87722"
           height={3}

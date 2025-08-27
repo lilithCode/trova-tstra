@@ -101,6 +101,7 @@ const BusinessComponent = () => {
             fill
             className="object-contain "
             loading="lazy"
+            sizes="(max-width: 768px) 90vw, 70vw"
           />
         </div>
 

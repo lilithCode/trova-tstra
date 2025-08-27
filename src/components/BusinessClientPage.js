@@ -1,5 +1,5 @@
 "use client";
-import React, { lazy, Suspense } from "react";
+import React, {lazy, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,6 +39,7 @@ const BusinessClientPage = () => {
                         alt={item.title}
                         layout="fill"
                         objectFit="contain"
+                        priority={index === 0} // Prioritize the first image
                       />
                     </div>
                   </div>

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import DynamicParticles from "@/components/DynamicParticles";
+import { Suspense } from "react";
 
 export const metadata = {
   metadataBase: new URL(
@@ -77,7 +78,9 @@ export default function RootLayout({ children }) {
         />
         <ScrollToTop />
         <div className="fixed inset-0 -z-10 overflow-hidden">
-          <DynamicParticles />
+          <Suspense fallback={null}>
+            <DynamicParticles />
+          </Suspense>
         </div>
         <div className="w-full bg-transparent fixed inset-x-0 top-0 z-100">
           <Navbar />

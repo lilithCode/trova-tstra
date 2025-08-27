@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row justify-between lg:gap-0 gap-5  mb-8">
           <div className="space-y-6 lg:w-1/2">
-            <Link href="/" aria-label="Go to home page">
+            <Link href="/" aria-label="Go to home page" className="block w-[100px] h-[100px]">
               <Image
                 src="/logo.png"
                 alt="Tstra Company Logo"
@@ -32,7 +32,7 @@ const Footer = () => {
 
             <div className="flex lg:flex-row flex-col items-start lg:items-center gap-16">
               <div>
-                <Link href="/contact">
+                <Link href="/Contact">
                   <button className="border border-white rounded-full px-6 py-3 hover:cursor-pointer transition-all duration-300 flex items-center space-x-2 group">
                     <span>Message us</span>
                     <svg
@@ -120,7 +120,7 @@ const Footer = () => {
               <ul className="space-y-3 text-[16px] text-[#d1d5db]">
                 <li className="flex items-center">
                   <Link
-                    href="#"
+                    href="/"
                     className="border-l-4 border-transparent hover:text-gray-300 hover:border-orange-500 transition-all duration-500 pl-2"
                   >
                     HOME
@@ -129,7 +129,7 @@ const Footer = () => {
                 <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <Link
-                    href="/about"
+                    href="/About"
                     className="hover:text-gray-300 transition-colors duration-500"
                   >
                     ABOUT US
@@ -138,7 +138,7 @@ const Footer = () => {
                 <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <Link
-                    href="/business"
+                    href="/Business"
                     className="hover:text-gray-300 transition-colors duration-500"
                   >
                     BUSINESS
@@ -147,7 +147,7 @@ const Footer = () => {
                 <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <Link
-                    href="/company"
+                    href="/Company"
                     className="hover:text-gray-300 transition-colors duration-500"
                   >
                     COMPANY
@@ -156,7 +156,7 @@ const Footer = () => {
                 <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <Link
-                    href="/careers"
+                    href="/Careers"
                     className="hover:text-gray-300 transition-colors duration-500"
                   >
                     CAREERS
@@ -165,7 +165,7 @@ const Footer = () => {
                 <li className="flex items-center ml-2 border-l-4 border-transparent hover:border-orange-500 transition-all duration-500 pl-2">
                   <span className="text-gray-400 mr-2">-</span>
                   <Link
-                    href="/contact"
+                    href="/Contact"
                     className="hover:text-gray-300 transition-colors duration-500"
                   >
                     CONTACT

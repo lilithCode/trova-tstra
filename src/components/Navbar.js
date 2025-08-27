@@ -71,7 +71,7 @@ const Navbar = () => {
           >
             <Image
               src="/logo.png"
-              alt="Tstra Company Logo"
+              alt=" Trova Tstra Company Logo"
               width={150}
               height={150}
               priority

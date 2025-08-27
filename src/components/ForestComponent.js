@@ -29,6 +29,7 @@ const ForestComponent = () => {
 
   useGSAP(
     () => {
+      // Initial setup
       gsap.set(sunsetRef.current, { opacity: 0 });
       gsap.set([leftBackgroundRef.current, leftForegroundRef.current], {
         xPercent: -15,
@@ -41,24 +42,48 @@ const ForestComponent = () => {
       gsap.set(textBlockRef.current, { y: 0, opacity: 1 });
 
       const clouds = gsap.utils.toArray(".cloud", containerRef.current);
+      const width = typeof window !== "undefined" ? window.innerWidth : 1920;
       clouds.forEach((cloud, i) => {
+        const startX = -50 - i * 50;
         gsap.set(cloud, {
           opacity: 0.4,
           filter: "grayscale(100%)",
-          x: -100 * (i + 1),
+          x: startX,
+        });
+        gsap.to(cloud, {
+          x: width + 100,
+          opacity: 0.8,
+          filter: "grayscale(0%)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 90%",
+            end: "bottom top",
+            scrub: 2,
+          },
         });
       });
 
-      gsap.to(sunsetRef.current, {
-        opacity: 1,
-        ease: "power1.inOut",
+      // Main animations
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top",
+          start: "top bottom",
           end: "center center",
           scrub: 2,
         },
       });
+
+      tl.to(sunsetRef.current, { opacity: 1, ease: "power1.inOut" }, 0).to(
+        [
+          leftBackgroundRef.current,
+          rightBackgroundRef.current,
+          leftForegroundRef.current,
+          rightForegroundRef.current,
+        ],
+        { xPercent: 0, ease: "power1.inOut" },
+        0
+      );
 
       gsap.to(sunRef.current, {
         y: -200,
@@ -69,56 +94,6 @@ const ForestComponent = () => {
           end: "+=500",
           scrub: 2,
         },
-      });
-      gsap.set([leftBackgroundRef.current, leftForegroundRef.current], {
-        xPercent: -15,
-      });
-
-      gsap.set([rightBackgroundRef.current, rightForegroundRef.current], {
-        xPercent: 15,
-      });
-
-      gsap.to(
-        [
-          leftBackgroundRef.current,
-          rightBackgroundRef.current,
-          leftForegroundRef.current,
-          rightForegroundRef.current,
-        ],
-        {
-          xPercent: 0,
-          ease: "power1.inOut",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top bottom",
-            end: "center center",
-            scrub: 2,
-          },
-        }
-      );
-
-      const width = typeof window !== "undefined" ? window.innerWidth : 1920;
-      clouds.forEach((cloud, i) => {
-        gsap.fromTo(
-          cloud,
-          {
-            opacity: 0.4,
-            filter: "grayscale(100%)",
-            x: -50 - i * 50,
-          },
-          {
-            x: width + 100,
-            opacity: 0.8,
-            filter: "grayscale(0%)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top 90%",
-              end: "bottom top",
-              scrub: 2,
-            },
-          }
-        );
       });
 
       gsap.fromTo(
@@ -136,20 +111,16 @@ const ForestComponent = () => {
         }
       );
 
-      gsap.fromTo(
-        textBlockRef.current,
-        { y: 0, opacity: 1 },
-        {
-          y: -200,
-          opacity: 0.8,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 2,
-          },
-        }
-      );
+      gsap.to(textBlockRef.current, {
+        y: -200,
+        opacity: 0.8,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 2,
+        },
+      });
     },
     { scope: containerRef }
   );
@@ -167,64 +138,123 @@ const ForestComponent = () => {
       <div
         ref={sunsetRef}
         className="absolute inset-0 z-10 bg-radial-gradient-orange"
+        style={{ willChange: "opacity" }}
       />
 
       <div
         ref={sunRef}
         className="absolute z-10 left-2/3 bottom-[10%] -translate-x-1/2"
+        style={{ willChange: "transform" }}
       >
-        <Image src="/forest/sun.svg" alt="Sun" width={2500} height={2500} />
+        <Image
+          src="/forest/sun.svg"
+          alt="Sun"
+          width={2500}
+          height={2500}
+          loading="lazy"
+        />
       </div>
 
-      <div className="cloud absolute z-30 top-[0%] right-[50%]">
+      <div
+        className="cloud absolute z-30 top-[0%] right-[50%]"
+        style={{ willChange: "transform, opacity, filter" }}
+      >
         <Image
           src="/forest/night-cloud.svg"
           alt="Cloud1"
           width={200}
           height={200}
+          loading="lazy"
         />
       </div>
-      <div className="cloud absolute z-30 top-[20%] left-[-20%]">
-        <Image src="/forest/cloud.svg" alt="Cloud2" width={220} height={220} />
+      <div
+        className="cloud absolute z-30 top-[20%] left-[-20%]"
+        style={{ willChange: "transform, opacity, filter" }}
+      >
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud2"
+          width={220}
+          height={220}
+          loading="lazy"
+        />
       </div>
-      <div className="cloud absolute z-30 top-[45%] left-[-50%]">
-        <Image src="/forest/cloud.svg" alt="Cloud3" width={220} height={220} />
+      <div
+        className="cloud absolute z-30 top-[45%] left-[-50%]"
+        style={{ willChange: "transform, opacity, filter" }}
+      >
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud3"
+          width={220}
+          height={220}
+          loading="lazy"
+        />
       </div>
-      <div className="cloud absolute z-30 top-[30%] left-[50%]">
-        <Image src="/forest/cloud.svg" alt="Cloud4" width={240} height={240} />
+      <div
+        className="cloud absolute z-30 top-[30%] left-[50%]"
+        style={{ willChange: "transform, opacity, filter" }}
+      >
+        <Image
+          src="/forest/cloud.svg"
+          alt="Cloud4"
+          width={240}
+          height={240}
+          loading="lazy"
+        />
       </div>
 
-      <div ref={leftBackgroundRef} className="absolute z-40 bottom-0 left-0">
+      <div
+        ref={leftBackgroundRef}
+        className="absolute z-40 bottom-0 left-0"
+        style={{ willChange: "transform" }}
+      >
         <Image
           src="/forest/trees-left-background.svg"
           alt="Left Background Trees"
           width={2000}
           height={2000}
+          loading="lazy"
         />
       </div>
-      <div ref={rightBackgroundRef} className="absolute z-40 bottom-0 right-0">
+      <div
+        ref={rightBackgroundRef}
+        className="absolute z-40 bottom-0 right-0"
+        style={{ willChange: "transform" }}
+      >
         <Image
           src="/forest/trees-right-background.svg"
           alt="Right Background Trees"
           width={2000}
           height={2000}
+          loading="lazy"
         />
       </div>
 
-      <div ref={leftForegroundRef} className="absolute z-50 bottom-0 left-0">
+      <div
+        ref={leftForegroundRef}
+        className="absolute z-50 bottom-0 left-0"
+        style={{ willChange: "transform" }}
+      >
         <Image
           src="/forest/trees-left-foreground.svg"
           alt="Left Foreground Trees"
           width={2000}
           height={2000}
+          loading="lazy"
         />
       </div>
-      <div ref={rightForegroundRef} className="absolute z-50 bottom-0 right-0">
+      <div
+        ref={rightForegroundRef}
+        className="absolute z-50 bottom-0 right-0"
+        style={{ willChange: "transform" }}
+      >
         <Image
           src="/forest/trees-right-foreground.svg"
           alt="Right Foreground Trees"
           width={2000}
           height={2000}
+          loading="lazy"
         />
       </div>
 
@@ -235,15 +265,21 @@ const ForestComponent = () => {
           width={2600}
           height={2600}
           className="object-contain relative z-30"
+          loading="lazy"
         />
 
-        <div ref={bearRef} className="absolute bottom-0 z-20">
+        <div
+          ref={bearRef}
+          className="absolute bottom-0 z-20"
+          style={{ willChange: "transform" }}
+        >
           <Image
             src="/forest/big-bear.svg"
             alt="Bear"
             width={2500}
             height={2500}
             className="object-contain"
+            loading="lazy"
           />
         </div>
       </div>
@@ -251,6 +287,7 @@ const ForestComponent = () => {
       <div
         ref={textBlockRef}
         className="absolute z-70 top-70 px-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-full"
+        style={{ willChange: "transform, opacity" }}
       >
         <div className="mb-6">
           <span className="px-6 py-3 rounded-full bg-black/40 border border-white/20 text-sm text-white flex items-center gap-2">

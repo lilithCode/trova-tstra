@@ -6,9 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ForestComponent = lazy(() =>
-  import("./ForestComponent")
-);
+const ForestComponent = lazy(() => import("./ForestComponent"));
 
 const coreValuesData = [
   {
@@ -120,7 +118,8 @@ const AboutClientPage = () => {
             alt="Mountain 1"
             fill
             className="object-cover"
-            loading="lazy"
+            priority
+            sizes="100vw"
           />
         </div>
         <div className="absolute inset-0 z-10">
@@ -129,7 +128,8 @@ const AboutClientPage = () => {
             alt="Mountain 2"
             fill
             className="object-cover"
-            loading="lazy"
+            priority
+            sizes="100vw"
           />
         </div>
         <div className="absolute inset-0 z-5">
@@ -138,7 +138,8 @@ const AboutClientPage = () => {
             alt="Mountain 3"
             fill
             className="object-cover"
-            loading="lazy"
+            priority
+            sizes="100vw"
           />
         </div>
 
@@ -151,7 +152,7 @@ const AboutClientPage = () => {
             className="w-full h-auto object-cover origin-bottom
                  scale-[2] sm:scale-125 md:scale-100"
             sizes="(max-width: 640px) 170vw, (max-width: 768px) 125vw, 100vw"
-            loading="lazy"
+            priority
           />
         </div>
 
@@ -164,7 +165,7 @@ const AboutClientPage = () => {
             className="w-full h-auto object-cover origin-bottom
                  scale-[1.9] sm:scale-135 md:scale-100"
             sizes="(max-width: 640px) 190vw, (max-width: 768px) 135vw, 100vw"
-            loading="lazy"
+            priority
           />
         </div>
       </div>
@@ -172,6 +173,7 @@ const AboutClientPage = () => {
       <section
         ref={philosophyRef}
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200"
+        style={{ willChange: "transform, opacity" }}
       >
         <h2 className=" text-left text-4xl md:text-6xl mb-8">
           OUR <span className="text-accent-light font-bold">PHILOSOPHY</span>
@@ -196,7 +198,11 @@ const AboutClientPage = () => {
             "On the contrary, true understanding drives transformation—sparking innovation, developing new frameworks, and pushing beyond existing standards in pursuit of something better. With each breakthrough, new principles emerge, leading us to question, refine, and expand our understanding even further.",
             "The relentless pursuit of truth fuels progress—driving innovation, shaping the future, and turning bold ideas into reality. By constantly pushing the limits of what's possible, we believe we can transform the world and enrich lives in ways never imagined.",
           ].map((text, i) => (
-            <p key={i} ref={(el) => (philosophyParagraphs.current[i] = el)}>
+            <p
+              key={i}
+              ref={(el) => (philosophyParagraphs.current[i] = el)}
+              style={{ willChange: "transform, opacity" }}
+            >
               {text}
             </p>
           ))}
@@ -206,6 +212,7 @@ const AboutClientPage = () => {
       <section
         ref={missionRef}
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200"
+        style={{ willChange: "transform, opacity" }}
       >
         <h2 className=" text-left text-4xl md:text-6xl mb-8">
           OUR <span className="text-accent-light font-bold">MISSION</span>
@@ -230,7 +237,11 @@ const AboutClientPage = () => {
             "We exist to awaken the innate curiosity and creativity within people, transforming ideas into tangible reality. By cultivating and bringing these visions to life, we introduce new value to the world.",
             "The drive to create is something that resides in all of us. Believing in its limitless potential, we dedicate ourselves to its realization—continuously evolving, innovating, and pushing the boundaries of what's possible.",
           ].map((text, i) => (
-            <p key={i} ref={(el) => (missionParagraphs.current[i] = el)}>
+            <p
+              key={i}
+              ref={(el) => (missionParagraphs.current[i] = el)}
+              style={{ willChange: "transform, opacity" }}
+            >
               {text}
             </p>
           ))}
@@ -239,6 +250,7 @@ const AboutClientPage = () => {
       <section
         ref={coreValuesRef}
         className="relative z-40 px-[10%] lg:px-[20%] py-24 w-full text-gray-200 text-center"
+        style={{ willChange: "transform, opacity" }}
       >
         <h2 className="text-4xl md:text-6xl mb-28">
           OUR <span className="text-accent-light font-bold">CORE VALUES</span>
@@ -269,6 +281,7 @@ const AboutClientPage = () => {
                 key={i}
                 ref={(el) => (coreValueCards.current[i] = el)}
                 className="mt-6 relative flex flex-col p-8 rounded-xl transform transition duration-300"
+                style={{ willChange: "transform, opacity" }}
               >
                 <div
                   className="absolute z-30 w-28 h-28 p-6 rounded-4xl border-2 border-accent-light bg-gray-900 flex items-center justify-center transform transition-transform duration-300

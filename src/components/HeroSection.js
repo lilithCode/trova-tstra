@@ -40,6 +40,8 @@ export default function SunsetScene() {
             gsap.set(textContainerRef.current.children[1], { opacity: 0 });
             gsap.set(textContainerRef.current.children[2], { opacity: 0 });
 
+            const flagYOffset = -landscapeRef.current.offsetHeight * 0.2;
+
             const tl = gsap.timeline({
               scrollTrigger: {
                 trigger: containerRef.current,
@@ -104,18 +106,8 @@ export default function SunsetScene() {
             tl.to(
               flagRef.current,
               {
-                y: () => -landscapeRef.current.offsetHeight * 0.2,
+                y: flagYOffset,
                 ease: "none",
-                onUpdate: function () {
-                  if (
-                    this.targets()[0]._gsap.y <
-                    -landscapeRef.current.offsetHeight * 0.2
-                  ) {
-                    gsap.set(flagRef.current, {
-                      y: -landscapeRef.current.offsetHeight * 0.2,
-                    });
-                  }
-                },
               },
               0
             );
@@ -239,7 +231,8 @@ export default function SunsetScene() {
           width={1920}
           height={1080}
           className="w-full h-full object-cover"
-          loading="lazy"
+          priority
+          sizes="100vw"
         />
       </div>
       <div ref={mountain2Ref} className="absolute inset-0 z-9">
@@ -249,7 +242,8 @@ export default function SunsetScene() {
           width={1920}
           height={1080}
           className="w-full h-full object-cover"
-          loading="lazy"
+          priority
+          sizes="100vw"
         />
       </div>
       <div ref={mountain3Ref} className="absolute inset-0 z-5">
@@ -259,7 +253,8 @@ export default function SunsetScene() {
           width={1920}
           height={1080}
           className="w-full h-full object-cover"
-          loading="lazy"
+          priority
+          sizes="100vw"
         />
       </div>
 
@@ -303,7 +298,8 @@ export default function SunsetScene() {
           width={1600}
           height={1500}
           className="w-full h-auto object-contain"
-          loading="lazy"
+          priority
+          sizes="(max-width: 1500px) 100vw, 1500px"
         />
       </div>
 
@@ -317,7 +313,8 @@ export default function SunsetScene() {
           width={1600}
           height={1500}
           className="w-full h-auto object-contain"
-          loading="lazy"
+          priority
+          sizes="(max-width: 1500px) 100vw, 1500px"
         />
       </div>
 

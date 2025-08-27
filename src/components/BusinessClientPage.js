@@ -39,6 +39,8 @@ const BusinessClientPage = () => {
                         alt={item.title}
                         layout="fill"
                         objectFit="contain"
+                        loading="lazy"
+                        sizes="(max-width: 640px) 192px, 256px"
                       />
                     </div>
                   </div>
@@ -97,7 +99,7 @@ const BusinessClientPage = () => {
         </Suspense>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default BusinessClientPage
+export default BusinessClientPage;

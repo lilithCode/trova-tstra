@@ -6,10 +6,12 @@ import ScrollToTop from "@/components/ScrollToTop";
 import DynamicParticles from "@/components/DynamicParticles";
 
 export const metadata = {
-  metadataBase: new URL("https://www.trovatstra.com"),
+  metadataBase: new URL(
+    "https://trova-tstra-git-stagging-ibrahim-devs-projects.vercel.app"
+  ),
   title: {
     default: "Trova Tstra ",
-    template: "%s | Trova Tstra",
+    template: "Trova Tstra | %s",
   },
   description:
     "Trova Tstra helps individuals and organizations reach their full potential by providing innovative software and dedicated support. We specialize in web development, mobile apps, and custom business solutions.",
@@ -21,12 +23,16 @@ export const metadata = {
     "custom software",
     "tech solutions",
     "business solutions",
+    "creative vision",
+    "product development",
   ],
+  creator: "Trova Tstra",
+  publisher: "Trova Tstra",
   openGraph: {
-    title: "Trova Tstra",
+    title: "Trova Tstra ",
     description:
-      "Trova Tstra helps individuals and organizations reach their full potential by providing innovative software and dedicated support.",
-    url: "https://www.trovatstra.com",
+      "We help individuals and organizations reach their full potential by providing innovative software and dedicated support.",
+    url: "https://trova-tstra-git-stagging-ibrahim-devs-projects.vercel.app",
     siteName: "Trova Tstra",
     images: [
       {
@@ -36,6 +42,8 @@ export const metadata = {
         alt: "Trova Tstra Logo",
       },
     ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",

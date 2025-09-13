@@ -2,6 +2,9 @@
 
 Trova Tstra is a modern web application built with Next.js and Tailwind CSS. It provides a dynamic platform for businesses, companies, and individuals to explore information about various services, career opportunities, and contact details.
 
+**Live Demo:**  
+[https://trova-tstra-three.vercel.app/](https://trova-tstra-three.vercel.app/)
+
 ## Features
 
 - Responsive design using Tailwind CSS, GSAP
@@ -47,6 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the app in your brow
 npm run build
 npm start
 ```
+
 ## License
 
 This project is licensed under the MIT License.

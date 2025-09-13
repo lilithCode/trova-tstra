@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Use next/dynamic for the ForestComponent
+
 const ForestComponent = dynamic(() => import("./ForestComponent"), {
   suspense: true,
 });
@@ -103,14 +103,14 @@ const AboutClientPage = () => {
       createdTriggers.push(anim.scrollTrigger);
     });
 
-    // Cleanup function
+    
     return () => {
       createdTriggers.forEach((trigger) => {
         if (trigger) {
           trigger.kill();
         }
       });
-      // Also kill any tweens associated with the elements to be safe
+      
       gsap.killTweensOf([
         philosophyRef.current,
         missionRef.current,

@@ -47,17 +47,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the app in your brow
 npm run build
 npm start
 ```
-
-## Project Structure
-
-- `src/app/` - Main application pages and layout
-- `src/components/` - Reusable React components
-- `public/` - Static assets and SVG illustrations
-
-## Customization
-
-You can modify the content and styles by editing the files in the `src/app/` and `src/components/` directories. Tailwind CSS configuration is in `tailwind.config.js`.
-
 ## License
 
 This project is licensed under the MIT License.

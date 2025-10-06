@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "autoprefixer": "^10.4.21",
     "gsap": "^3.13.0",
     "next": "15.4.7",
     "nextjs-toploader": "^3.8.16",
@@ -24,6 +25,6 @@
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.4.7",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4.1.14"
   }
 }

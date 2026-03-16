@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ForestComponent from "./../../components/ForestComponent";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 const coreValuesData = [

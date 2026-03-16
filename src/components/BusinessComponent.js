@@ -96,8 +96,8 @@ const BusinessComponent = () => {
           <Image
             src="/business-home.svg"
             alt="Business Structure"
-            layout="fill"
-            objectFit="contain"
+            fill 
+            className="object-contain"
             priority
           />
         </div>
